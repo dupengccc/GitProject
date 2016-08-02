@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel;
-using Common.ToolsHelper;
 
-namespace Common
+
+namespace Common.ToolsHelper
 {
     /// <summary>
     /// 功能描述：共用工具类

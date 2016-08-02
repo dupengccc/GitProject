@@ -970,9 +970,9 @@ namespace Common
             Htmlstring = Regex.Replace(Htmlstring, @"&(copy|#169);", "\xa9", RegexOptions.IgnoreCase);
 
             Htmlstring = Regex.Replace(Htmlstring, @"&#(\d+);", "", RegexOptions.IgnoreCase);
-            Htmlstring.Replace("<", "");
-            Htmlstring.Replace(">", "");
-            Htmlstring.Replace("\r\n", "");
+            Htmlstring = Htmlstring.Replace("<", "");
+            Htmlstring = Htmlstring.Replace(">", "");
+            Htmlstring = Htmlstring.Replace("\r\n", "");
             Htmlstring = HttpContext.Current.Server.HtmlEncode(Htmlstring).Trim();
             return Htmlstring;
         }

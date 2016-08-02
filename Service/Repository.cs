@@ -84,6 +84,7 @@ namespace Service
             }
         }
 
+
         /// <summary>
         /// 异步锁定
         /// </summary>
@@ -595,7 +596,7 @@ namespace Service
         {
             List<object> list = QueryObject<TEntity, TOrderBy>
                  (where, orderby, selector, IsAsc);
-            return Common.JsonConverter.JsonClass(list);
+            return   Common.JsonHelper.JsonConverter.JsonClass(list);
         }
         #endregion
 
