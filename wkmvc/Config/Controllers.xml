@@ -6,5 +6,9 @@
   <object type="wkmvc.Areas.SysManage.Controllers.AccountController,wkmvc" singleton="false">
         <property name="UserManage" ref="Service.User"/>
   </object>
+  
+ <object type="wkmvc.Areas.SysManage.Controllers.HomeController,wkmvc" singleton="false">
+        <property name="ModuleManage" ref="Service.Module"/>
+  </object>
   <!--系统管理 end-->
 </objects>

@@ -28,5 +28,31 @@ namespace Service.IService.SysManage
         /// <returns></returns>
         string GetUserName(int userId);
 
+        /// <summary>
+        /// 根据用户ID 获取用户部门
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <returns></returns>
+        string GetUserDptName(int userid);
+
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <returns></returns>
+        bool Remove(int userid);
+
+        /// <summary>
+        /// 根据用户构造用户基本信息
+
+        Account GetAccountByUser(Domain.SYS_USER user);
+
+        /// <summary>
+        /// 从Cookie中获取用户信息
+        /// </summary>
+        Account GetAccountByCookie();
+
+
     }
 }

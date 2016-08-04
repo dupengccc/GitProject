@@ -10,6 +10,10 @@ using Domain;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Runtime.Remoting.Contexts;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.IO;
+using RazorEngine;
 
 namespace Service
 {
@@ -878,6 +882,128 @@ namespace Service
                 throw e;
             }
         }
+
+        /// <summary>
+        /// 解析模板生成静态页
+        /// </summary>
+        /// <param name="temppath">模板地址</param>
+        /// <param name="path">静态页地址</param>
+        /// <param name="t">数据模型</param>
+        /// <returns></returns>
+        public bool CreateStaticPage(string temppath, string path, T t)
+        {
+            try
+            {
+                //实例化模型
+                var Entity = new Domain.TemplateView();
+
+                //获取模板Html
+                string TemplateContent = GetHtml(temppath, System.Text.Encoding.UTF8);
+                //初始化结果
+                string result = "";
+
+                //反射赋值
+                Type typeT = t.GetType();
+                Type typeEn = Entity.GetType();
+
+                System.Reflection.PropertyInfo[] propertyinfosT = typeT.GetProperties();
+
+                foreach (System.Reflection.PropertyInfo propertyinfoT in propertyinfosT)
+                {
+                    System.Reflection.PropertyInfo propertyinfoEn = typeEn.GetProperty(propertyinfoT.Name);
+                    if (propertyinfoEn != null && propertyinfoT.GetValue(t, null) != null)
+                    {
+                        propertyinfoEn.SetValue(Entity, propertyinfoT.GetValue(t, null), null);
+                    }
+                }
+
+                //很多时候 我们并没有创建复杂的主外键关系 例如栏目下的文章 我们仅仅是在文章表中添加了一个所属栏目ID的字段
+                //并没有创建关联 这种情况下 我们直接获取栏目的时候 是获取不到文章列表的
+                //包括很多自定义的模型和字段 比如 文章的内容 可能不跟文章一个表 而是一个单独的大数据字段表 这种情况下 我们的
+                //TemplateView.Content就需要单独获取一下另一个数据模型里的 这个文章的内容 这种时候 我们可以在这里重新给他赋值
+
+                //如 传入的模型是 文章
+                //if(t is Domain.Articles)
+                //{
+                //    Entity.Content= 查询大数据字段表中这篇文章的内容;
+
+                //}
+
+                result = Razor.Parse(TemplateContent, Entity);
+
+                return CreateFileHtmlByTemp(result, path);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// 获取页面的Html代码
+        /// </summary>
+        /// <param name="url">模板页面路径</param>
+        /// <param name="encoding">页面编码</param>
+        /// <returns></returns>
+        public string GetHtml(string url, System.Text.Encoding encoding)
+        {
+            byte[] buf = new WebClient().DownloadData(url);
+            if (encoding != null) return encoding.GetString(buf);
+            string html = System.Text.Encoding.UTF8.GetString(buf);
+            encoding = GetEncoding(html);
+            if (encoding == null || encoding == System.Text.Encoding.UTF8) return html;
+            return encoding.GetString(buf);
+        }
+
+        /// <summary>
+        /// 获取页面的编码
+        /// </summary>
+        /// <param name="html">Html源码</param>
+        /// <returns></returns>
+        public System.Text.Encoding GetEncoding(string html)
+        {
+            string pattern = @"(?i)\bcharset=(?<charset>[-a-zA-Z_0-9]+)";
+            string charset = Regex.Match(html, pattern).Groups["charset"].Value;
+            try { return System.Text.Encoding.GetEncoding(charset); }
+            catch (ArgumentException) { return null; }
+        }
+
+        /// <summary>
+        /// 创建静态文件
+        /// </summary>
+        /// <param name="result">Html代码</param>
+        /// <param name="createpath">生成路径</param>
+        /// <returns></returns>
+        public bool CreateFileHtmlByTemp(string result, string createpath)
+        {
+            if (!string.IsNullOrEmpty(result))
+            {
+                if (string.IsNullOrEmpty(createpath))
+                {
+                    createpath = "/default.html";
+                }
+                string filepath = createpath.Substring(createpath.LastIndexOf(@"\"));
+                createpath = createpath.Substring(0, createpath.LastIndexOf(@"\"));
+                if (!Directory.Exists(createpath))
+                {
+                    Directory.CreateDirectory(createpath);
+                }
+                createpath = createpath + filepath;
+                try
+                {
+                    FileStream fs2 = new FileStream(createpath, FileMode.Create);
+                    StreamWriter sw = new StreamWriter(fs2, new System.Text.UTF8Encoding(false));//去除UTF-8 BOM
+                    sw.Write(result);
+                    sw.Close();
+                    fs2.Close();
+                    fs2.Dispose();
+                    return true;
+                }
+                catch { return false; }
+            }
+            return false;
+        }
+
         #endregion
     }
 }

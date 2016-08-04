@@ -7,7 +7,7 @@ namespace wkmvc.Areas.SysManage
         public override string AreaName 
         {
             get 
-            {
+            { 
                 return "SysManage";
             }
         }

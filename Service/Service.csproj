@@ -47,6 +47,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="RazorEngine">
+      <HintPath>..\..\BIN\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Spring.Core, Version=2.0.1.45000, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <HintPath>..\packages\Spring.Core.2.0.1\lib\net45\Spring.Core.dll</HintPath>
       <Private>True</Private>
@@ -64,6 +67,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,13 +77,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Account.cs" />
     <Compile Include="DatabaseExtensions.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IService\SysManage\IArticleManage.cs" />
+    <Compile Include="IService\SysManage\IColumnManage.cs" />
+    <Compile Include="IService\SysManage\ICompanyManage.cs" />
+    <Compile Include="IService\SysManage\IDepartmentManage.cs" />
+    <Compile Include="IService\SysManage\IModuleManage.cs" />
+    <Compile Include="IService\SysManage\IPermissionManage.cs" />
+    <Compile Include="IService\SysManage\IPostUserManage.cs" />
+    <Compile Include="IService\SysManage\IUserInfoManage.cs" />
     <Compile Include="IService\SysManage\IUserManage.cs" />
+    <Compile Include="IService\SysManage\IUserPermissionManage .cs" />
+    <Compile Include="IService\SysManage\IUserRoleManage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="IService\SysManage\IUserDepartmentManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ArticleManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ColumnManage.cs" />
+    <Compile Include="ServiceImp\SysManage\CompanyManage.cs" />
+    <Compile Include="ServiceImp\SysManage\DepartmentManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ModuleManage.cs" />
+    <Compile Include="ServiceImp\SysManage\PermissionDistinct.cs" />
+    <Compile Include="ServiceImp\SysManage\PermissionManage .cs" />
+    <Compile Include="ServiceImp\SysManage\PostUserManage.cs" />
+    <Compile Include="ServiceImp\SysManage\UserDepartmentManage.cs" />
+    <Compile Include="ServiceImp\SysManage\UserInfoManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserManage.cs" />
+    <Compile Include="ServiceImp\SysManage\UserPermissionManage.cs" />
+    <Compile Include="ServiceImp\SysManage\UserRoleManage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

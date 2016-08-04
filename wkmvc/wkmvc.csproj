@@ -103,6 +103,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -232,6 +233,7 @@
     <Compile Include="Areas\SysManage\Controllers\AccountController.cs" />
     <Compile Include="Areas\SysManage\SysManageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,13 +242,17 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserAuthorizeAttribute.cs" />
+    <Compile Include="Models\verify_code.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Config\ComControllers.xml" />
     <EmbeddedResource Include="Config\Controllers.xml" />
-    <EmbeddedResource Include="Config\IndexControllers.xml" />
+    <EmbeddedResource Include="Config\IndexControllers.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\js\ai.0.22.9-build00167.js" />
@@ -336,6 +342,7 @@
     <Folder Include="Areas\ComManage\Views\Shared\" />
     <Folder Include="Areas\SysManage\Models\" />
     <Folder Include="Areas\SysManage\Views\Shared\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

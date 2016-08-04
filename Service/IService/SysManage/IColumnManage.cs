@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service
+namespace Service.IService.SysManage
 {
-    public class Class1
+   public interface IColumnManage : IRepository<Domain.Column>
     {
+      
+
     }
 }

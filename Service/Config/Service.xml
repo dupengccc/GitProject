@@ -3,7 +3,40 @@
   <description>Spring注入Service，容器指向本层层封装的接口，舍弃Dao层，减少代码量</description>
   <!--系统管理begin-->
   <!--用户管理-->
-  <object id="Service.User" type="Service.ServiceImp.UserManage,Service" singleton="false">
+  <object id="Service.User" type="Service.ServiceImp.SysManage.UserManage,Service" singleton="false">
+    <property name="UserInfoManage" ref="Service.UserInfo"></property>
+    <property name="UserRoleManage" ref="Service.UserRole"></property>
+    <property name="UserPermissionManage" ref="Service.UserPermission"></property>
+    <property name="PostUserManage" ref="Service.UserRole"></property>
+    <property name="PermissionManage" ref="Service.Permission"></property>
+    <property name="DepartmentManage" ref="Service.Department"></property>
   </object>
-  <!--系统管理end-->
+
+  <object id="Service.UserInfo" type="Service.ServiceImp.SysManage.UserInfoManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.UserRole" type="Service.ServiceImp.SysManage.UserRoleManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.PostUser" type="Service.ServiceImp.SysManage.PostUserManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.UserPermission" type="Service.ServiceImp.SysManage.UserPermissionManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.Permission" type="Service.ServiceImp.SysManage.PermissionManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.Department" type="Service.ServiceImp.SysManage.DepartmentManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.ArticleManage" type="Service.ServiceImp.SysManage.ArticleManage,Service" singleton="false">
+  </object>
+  <object id="Service.ColumnManage" type="Service.ServiceImp.SysManage.ColumnManage,Service" singleton="false">
+  </object>
+  <object id="Service.CompanyManage" type="Service.ServiceImp.SysManage.CompanyManage,Service" singleton="false">
+  </object>
+
 </objects>
+  <!--系统管理end-->
+
