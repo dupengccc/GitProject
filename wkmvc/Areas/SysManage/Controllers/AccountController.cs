@@ -7,10 +7,11 @@ using System.Web.Mvc;
 using Domain;
 using Common.JsonHelper;
 using Common;
+using wkmvc.Controllers;
 
 namespace wkmvc.Areas.SysManage.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         #region 声明容器
         /// <summary>

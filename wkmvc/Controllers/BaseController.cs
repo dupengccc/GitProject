@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Spring.Context.Support;
 
 namespace wkmvc.Controllers
 {
@@ -27,7 +28,7 @@ namespace wkmvc.Controllers
             /// <summary>
             /// 用户容器，公用
             /// </summary>
-            public IUserManage UserManage = Spring.Context.Support.ContextRegistry.GetContext().GetObject("Service.User") as IUserManage;
+            public IUserManage UserManage = ContextRegistry.GetContext().GetObject("Service.User") as IUserManage;
 
             public string System_id { get; set; }
         #endregion
