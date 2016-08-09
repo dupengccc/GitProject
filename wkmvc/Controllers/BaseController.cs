@@ -62,35 +62,35 @@ namespace wkmvc.Controllers
             //1、判断Session对象是否存在
             if (filterContext.HttpContext.Session == null)
             {
-                filterContext.HttpContext.Response.Write(
-                       " <script type='text/javascript'> alert('~登录已过期，请重新登录');window.top.location='/'; </script>");
-                filterContext.RequestContext.HttpContext.Response.End();
-                filterContext.Result = new EmptyResult();
-                return;
+                //filterContext.HttpContext.Response.Write(
+                //       " <script type='text/javascript'> alert('~登录已过期，请重新登录');window.top.location='/'; </script>");
+                //filterContext.RequestContext.HttpContext.Response.End();
+                //filterContext.Result = new EmptyResult();
+                //return;
             }
             //2、登录验证
             if (this.CurrentUser == null)
             {
-                filterContext.HttpContext.Response.Write(
-                    " <script type='text/javascript'> alert('登录已过期，请重新登录'); window.top.location='/';</script>");
-                filterContext.RequestContext.HttpContext.Response.End();
-                filterContext.Result = new EmptyResult();
-                return;
+                //filterContext.HttpContext.Response.Write(
+                //    " <script type='text/javascript'> alert('登录已过期，请重新登录'); window.top.location='/';</script>");
+                //filterContext.RequestContext.HttpContext.Response.End();
+                //filterContext.Result = new EmptyResult();
+                //return;
             }
 
             #endregion
 
             #region 公共Get变量
             //分页页码
-            object p = filterContext.HttpContext.Request["page"];
-            if (p == null || p.ToString() == "") { page = 1; } else { page = int.Parse(p.ToString()); }
+            //object p = filterContext.HttpContext.Request["page"];
+            //if (p == null || p.ToString() == "") { page = 1; } else { page = int.Parse(p.ToString()); }
 
-            //搜索关键词
-            string search = filterContext.HttpContext.Request.QueryString["Search"];
-            if (!string.IsNullOrEmpty(search)) { keywords = search; }
-            //显示分页条数
-            string size = filterContext.HttpContext.Request.QueryString["example_length"];
-            if (!string.IsNullOrEmpty(size) && System.Text.RegularExpressions.Regex.IsMatch(size.ToString(), @"^\d+$")) { pagesize = int.Parse(size.ToString()); } else { pagesize = 10; }
+            ////搜索关键词
+            //string search = filterContext.HttpContext.Request.QueryString["Search"];
+            //if (!string.IsNullOrEmpty(search)) { keywords = search; }
+            ////显示分页条数
+            //string size = filterContext.HttpContext.Request.QueryString["example_length"];
+            //if (!string.IsNullOrEmpty(size) && System.Text.RegularExpressions.Regex.IsMatch(size.ToString(), @"^\d+$")) { pagesize = int.Parse(size.ToString()); } else { pagesize = 10; }
             #endregion
 
         }

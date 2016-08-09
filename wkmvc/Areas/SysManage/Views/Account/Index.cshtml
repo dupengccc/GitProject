@@ -10,7 +10,7 @@
 <body>
     <div>
         <div>
-            @using (Ajax.BeginForm("login", null, new AjaxOptions()
+            @using (Ajax.BeginForm("Login", null, new AjaxOptions()
             {
                 HttpMethod = "Post",
                 OnBegin = "dig.Loading",
@@ -36,21 +36,40 @@
                                                             @maxlength = 12,
                                                             @required = "required"
                                                         })
-                <button type="submit" id="login-button"></button>
+                <div class="from_control">
+                    @Html.TextBox("code","",new { @class="from_control",
+                                                  @placeholder="请输入验证码",
+                                                  @datatype="*",
+                                                  @nullmsg="请输入验证码",
+                                                  @maxlength=4,
+                                                  @required="required",
+                                                  @autocomplete="off"
+                                             }
+                                   )
+                </div>
+                <div class="code-img">
+                    <img id="imgVerfy" src="/Sys/Account/ValidateCode" alt="看不清? 点击更换" onclick="this.src=this.src+'?'" style="vertical-align:middle" />
+                </div>
+                <button type="submit" id="login-button" value="提交" style="width:50px;height:20px;"></button>
             }
 
         </div>
 
     </div>
+    <link href="@Url.StaticFile("~/Content/js/jquery-ui-1.10.4.min.js")" rel="stylesheet" />
+    <link href="@Url.StaticFile(" ~/Content/jss/jquery.validate.unobtrusive.js")" rel="stylesheet" />
 
 
-    <script type="text/javascript" src="/Content/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/Content/js/jquery.unobtrusive-ajax.min.js"></script>
+   
+ @Scripts.Render("~/Content/js/jquery-ui-1.10.4.min.js");
+@Scripts.Render("~/Content/jss/jquery.validate.unobtrusive.js");
+@Scripts.Render("~/Content/jss");
+@Scripts.Render("~/Content/js");
+@Scripts.Render("~/Content/plugins/metisMenu");
     <script type="text/javascript">
-
         var dig = {
             Loading: function () {
-                $("#login-button").attr("disabled", "disabled");;
+                $("#login-button").attr("disabled", "disabled");
             },
             Success: function (result) {
                 if (result.Status == "y") {

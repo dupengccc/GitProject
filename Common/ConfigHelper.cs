@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    class ConfigHelper
+   public class ConfigHelper
     {
 
         #region 配置文件读取

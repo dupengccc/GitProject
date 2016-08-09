@@ -8,6 +8,7 @@ using Domain;
 using Common.JsonHelper;
 using Common;
 using wkmvc.Controllers;
+using Models;
 
 namespace wkmvc.Areas.SysManage.Controllers
 {
@@ -23,6 +24,8 @@ namespace wkmvc.Areas.SysManage.Controllers
         /// 日志记录
         /// </summary>
         log4net.Ext.IExtLog log = log4net.Ext.ExtLogManager.GetLogger("dblog");
+      
+        
         #endregion
 
         #region 基本视图
@@ -34,40 +37,60 @@ namespace wkmvc.Areas.SysManage.Controllers
         /// 登录验证
         /// add yuangang by 2016-05-16
         /// </summary>
-        [ValidateAntiForgeryToken]
+      //  [ValidateAntiForgeryToken]
         public ActionResult Login(Domain.SYS_USER item)
         {
+            var code = Request.Form["code"];
             var json = new JsonHelper() { Msg = "登录成功", Status = "n" };
             try
             {
-                //调用登录验证接口 返回用户实体类
-                var users = UserManage.UserLogin(item.ACCOUNT.Trim(), item.PASSWORD.Trim());
-                if (users != null)
+                if (SessionHelper.Get("code") == code)
                 {
-                    //是否锁定
-                    if (users.ISCANLOGIN == 1)
+                    //调用登录验证接口 返回用户实体类
+                    var users = UserManage.UserLogin(item.ACCOUNT.Trim(), item.PASSWORD.Trim());
+                    if (users != null)
                     {
-                        json.Msg = "用户已锁定，禁止登录，请联系管理员进行解锁";
-                        log.Warn(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
-                        return Json(json);
+                        //是否锁定
+                        if (users.ISCANLOGIN == 1)
+                        {
+                            json.Msg = "用户已锁定，禁止登录，请联系管理员进行解锁";
+                            log.Warn(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+                            return Json(json);
+                        }
+                        json.Status = "y";
+                        log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+
                     }
-                    json.Status = "y";
-                    log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+                    else
+                    {
+                        json.Msg = "用户名或密码不正确";
+                        log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+                    }
 
                 }
                 else
                 {
-                    json.Msg = "用户名或密码不正确";
-                    log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
-                }
 
+                }
             }
             catch (Exception e)
             {
                 json.Msg = e.Message;
                 log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
             }
+       
             return Json(json, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region  生成随机码
+        public FileContentResult ValidateCode()
+        {
+            string code = string.Empty;
+            System.IO.MemoryStream ms = new verify_code().Create(out code);
+            SessionHelper.Add("code", code);
+            Response.ClearContent();//清空输出流
+            return File(ms.ToArray(), @"image/png");
         }
         #endregion
 

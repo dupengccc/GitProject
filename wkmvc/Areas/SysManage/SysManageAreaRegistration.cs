@@ -16,7 +16,7 @@ namespace wkmvc.Areas.SysManage
         {
             context.MapRoute(
                 "SysManage_default",
-                "SysManage/{controller}/{action}/{id}",
+                "Sys/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
                  new string[] { "wkmvc.Areas.SysManage.Controllers" }
             );
