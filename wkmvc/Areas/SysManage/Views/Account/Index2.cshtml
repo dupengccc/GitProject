@@ -1,4 +1,5 @@
 ﻿@model  Domain.SYS_USER
+@using Common
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,9 +60,7 @@
     <link href="@Url.StaticFile("~/Content/js/jquery-ui-1.10.4.min.js")" rel="stylesheet" />
     <link href="@Url.StaticFile(" ~/Content/jss/jquery.validate.unobtrusive.js")" rel="stylesheet" />
 
-
-   
- @Scripts.Render("~/Content/js/jquery-ui-1.10.4.min.js");
+@Scripts.Render("~/Content/js/jquery-ui-1.10.4.min.js");
 @Scripts.Render("~/Content/jss/jquery.validate.unobtrusive.js");
 @Scripts.Render("~/Content/jss");
 @Scripts.Render("~/Content/js");

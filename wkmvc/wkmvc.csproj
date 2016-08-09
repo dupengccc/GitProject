@@ -371,6 +371,7 @@
     <Content Include="Content\css\plugins\footable\fonts\footable.woff" />
     <Content Include="Content\css\plugins\footable\fonts\footabled41d.eot" />
     <Content Include="Areas\SysManage\Views\Account\Index1.cshtml" />
+    <Content Include="Areas\SysManage\Views\Account\login.cshtml" />
     <None Include="Content\jss\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\jss\jquery-1.10.2.js" />
     <Content Include="Content\jss\jquery-1.10.2.min.js" />

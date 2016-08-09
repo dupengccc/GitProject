@@ -24,12 +24,10 @@ namespace wkmvc.Areas.SysManage.Controllers
         /// 日志记录
         /// </summary>
         log4net.Ext.IExtLog log = log4net.Ext.ExtLogManager.GetLogger("dblog");
-      
-        
         #endregion
 
         #region 基本视图
-        public ActionResult Index()
+        public ActionResult login()
         {
             return View();
         }
@@ -44,7 +42,7 @@ namespace wkmvc.Areas.SysManage.Controllers
             var json = new JsonHelper() { Msg = "登录成功", Status = "n" };
             try
             {
-                if (SessionHelper.Get("code") == code)
+                if (SessionHelper.Get("code").ToLower() == code.ToLower())
                 {
                     //调用登录验证接口 返回用户实体类
                     var users = UserManage.UserLogin(item.ACCOUNT.Trim(), item.PASSWORD.Trim());
