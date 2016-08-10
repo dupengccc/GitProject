@@ -1,4 +1,4 @@
-﻿using  System.Web.Mvc
+﻿@using Common;
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -17,7 +17,10 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
     <link rel="shortcut icon" href="favicon.ico">
-    @Styles.Render("~/Content/css")
+    <link href="@Url.JsCssFile("/Content/css/bootstrap.min14ed.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/css/font-awesome.min93e3.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/css/animate.min.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/css/style.min862f.css")" rel="stylesheet">
    
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -85,7 +88,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    @RenderBody()
+                    @*<li>
                         <a class="J_menuItem" href="layouts.html"><i class="fa fa-columns"></i> <span class="nav-label">布局</span></a>
                     </li>
                     <li>
@@ -443,7 +447,7 @@
                                 <a class="J_menuItem" href="form_builder.html">表单构建器</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </nav>
@@ -974,8 +978,15 @@
             </a>
         </div>
     </div>
-    @Scripts.Render("~/Content/js");
-    @Scripts.Render("~/Content/plugins/metisMenu");
+    <link href="@Url.JsCssFile("/Content/js/jquery.min.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/bootstrap.min.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/plugins/metisMenu/jquery.metisMenu.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/plugins/slimscroll/jquery.slimscroll.min.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/plugins/layer/layer.min.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/hplus.min.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/contabs.min.js")" rel="stylesheet">
+    <link href="@Url.JsCssFile("/Content/js/plugins/pace/pace.min.js")" rel="stylesheet">
 </body>
+     @RenderSection("PageSpecificJavascriptIncludes", required: false)
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

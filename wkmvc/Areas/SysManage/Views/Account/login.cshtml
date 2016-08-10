@@ -25,7 +25,7 @@
                 <h1 class="logo-name">H+</h1>
             </div>
             <h3>欢迎使用 H+</h3>
-            @using (Ajax.BeginForm("Login", null, new AjaxOptions()
+            @using (Ajax.BeginForm("PostLogin", null, new AjaxOptions()
             {
                 HttpMethod = "Post",
                 OnBegin = "dig.Loading",
@@ -34,30 +34,32 @@
                 OnComplete = "dig.Complete"
             }, new { @class = "m-t",role= "form" }))
             {
-           
                 <div class="form-group">
                     @Html.TextBoxFor(model => model.ACCOUNT, new { @class = "form-control", placeholder = "用户名", required = "required", @maxlength = 15 })
                    
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.PASSWORD, new { @class = "form-control", placeholder = "密码", required = "required", @maxlength = 15 })
+                    @Html.PasswordFor(model => model.PASSWORD, new { @class = "form-control", placeholder = "密码", required = "required", @maxlength = 15 })
                 </div>
-                <div class="from_control">
+                <div class="form-group" style="width:300px;margin-bottom:70px">
                     @Html.TextBox("code", "", new
-               {
-                   @class = "from_control",
+                  {
+                   @class = "form-control",
                    @placeholder = "请输入验证码",
                    @datatype = "*",
                    @nullmsg = "请输入验证码",
                    @maxlength = 4,
                    @required = "required",
-                   @autocomplete = "off"
-               }
+                   @autocomplete = "off",
+                   @style= "width:210px;position:absolute"
+                  }
                         )
+                    <div class="code-img" style="float:right">
+                        <img id="imgVerfy" src="@Url.Action("ValidateCode")" alt="看不清? 点击更换" onclick="this.src=this.src+'?'" style="vertical-align:middle" />
+                    </div>
                 </div>
-                <div class="code-img">
-                    <img id="imgVerfy" src="/Sys/Account/ValidateCode" alt="看不清? 点击更换" onclick="this.src=this.src+'?'" style="vertical-align:middle" />
-                </div><button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+               
+                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
                 <p class="text-muted text-center">
                     <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
                 </p>
@@ -66,6 +68,33 @@
     </div>
     <script src="@Url.JsCssFile("/Content/js/jquery.min.js")"></script>
     <script src="@Url.JsCssFile("/Content/js/bootstrap.min.js")"></script>
+  
+    <script src="@Url.JsCssFile("/Scripts/jquery.unobtrusive-ajax.js")"></script>
+    <script type="text/javascript">
+        var dig = {
+            Loading: function () {
+                $("#login-button").attr("disabled", "disabled");
+            },
+            Success: function (result) {
+                if (result.Status == "y") {
+                    alert(result.Msg)
+                } else {
+                   alert(result.Msg);
+                    dig.Complete();
+                }
+            },
+            Failure: function () {
+                alert(result.Msg);
+                dig.Complete();
+            },
+            Complete: function () {
+                $("#login-button").attr("disabled", false);
+            },
+            ErrorMsg: function (msg) {
+                alert(msg);
+            }
+        };
+    </script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>

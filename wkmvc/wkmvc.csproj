@@ -93,6 +93,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\BIN\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\..\BIN\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine.Mvc">
+      <HintPath>..\..\BIN\RazorEngine.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Spring.Core, Version=2.0.1.45000, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <HintPath>..\packages\Spring.Core.2.0.1\lib\net45\Spring.Core.dll</HintPath>
       <Private>True</Private>
@@ -370,8 +376,8 @@
     <Content Include="Content\css\plugins\footable\fonts\footable.ttf" />
     <Content Include="Content\css\plugins\footable\fonts\footable.woff" />
     <Content Include="Content\css\plugins\footable\fonts\footabled41d.eot" />
-    <Content Include="Areas\SysManage\Views\Account\Index1.cshtml" />
-    <Content Include="Areas\SysManage\Views\Account\login.cshtml" />
+    <Content Include="Areas\SysManage\Views\Account\Index.cshtml" />
+    <Content Include="Areas\SysManage\Views\Account\Login.cshtml" />
     <None Include="Content\jss\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\jss\jquery-1.10.2.js" />
     <Content Include="Content\jss\jquery-1.10.2.min.js" />
@@ -535,7 +541,6 @@
     <Content Include="Areas\ComManage\Views\web.config" />
     <Content Include="Areas\SysManage\Views\web.config" />
     <Content Include="log4net.config" />
-    <Content Include="Areas\SysManage\Views\Account\Index.cshtml" />
     <Content Include="Content\jss\jquery-1.10.2.min.map" />
     <Content Include="fonts\fontawesome-webfont93e3.eot" />
     <Content Include="fonts\fontawesome-webfont93e3.ttf" />
@@ -550,6 +555,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

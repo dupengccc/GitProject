@@ -31,44 +31,62 @@ namespace wkmvc.Areas.SysManage.Controllers
         {
             return View();
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region 登录验证
         /// <summary>
         /// 登录验证
         /// add yuangang by 2016-05-16
         /// </summary>
-      //  [ValidateAntiForgeryToken]
-        public ActionResult Login(Domain.SYS_USER item)
+        //  [ValidateAntiForgeryToken]
+        public ActionResult PostLogin(Domain.SYS_USER item)
         {
             var code = Request.Form["code"];
             var json = new JsonHelper() { Msg = "登录成功", Status = "n" };
             try
             {
-                if (SessionHelper.Get("code").ToLower() == code.ToLower())
+                if (!string.IsNullOrEmpty(SessionHelper.Get("code")))
                 {
-                    //调用登录验证接口 返回用户实体类
-                    var users = UserManage.UserLogin(item.ACCOUNT.Trim(), item.PASSWORD.Trim());
-                    if (users != null)
+                    if (!string.IsNullOrEmpty(code) && SessionHelper.Get("code").ToLower() == code.ToLower())
                     {
-                        //是否锁定
-                        if (users.ISCANLOGIN == 1)
+                        //调用登录验证接口 返回用户实体类
+                        var users = UserManage.UserLogin(item.ACCOUNT.Trim(), item.PASSWORD.Trim());
+                        if (users != null)
                         {
-                            json.Msg = "用户已锁定，禁止登录，请联系管理员进行解锁";
-                            log.Warn(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
-                            return Json(json);
+                            //是否锁定
+                            if (users.ISCANLOGIN == 1)
+                            {
+                                json.Msg = "用户已锁定，禁止登录，请联系管理员进行解锁";
+                                log.Warn(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+                                return Json(json);
+                            }
+                            json.Status = "y";
+                            log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+
                         }
-                        json.Status = "y";
-                        log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+                        else
+                        {
+                            json.Msg = "用户名或密码不正确";
+                            log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
+                        }
 
                     }
                     else
                     {
-                        json.Msg = "用户名或密码不正确";
+                        json.Msg = "验证码错误";
                         log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
                     }
-
                 }
                 else
                 {
-
+                    json.Msg = "验证码错误";
+                    log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
                 }
             }
             catch (Exception e)
