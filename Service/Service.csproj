@@ -91,6 +91,7 @@
     <Compile Include="IService\SysManage\IModuleManage.cs" />
     <Compile Include="IService\SysManage\IPermissionManage.cs" />
     <Compile Include="IService\SysManage\IPostUserManage.cs" />
+    <Compile Include="IService\SysManage\ISystemManage.cs" />
     <Compile Include="IService\SysManage\IUserInfoManage.cs" />
     <Compile Include="IService\SysManage\IUserManage.cs" />
     <Compile Include="IService\SysManage\IUserPermissionManage .cs" />

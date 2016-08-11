@@ -212,7 +212,7 @@ namespace Service.ServiceImp.SysManage
         public SYS_USER UserLogin(string useraccount, string password)
         {
             var entity = this.Get(p => p.ACCOUNT == useraccount);
-            if (entity != null && new Common.CryptHelper.AESCrypt().Decrypt(password)==password)
+            if (entity != null && new Common.CryptHelper.AESCrypt().Decrypt(entity.PASSWORD) == password)
             {
                 return entity;
             }

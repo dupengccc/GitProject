@@ -8,13 +8,11 @@
     <title>H+ 后台主题UI框架 - 登录</title>
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-    <link rel="shortcut icon" href="@Url.JsCssFile("~/Content/img/favicon.ico")">
+    <link rel="shortcut icon" href="favicon.ico">
     <link href="@Url.JsCssFile("~/Content/css/bootstrap.min14ed.css")" rel="stylesheet">
-    <link href="@Url.JsCssFile("~/Content/css/bootstrap.min.css")" rel="stylesheet">
     <link href="@Url.JsCssFile("~/Content/css/font-awesome.min93e3.css")" rel="stylesheet">
     <link href="@Url.JsCssFile("~/Content/css/animate.min.css")" rel="stylesheet">
     <link href="@Url.JsCssFile("~/Content/css/style.min862f.css")" rel="stylesheet">
-    <link href="@Url.JsCssFile("~/Content/css/login.min.css")" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -27,7 +25,7 @@
                 <h1 class="logo-name">H+</h1>
             </div>
             <h3>欢迎使用 H+</h3>
-            @using (Ajax.BeginForm("PostLogin", null, new AjaxOptions()
+            @using (Ajax.BeginForm("Login", null, new AjaxOptions()
             {
                 HttpMethod = "Post",
                 OnBegin = "dig.Loading",
@@ -36,32 +34,30 @@
                 OnComplete = "dig.Complete"
             }, new { @class = "m-t",role= "form" }))
             {
+           
                 <div class="form-group">
                     @Html.TextBoxFor(model => model.ACCOUNT, new { @class = "form-control", placeholder = "用户名", required = "required", @maxlength = 15 })
                    
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(model => model.PASSWORD, new { @class = "form-control", placeholder = "密码", required = "required", @maxlength = 15 })
+                    @Html.TextBoxFor(model => model.PASSWORD, new { @class = "form-control", placeholder = "密码", required = "required", @maxlength = 15 })
                 </div>
-                <div class="form-group" style="width:300px;margin-bottom:70px">
+                <div class="from_control">
                     @Html.TextBox("code", "", new
-                  {
-                   @class = "form-control",
+               {
+                   @class = "from_control",
                    @placeholder = "请输入验证码",
                    @datatype = "*",
                    @nullmsg = "请输入验证码",
                    @maxlength = 4,
                    @required = "required",
-                   @autocomplete = "off",
-                   @style= "width:210px;position:absolute"
-                  }
+                   @autocomplete = "off"
+               }
                         )
-                    <div class="code-img" style="float:right">
-                        <img id="imgVerfy" src="/Sys/Account/ValidateCode" alt="看不清? 点击更换" onclick="this.src=this.src+'?'" style="vertical-align:middle" />
-                    </div>
                 </div>
-               
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <div class="code-img">  
+                    <img id="imgVerfy" src="@Url.Action("ValidateCode")" alt="看不清? 点击更换" onclick="this.src=this.src+'?'" style="vertical-align:middle" />
+                </div><button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
                 <p class="text-muted text-center">
                     <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
                 </p>
@@ -70,34 +66,6 @@
     </div>
     <script src="@Url.JsCssFile("/Content/js/jquery.min.js")"></script>
     <script src="@Url.JsCssFile("/Content/js/bootstrap.min.js")"></script>
-    <script src="@Url.JsCssFile("/Scripts/jquery.unobtrusive-ajax.js")"></script>
-    <script type="text/javascript" >
-        
-        var dig = {
-            Loading: function () {
-                $("#login-button").attr("disabled", "disabled");
-            },
-            Success: function (result) {
-              
-                if (result.Status == "y") {
-                    window.location.href ="../../"+result.ReUrl;
-                } else {
-                    dig.Complete();
-                    alert(result.Msg);
-                }
-            },
-            Failure: function () {
-                alert(result.Msg);
-                dig.Complete();
-            },
-            Complete: function () {
-                $("#login-button").attr("disabled", false);
-            },
-            ErrorMsg: function (msg) {
-                alert(msg);
-            }
-        };
-    </script>
 </body>
-
+<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>

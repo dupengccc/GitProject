@@ -31,20 +31,14 @@ namespace wkmvc.Areas.SysManage.Controllers
         {
             return View();
         }
-
-        public ActionResult Index()
-        {
-            return View();
-        }
         #endregion
-
 
         #region 登录验证
         /// <summary>
         /// 登录验证
-        /// add yuangang by 2016-05-16
+        /// add dupeng by 2016-05-16
         /// </summary>
-        //  [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         public ActionResult PostLogin(Domain.SYS_USER item)
         {
             var code = Request.Form["code"];
@@ -67,8 +61,14 @@ namespace wkmvc.Areas.SysManage.Controllers
                                 return Json(json);
                             }
                             json.Status = "y";
+                            var Account = UserManage.GetAccountByUser(users);
+                            SessionHelper.SetSession("CurrentUser", Account);
+                            string cookie = "{\"id\":\""+ Account.Id+ "\",\"username\":\"" + Account.LogName + "\",\"password\":\"" + Account.PassWord + "\",\"ToKen\":\"" + Session.SessionID + "\"}";
+                            CookieHelper.SetCookie("Cooke_rememberme", new Common.CryptHelper.AESCrypt().Encrypt(cookie),null);
+                            users.LastLoginIP = Utils.GetIP();
+                            UserManage.Update(users);
+                            json.ReUrl = "sys/Home/Index";
                             log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
-
                         }
                         else
                         {
@@ -85,7 +85,7 @@ namespace wkmvc.Areas.SysManage.Controllers
                 }
                 else
                 {
-                    json.Msg = "验证码错误";
+                    json.Msg = "验证码已经过期!请刷新验证码";
                     log.Error(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
                 }
             }
@@ -104,14 +104,12 @@ namespace wkmvc.Areas.SysManage.Controllers
         {
             string code = string.Empty;
             System.IO.MemoryStream ms = new verify_code().Create(out code);
-            SessionHelper.Add("code", code);
+            SessionHelper.SetSession("code", code);
             Response.ClearContent();//清空输出流
             return File(ms.ToArray(), @"image/png");
         }
         #endregion
 
-        #region 帮助方法
-        #endregion
     }
 
 }

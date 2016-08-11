@@ -11,7 +11,6 @@
     <property name="PermissionManage" ref="Service.Permission"></property>
     <property name="DepartmentManage" ref="Service.Department"></property>
   </object>
-
   <object id="Service.UserInfo" type="Service.ServiceImp.SysManage.UserInfoManage,Service" singleton="false">
   </object>
 
@@ -35,6 +34,9 @@
   <object id="Service.ColumnManage" type="Service.ServiceImp.SysManage.ColumnManage,Service" singleton="false">
   </object>
   <object id="Service.CompanyManage" type="Service.ServiceImp.SysManage.CompanyManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.Module" type="Service.ServiceImp.SysManage.ModuleManage,Service" singleton="false">
   </object>
 
 </objects>

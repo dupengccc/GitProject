@@ -3,12 +3,14 @@
   <description>Spring注入控制器，容器指向Service层封装的接口</description>
   <!--系统管理 Begin-->
   <!--登录控制器-->
-  <object type="wkmvc.Areas.SysManage.Controllers.AccountController,wkmvc" singleton="false">
+ <object type="wkmvc.Areas.SysManage.Controllers.AccountController,wkmvc" singleton="false">
         <property name="UserManage" ref="Service.User"/>
   </object>
   
- <object type="wkmvc.Areas.SysManage.Controllers.HomeController,wkmvc" singleton="false">
+  <object type="wkmvc.Areas.SysManage.Controllers.HomeController,wkmvc" singleton="false">
         <property name="ModuleManage" ref="Service.Module"/>
+        <property name="PermissionManage" ref="Service.Permission"/>
+        <property name="SystemManage" ref="Service.System"/>
   </object>
   <!--系统管理 end-->
 </objects>
