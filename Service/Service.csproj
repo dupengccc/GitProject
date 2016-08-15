@@ -107,6 +107,7 @@
     <Compile Include="ServiceImp\SysManage\PermissionDistinct.cs" />
     <Compile Include="ServiceImp\SysManage\PermissionManage .cs" />
     <Compile Include="ServiceImp\SysManage\PostUserManage.cs" />
+    <Compile Include="ServiceImp\SysManage\SystemManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserDepartmentManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserInfoManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserManage.cs" />

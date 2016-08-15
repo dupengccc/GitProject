@@ -81,12 +81,18 @@ namespace Service.ServiceImp.SysManage
             var dptInfo = this.DepartmentManage.Get(p => p.ID == users.DPTID);
             //用户模块
             var module = permission.Select(p => p.SYS_MODULE).ToList().Distinct(new ModuleDistinct()).ToList();
+
+            ///系统ID
+            var System_id = module.Select(a=>a.FK_BELONGSYSTEM).Distinct<string>().ToList();
+
+
             Account account = new Account()
             {
                 Id = users.ID,
                 Name = users.NAME,
                 LogName = users.ACCOUNT,
                 PassWord = users.PASSWORD,
+                System_id= System_id,
                 IsAdmin = IsAdmin(users.ID),
                 DptInfo = dptInfo,
                 Dpt = dpt,

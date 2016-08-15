@@ -41,6 +41,8 @@ namespace wkmvc.Areas.SysManage.Controllers
         // [ValidateAntiForgeryToken]
         public ActionResult PostLogin(Domain.SYS_USER item)
         {
+
+
             var code = Request.Form["code"];
             var json = new JsonHelper() { Msg = "登录成功", Status = "n" };
             try
@@ -65,8 +67,9 @@ namespace wkmvc.Areas.SysManage.Controllers
                             SessionHelper.SetSession("CurrentUser", Account);
                             string cookie = "{\"id\":\""+ Account.Id+ "\",\"username\":\"" + Account.LogName + "\",\"password\":\"" + Account.PassWord + "\",\"ToKen\":\"" + Session.SessionID + "\"}";
                             CookieHelper.SetCookie("Cooke_rememberme", new Common.CryptHelper.AESCrypt().Encrypt(cookie),null);
-                            users.LastLoginIP = Utils.GetIP();
-                            UserManage.Update(users);
+                            var sysuser = UserManage.Get(p => p.ID == users.ID);
+                            sysuser.LastLoginIP = Utils.GetIP();
+                            UserManage.Update(sysuser);
                             json.ReUrl = "sys/Home/Index";
                             log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
                         }

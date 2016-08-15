@@ -167,8 +167,9 @@ namespace Service
             try
             {
                 int rows = 0;
-                var entry = this.Context.Entry(entity);
+                var entry = this.Context.Entry<T>(entity);
                 entry.State = System.Data.Entity.EntityState.Modified;
+              
                 rows = this.Context.SaveChanges();
                 entry.State = System.Data.Entity.EntityState.Detached;
                 return rows > 0;

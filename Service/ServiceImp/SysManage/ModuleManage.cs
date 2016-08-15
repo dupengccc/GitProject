@@ -57,13 +57,44 @@ namespace Service.ServiceImp.SysManage
                 return retmodule.OrderBy(p => p.LEVELS).ThenBy(p => p.SHOWORDER).ToList();
             }
 
-            /// <summary>
-            /// 反向递归模块集合，可重复模块数据，最后去重
-            /// </summary>
-            /// <param name="PrevModule">总模块</param>
-            /// <param name="retmodule">返回模块</param>
-            /// <param name="parentId">上级ID</param>
-            private void RecursiveModule(List<Domain.SYS_MODULE> PrevModule, List<Domain.SYS_MODULE> retmodule, int? parentId)
+        public List<Domain.SYS_MODULE> GetModuleSystem(int userId, List<Domain.SYS_PERMISSION> permission, List<string> systemid)
+        {
+            //返回模块
+            var retmodule = new List<Domain.SYS_MODULE>();
+            var permodule = new List<Domain.SYS_MODULE>();
+            //权限转模块
+            if (permission != null)
+            {
+                permodule.AddRange(permission.Select(p => p.SYS_MODULE));
+                //去重
+                permodule = permodule.Distinct(new ModuleDistinct()).ToList();
+            }
+            //检索显示与系统
+            permodule = permodule.Where(p => p.ISSHOW==1 && systemid.Any(e => e == p.FK_BELONGSYSTEM)).ToList();
+            //构造上级导航模块
+            var prevModule = this.LoadListAll(p => systemid.Any(e => e == p.FK_BELONGSYSTEM));
+            //反向递归算法构造模块带上级上上级模块
+            if (permodule.Count > 0)
+            {
+                foreach (var item in permodule)
+                {
+                    RecursiveModule(prevModule, retmodule, item.PARENTID);
+                    retmodule.Add(item);
+                }
+            }
+            //去重
+            retmodule = retmodule.Distinct(new ModuleDistinct()).ToList();
+            //返回模块集合
+            return retmodule.OrderBy(p => p.LEVELS).ThenBy(p => p.SHOWORDER).ToList();
+        }
+
+        /// <summary>
+        /// 反向递归模块集合，可重复模块数据，最后去重
+        /// </summary>
+        /// <param name="PrevModule">总模块</param>
+        /// <param name="retmodule">返回模块</param>
+        /// <param name="parentId">上级ID</param>
+        private void RecursiveModule(List<Domain.SYS_MODULE> PrevModule, List<Domain.SYS_MODULE> retmodule, int? parentId)
             {
                 var result = PrevModule.Where(p => p.ID == parentId);
                 if (result != null)
@@ -119,16 +150,20 @@ namespace Service.ServiceImp.SysManage
                     {
                         item.LEVELS = levels + 1;
                         this.Update(item);
-                        MoreModifyModule(item.ID, item.LEVELS);
+                        MoreModifyModule(item.ID, item.LEVELS??0);
                     }
                 }
                 return true;
             }
 
-            /// <summary>
-            /// 获取模板列表
-            /// </summary>
-            public dynamic LoadModuleInfo(int id)
+             ISystemManage SystemManage { get; set; }
+
+             IPermissionManage PermissionManage { get; set; }
+
+        /// <summary>
+        /// 获取模板列表
+        /// </summary>
+        public dynamic LoadModuleInfo(int id)
             {
                 return Common.JsonHelper.JsonConverter.JsonClass(this.LoadAll(p => p.PARENTID == id).OrderBy(p => p.ID).Select(p => new { p.ID, p.NAME }).ToList());
             }

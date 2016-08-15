@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Service.IService.SysManage
 {
-   public interface ISystemManage
+     public interface ISystemManage : IRepository<Domain.SYS_SYSTEM>
     {
-
+      
     }
 }

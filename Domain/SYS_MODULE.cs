@@ -22,16 +22,16 @@ namespace Domain
     
         public int ID { get; set; }
         public string FK_BELONGSYSTEM { get; set; }
-        public int PARENTID { get; set; }
+        public Nullable<int> PARENTID { get; set; }
         public string NAME { get; set; }
         public string ALIAS { get; set; }
-        public int MODULETYPE { get; set; }
+        public Nullable<int> MODULETYPE { get; set; }
         public string ICON { get; set; }
         public string MODULEPATH { get; set; }
-        public int ISSHOW { get; set; }
-        public int SHOWORDER { get; set; }
-        public int LEVELS { get; set; }
-        public bool IsVillage { get; set; }
+        public Nullable<int> ISSHOW { get; set; }
+        public Nullable<int> SHOWORDER { get; set; }
+        public Nullable<int> LEVELS { get; set; }
+        public Nullable<bool> IsVillage { get; set; }
         public string CREATEUSER { get; set; }
         public Nullable<System.DateTime> CREATEDATE { get; set; }
         public string UPDATEUSER { get; set; }

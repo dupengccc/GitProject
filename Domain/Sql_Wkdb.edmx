@@ -68,16 +68,16 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FK_BELONGSYSTEM" Type="nvarchar" MaxLength="36" Nullable="false" />
-          <Property Name="PARENTID" Type="int" Nullable="false" />
+          <Property Name="PARENTID" Type="int" />
           <Property Name="NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="ALIAS" Type="nvarchar" MaxLength="50" />
-          <Property Name="MODULETYPE" Type="int" Nullable="false" />
+          <Property Name="MODULETYPE" Type="int" />
           <Property Name="ICON" Type="nvarchar" MaxLength="200" />
           <Property Name="MODULEPATH" Type="nvarchar" MaxLength="500" />
-          <Property Name="ISSHOW" Type="int" Nullable="false" />
-          <Property Name="SHOWORDER" Type="int" Nullable="false" />
-          <Property Name="LEVELS" Type="int" Nullable="false" />
-          <Property Name="IsVillage" Type="bit" Nullable="false" />
+          <Property Name="ISSHOW" Type="int" />
+          <Property Name="SHOWORDER" Type="int" />
+          <Property Name="LEVELS" Type="int" />
+          <Property Name="IsVillage" Type="bit" />
           <Property Name="CREATEUSER" Type="nvarchar" MaxLength="50" />
           <Property Name="CREATEDATE" Type="datetime" />
           <Property Name="UPDATEUSER" Type="nvarchar" MaxLength="36" />
@@ -684,16 +684,16 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FK_BELONGSYSTEM" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="PARENTID" Type="Int32" Nullable="false" />
+          <Property Name="PARENTID" Type="Int32" />
           <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ALIAS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MODULETYPE" Type="Int32" Nullable="false" />
+          <Property Name="MODULETYPE" Type="Int32" />
           <Property Name="ICON" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MODULEPATH" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ISSHOW" Type="Int32" Nullable="false" />
-          <Property Name="SHOWORDER" Type="Int32" Nullable="false" />
-          <Property Name="LEVELS" Type="Int32" Nullable="false" />
-          <Property Name="IsVillage" Type="Boolean" Nullable="false" />
+          <Property Name="ISSHOW" Type="Int32" />
+          <Property Name="SHOWORDER" Type="Int32" />
+          <Property Name="LEVELS" Type="Int32" />
+          <Property Name="IsVillage" Type="Boolean" />
           <Property Name="CREATEUSER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
           <Property Name="UPDATEUSER" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />

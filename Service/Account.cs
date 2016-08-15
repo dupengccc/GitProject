@@ -20,6 +20,12 @@ namespace Service
         /// 登录的用户名
         /// </summary>
         public string LogName { get; set; }
+
+        /// <summary>
+        /// 系统编号
+        /// </summary>
+        public List<string> System_id { get; set; }
+
         /// <summary>
         /// 登录密码
         /// </summary>
