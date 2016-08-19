@@ -242,6 +242,7 @@
     <Compile Include="Areas\SysManage\Controllers\HomeController.cs" />
     <Compile Include="Areas\SysManage\Controllers\ModuleController.cs" />
     <Compile Include="Areas\SysManage\SysManageAreaRegistration.cs" />
+    <Content Include="Areas\SysManage\Views\Module\Index.cshtml" />
     <None Include="Controllers\AccountController.csbak" />
     <Compile Include="Controllers\BaseController.cs" />
     <None Include="Controllers\HomeController.csbak" />
@@ -256,10 +257,13 @@
     <Compile Include="Models\verify_code.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Content Include="Content\js\admin\common\common.js" />
+    <Content Include="Content\js\admin\moduleManage.js" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Chat.cshtml" />
+    <Content Include="Views\Shared\_PageList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Config\ComControllers.xml" />
@@ -582,7 +586,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -591,7 +594,6 @@
     <Folder Include="Areas\ComManage\Views\Account\" />
     <Folder Include="Areas\ComManage\Views\Shared\" />
     <Folder Include="Areas\SysManage\Models\" />
-    <Folder Include="Areas\SysManage\Views\Module\" />
     <Folder Include="Areas\SysManage\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

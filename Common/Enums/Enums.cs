@@ -281,7 +281,7 @@ namespace Common.Enums
             get
             {
                 Dictionary<string, int> _dic = new Dictionary<string, int>();
-                _dic.Add("超级管理员", 1);
+                _dic.Add("超级管理员", 5);
                 return _dic;
             }
         }

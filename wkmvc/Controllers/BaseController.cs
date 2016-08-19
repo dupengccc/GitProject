@@ -13,7 +13,7 @@ namespace wkmvc.Controllers
 {
     public class BaseController : Controller
     {
-        #region 公用变量
+          #region 公用变量
             /// <summary>
             /// 查询关键词
             /// </summary>
@@ -30,9 +30,13 @@ namespace wkmvc.Controllers
             /// 用户容器，公用
             /// </summary>
             public IUserManage UserManage = ContextRegistry.GetContext().GetObject("Service.User") as IUserManage;
-            public IModuleManage ModuleManage = ContextRegistry.GetContext().GetObject("Service.Module") as IModuleManage;
-    
+            public IModuleManage ModuleManage = ContextRegistry.GetContext().GetObject("Service.Module") as IModuleManage;  
         #endregion
+        //public void WriteLog()
+        //{
+        //    log4net.Ext.IExtLog log = log4net.Ext.ExtLogManager.GetLogger("dblog");
+        //    log.Error()
+        //}
 
 
         #region 用户对象
@@ -63,11 +67,19 @@ namespace wkmvc.Controllers
             //1、判断Session对象是否存在
             if (filterContext.HttpContext.Session == null)
             {
-                //filterContext.HttpContext.Response.Write(
-                //       " <script type='text/javascript'> window.top.location='../../sys/Account/login'; </script>");
-                //filterContext.RequestContext.HttpContext.Response.End();
-               // filterContext.Result = new EmptyResult();
-               // return;
+                filterContext.HttpContext.Response.Write(
+                      " <script type='text/javascript'> window.location='../../sys/Account/login'; </script>");
+                filterContext.RequestContext.HttpContext.Response.End();
+                filterContext.Result = new EmptyResult();
+                return;
+            }
+            if (string.IsNullOrEmpty(Common.CookieHelper.GetCookie("Cooke_rememberme").ToString()))
+            {
+                filterContext.HttpContext.Response.Write(
+                      " <script type='text/javascript'> window.location='../../sys/Account/login'; </script>");
+                filterContext.RequestContext.HttpContext.Response.End();
+                filterContext.Result = new EmptyResult();
+                return;
             }
             //2、登录验证
             if (this.CurrentUser == null)
@@ -75,17 +87,7 @@ namespace wkmvc.Controllers
                 if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Account")
                 {
                     filterContext.Result = RedirectToAction("login", "Account", new { Area = "SysManage" });
-
                 }
-                //else
-                //{
-                //    //filterContext.HttpContext.Response.Write(
-                //    //" <script type='text/javascript'> window.top.location='../../sys/Account/login'; </script>");
-                //    //filterContext.RequestContext.HttpContext.Response.End();
-                //   //  filterContext.Result = new EmptyResult();
-                //  //  return;
-                //}
-
             }
 
             #endregion

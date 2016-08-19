@@ -84,8 +84,8 @@ namespace Service.ServiceImp.SysManage
             }
             //去重
             retmodule = retmodule.Distinct(new ModuleDistinct()).ToList();
-            //返回模块集合
-            return retmodule.OrderBy(p => p.LEVELS).ThenBy(p => p.SHOWORDER).ToList();
+            //返回模块集合 .ThenBy(p => p.LEVELS)
+            return retmodule.OrderBy(p => p.SHOWORDER).ToList();
         }
 
         /// <summary>

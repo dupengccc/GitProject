@@ -12,5 +12,11 @@
         <property name="PermissionManage" ref="Service.Permission"/>
         <property name="SystemManage" ref="Service.System"/>
   </object>
+
+  <object type="wkmvc.Areas.SysManage.Controllers.ModuleController,wkmvc" singleton="false">
+    <property name="ModuleManage" ref="Service.Module"/>
+    <property name="PermissionManage" ref="Service.Permission"/>
+    <property name="SystemManage" ref="Service.System"/>
+  </object>
   <!--系统管理 end-->
 </objects>

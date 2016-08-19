@@ -25,7 +25,7 @@
                 <li class="divider"></li>
                 <li>
                     @Html.ActionLink("安全退出", "Logout")
-                    
+
                 </li>
             </ul>
         </div>
@@ -33,26 +33,6 @@
             H+
         </div>
     </li>
-    <li>
-        @foreach (var m in ViewData["Module"] as List<Domain.SYS_MODULE>)
-        {
-            if (m.LEVELS == 1)
-            {
-            <a href="#">
-                <i class="fa fa-home"></i>
-                <span class="nav-label">@m.NAME</span>
-                <span class="fa arrow"></span>
-            </a>
-            }
-            <ul class="nav nav-second-level">
-               @if (m.LEVELS == 2)
-                {
-                <li>
-                    <a class="J_menuItem" href="www.baidu.com" data-index="0">@m.NAME</a>
-                </li>
-                }
-            </ul>
-
-        }
-    </li>
+    @Html.Raw(ViewData["Module"]);
+   
 </ul>
