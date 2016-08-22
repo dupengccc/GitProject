@@ -15,7 +15,10 @@
     <link href="@Url.JsCssFile("~/Content/css/plugins/dataTables/dataTables.bootstrap.css")" rel="stylesheet">
     <link href="@Url.JsCssFile("~/Content/css/animate.min.css")" rel="stylesheet">
     <link href="@Url.JsCssFile("~/Content/css/style.min862f.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/js/plugins/layer/skin/layer.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/js/plugins/layer/skin/layer.ext.css")" rel="stylesheet">
 </head>
+
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
         @RenderSection("MainContent", required: false)
@@ -29,6 +32,8 @@
     <script src="@Url.JsCssFile("~/Content/js/content.min.js")"></script>
     <script src="@Url.JsCssFile("~/Content/js/plugins/iCheck/icheck.min.js")"></script>
     <script src="@Url.JsCssFile("~/Content/js/admin/common/common.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/plugins/layer/layer.min.js")"></script>
+
     <script>
         $(document).ready(function () {
             $(".dataTables-example").dataTable(); var oTable = $("#editable").dataTable(); oTable.$("td").editable("http://www.zi-han.net/theme/example_ajax.php", { "callback": function (sValue, y) { var aPos = oTable.fnGetPosition(this); oTable.fnUpdate(sValue, aPos[0], aPos[1]) }, "submitdata": function (value, settings) { return { "row_id": this.parentNode.getAttribute("id"), "column": oTable.fnGetPosition(this)[2] } }, "width": "90%", "height": "100%" })

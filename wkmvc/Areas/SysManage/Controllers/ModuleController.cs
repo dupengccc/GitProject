@@ -34,7 +34,6 @@ namespace wkmvc.Areas.SysManage.Controllers
         log4net.Ext.IExtLog log = log4net.Ext.ExtLogManager.GetLogger("dblog");
         #endregion
 
-
         public ActionResult GetData(int pageIndex=1,int pagesize=10)
         {
             var products = new[] {
@@ -101,6 +100,23 @@ namespace wkmvc.Areas.SysManage.Controllers
                 throw   er.InnerException;
             } 
         }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Edit()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception er)
+            {
+                throw er.InnerException;
+            }
+        }
+
+
 
         private object GetModuleName(string name, decimal? level)
         {
@@ -109,9 +125,9 @@ namespace wkmvc.Areas.SysManage.Controllers
                 string nbsp = "&nbsp;&nbsp;&nbsp;";
                 for (int i = 0; i < level; i++)
                 {
-                    nbsp += "&nbsp;&nbsp;";
+                    nbsp += "&nbsp;&nbsp;&nbsp;";
                 }
-                name = nbsp + " |--" + name;
+                name = nbsp + "|--" + name;
             }
             return name;
         }

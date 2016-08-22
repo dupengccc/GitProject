@@ -70,7 +70,7 @@ namespace wkmvc.Areas.SysManage.Controllers
                 }
                 else
                 {
-                    sb.AppendFormat("<a class=\"J_menuItem\" href=\"{0}\" data-index=\"0\">{1}</a>", vitem.MODULEPATH, vitem.NAME);
+                    sb.AppendFormat("<a class=\"J_menuItem\" href=\"{0}\" data-index=\"0\"><i class=\"{1}\"></i>{2}</a>", vitem.MODULEPATH,vitem.ICON,vitem.NAME);
                 }
                 sb.Append("</li >");
             }

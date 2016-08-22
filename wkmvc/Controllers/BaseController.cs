@@ -65,28 +65,32 @@ namespace wkmvc.Controllers
         {
             #region 登录用户验证
             //1、判断Session对象是否存在
-            if (filterContext.HttpContext.Session == null)
+
+            if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Account")
             {
-                filterContext.HttpContext.Response.Write(
-                      " <script type='text/javascript'> window.location='../../sys/Account/login'; </script>");
-                filterContext.RequestContext.HttpContext.Response.End();
-                filterContext.Result = new EmptyResult();
-                return;
-            }
-            if (string.IsNullOrEmpty(Common.CookieHelper.GetCookie("Cooke_rememberme").ToString()))
-            {
-                filterContext.HttpContext.Response.Write(
-                      " <script type='text/javascript'> window.location='../../sys/Account/login'; </script>");
-                filterContext.RequestContext.HttpContext.Response.End();
-                filterContext.Result = new EmptyResult();
-                return;
-            }
-            //2、登录验证
-            if (this.CurrentUser == null)
-            {
-                if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Account")
+                if (filterContext.HttpContext.Session == null)
                 {
-                    filterContext.Result = RedirectToAction("login", "Account", new { Area = "SysManage" });
+                    filterContext.HttpContext.Response.Write(
+                          " <script type='text/javascript'> window.location='../../sys/Account/login'; </script>");
+                    filterContext.RequestContext.HttpContext.Response.End();
+                    filterContext.Result = new EmptyResult();
+                    return;
+                }
+                if (string.IsNullOrEmpty(Common.CookieHelper.GetCookie("Cooke_rememberme").ToString()))
+                {
+                    filterContext.HttpContext.Response.Write(
+                          " <script type='text/javascript'> window.location='../../sys/Account/login'; </script>");
+                    filterContext.RequestContext.HttpContext.Response.End();
+                    filterContext.Result = new EmptyResult();
+                    return;
+                }
+                //2、登录验证
+                if (this.CurrentUser == null)
+                {
+                    if (filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Account")
+                    {
+                        filterContext.Result = RedirectToAction("login", "Account", new { Area = "SysManage" });
+                    }
                 }
             }
 

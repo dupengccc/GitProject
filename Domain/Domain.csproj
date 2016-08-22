@@ -129,6 +129,9 @@
       <DependentUpon>Sql_Wkdb.tt</DependentUpon>
     </Compile>
     <Compile Include="TemplateView.cs" />
+    <Compile Include="UserOnline.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Sql_Wkdb.edmx">

@@ -1,4 +1,4 @@
-﻿//$(function () {
+﻿
 //    var oTable = new TableInit();
 //    oTable.Init();
 //    oTable.queryParams();
@@ -91,28 +91,57 @@
 //    debugger;
 //    $(".icheck_box").iCheck("uncheck");
 //});
-    $("#checkall").on("click", function () {
-        //第一种方法 全选全不选
-        var flag = this.checked;
-        //if(this.checked){
-        //    $("input[name='check1']:checkbox").attr('checked', true);
-        //} else {
-        //    $("input[name='check1']:checkbox").attr('checked',false);
-        //}
-        //第二种方法 全选全不选
-        //  $("[name='check1']:checkbox").attr("checked", this.checked);//checked为true时为默认显示的状态
-        $("[name='check1']:checkbox").each(function () {
-            this.checked = flag;
-        });
-        //$("[name='check1']:checkbox").each(function () {
-        //    alter(this.checked);
-        //});
+
+$(function () {
+    layer.config({
+        skin: 'layer-ext-espresso' //一旦设定，所有弹层风格都采用此主题。
     });
-    //$("#checkrev").click(function(){
-    //    //实现反选功能
-    //    $('[name=check1]:checkbox').each(function(){
-    //        this.checked=!this.checked;
-    //    });
-    //});
+});
+
+//弹出框
+$("#insert").on("click", function () {
+    var UnitCode = "110000";
+    layer.open({
+        title: ['模块管理'],
+        type: 2,
+        content: "/sys/Module/Edit" + "/" + UnitCode,
+        area: ['500px', '520px'],
+        shade: 0.3,
+        btn: ['确定', '关闭'],
+        yes: function (index) {
+            //var res = window["layui-layer-iframe" + index].saveFunc();
+            //if (res != false) {
+            //    $("#hidSelectUnit").val(res.SelectUnit);
+            //    $("#hidCompareDate").val(res.CompareDate);
+            //    $("#hidCompareTips").val(res.CompareTips);
+            //    $("#form1").submit();
+            //}
+        }
+    });
+})
+
+$("#edit").on("click", function () {
+    var UnitCode = "110000";
+    layer.open({
+        title: ['模块管理'],
+        type: 2,
+        content: "/sys/Module/Edit" + "/" + UnitCode,
+        area: ['500px', '520px'],
+        shade: 0.3,
+        btn: ['确定', '关闭'],
+        yes: function (index) {
+            //var res = window["layui-layer-iframe" + index].saveFunc();
+            //if (res != false) {
+            //    $("#hidSelectUnit").val(res.SelectUnit);
+            //    $("#hidCompareDate").val(res.CompareDate);
+            //    $("#hidCompareTips").val(res.CompareTips);
+            //    $("#form1").submit();
+            //}
+        }
+    });
+})
+
+
+
  
 

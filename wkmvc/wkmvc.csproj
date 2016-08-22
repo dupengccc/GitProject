@@ -243,10 +243,8 @@
     <Compile Include="Areas\SysManage\Controllers\ModuleController.cs" />
     <Compile Include="Areas\SysManage\SysManageAreaRegistration.cs" />
     <Content Include="Areas\SysManage\Views\Module\Index.cshtml" />
-    <None Include="Controllers\AccountController.csbak" />
     <Compile Include="Controllers\BaseController.cs" />
-    <None Include="Controllers\HomeController.csbak" />
-    <None Include="Controllers\ManageController.csbak" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,6 +255,7 @@
     <Compile Include="Models\verify_code.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Content Include="Content\css\art-Dialog\ui-dialog.css" />
     <Content Include="Content\js\admin\common\common.js" />
     <Content Include="Content\js\admin\moduleManage.js" />
     <Content Include="Views\Shared\_Header.cshtml" />
@@ -387,6 +386,7 @@
     <Content Include="Content\css\plugins\footable\fonts\footabled41d.eot" />
     <Content Include="Areas\SysManage\Views\Home\Index.cshtml" />
     <Content Include="Areas\SysManage\Views\Account\Login.cshtml" />
+    <Content Include="Areas\SysManage\Views\Module\Edit.cshtml" />
     <None Include="Content\jss\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\jss\jquery-1.10.2.js" />
     <Content Include="Content\jss\jquery-1.10.2.min.js" />
@@ -586,6 +586,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Layout.Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

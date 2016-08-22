@@ -250,6 +250,17 @@
           <Property Name="UPDATEDATE" Type="datetime" />
           <Property Name="UPDATEUSER" Type="nvarchar" MaxLength="36" />
         </EntityType>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Userid" Type="int" />
+          <Property Name="OnlineDate" Type="datetime" />
+          <Property Name="UserIP" Type="varchar" MaxLength="50" />
+          <Property Name="OffineDate" Type="datetime" />
+          <Property Name="ConnectId" Type="varchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_SYS_MODULE_SYSTEMID">
           <End Role="SYS_SYSTEM" Type="Self.SYS_SYSTEM" Multiplicity="1" />
           <End Role="SYS_MODULE" Type="Self.SYS_MODULE" Multiplicity="*" />
@@ -448,6 +459,7 @@
           <EntitySet Name="SYS_USER_PERMISSION" EntityType="Self.SYS_USER_PERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_USER_ROLE" EntityType="Self.SYS_USER_ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_USERINFO" EntityType="Self.SYS_USERINFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_SYS_MODULE_SYSTEMID" Association="Self.FK_SYS_MODULE_SYSTEMID">
             <End Role="SYS_SYSTEM" EntitySet="SYS_SYSTEM" />
             <End Role="SYS_MODULE" EntitySet="SYS_MODULE" />
@@ -621,6 +633,11 @@
           <AssociationSet Name="FK_SYS_USERINFO_SYSUSERID" Association="Domain.FK_SYS_USERINFO_SYSUSERID">
             <End Role="SYS_USER" EntitySet="SYS_USER" />
             <End Role="SYS_USERINFO" EntitySet="SYS_USERINFO" />
+          </AssociationSet>
+          <EntitySet Name="UserOnline" EntityType="Domain.UserOnline" />
+          <AssociationSet Name="FK_UserOnline_UserOnline" Association="Domain.FK_UserOnline_UserOnline">
+            <End Role="UserOnline" EntitySet="UserOnline" />
+            <End Role="UserOnline1" EntitySet="UserOnline" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SYS_CODE">
@@ -1051,6 +1068,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Userid" Type="Int32" />
+          <Property Name="OnlineDate" Type="DateTime" Precision="3" />
+          <Property Name="UserIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OffineDate" Type="DateTime" Precision="3" />
+          <Property Name="ConnectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserOnline1" Relationship="Domain.FK_UserOnline_UserOnline" FromRole="UserOnline" ToRole="UserOnline1" />
+        </EntityType>
+        <Association Name="FK_UserOnline_UserOnline">
+          <End Type="Domain.UserOnline" Role="UserOnline" Multiplicity="1" />
+          <End Type="Domain.UserOnline" Role="UserOnline1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserOnline">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserOnline1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1315,6 +1356,18 @@
                 <ScalarProperty Name="PHONE" ColumnName="PHONE" />
                 <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOnline">
+            <EntityTypeMapping TypeName="Domain.UserOnline">
+              <MappingFragment StoreEntitySet="UserOnline">
+                <ScalarProperty Name="ConnectId" ColumnName="ConnectId" />
+                <ScalarProperty Name="OffineDate" ColumnName="OffineDate" />
+                <ScalarProperty Name="UserIP" ColumnName="UserIP" />
+                <ScalarProperty Name="OnlineDate" ColumnName="OnlineDate" />
+                <ScalarProperty Name="FK_Userid" ColumnName="FK_Userid" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

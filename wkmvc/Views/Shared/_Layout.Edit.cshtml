@@ -1,0 +1,38 @@
+﻿@using Common;
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+ <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="@Url.JsCssFile("~/Content/css/bootstrap.min14ed.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/css/font-awesome.min93e3.css")" rel="stylesheet">
+    <!-- Data Tables -->
+    <link href="@Url.JsCssFile("~/Content/css/plugins/dataTables/dataTables.bootstrap.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/css/animate.min.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/css/style.min862f.css")" rel="stylesheet">
+     @RenderSection("PageSpecificStyleSheetIncludes", required: false)
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body>
+    @RenderSection("MainContent", required: false)
+    @RenderBody();
+
+    <!-- BEGIN JAVASCRIPTS -->
+    <script src="@Url.JsCssFile("~/Content/js/jquery.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/bootstrap.min.js")"></script>
+    @RenderSection("PageSpecificJavascriptIncludes", required: false)
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
+
+
