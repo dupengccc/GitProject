@@ -1,21 +1,20 @@
-﻿using Service.IService.SysManage;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
 using Domain;
-using System.Collections;
-using System.Data.Common;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq.Expressions;
-using System.Runtime.Remoting.Contexts;
 
-namespace Service.ServiceImp.SysManage
+namespace Service.IService.SysManage
 {
-    public class UserOnlineManage : IUserOnlineManage
+    public class ICodeManage : IRepository<Domain.SYS_CODE>
     {
         public bool Committed
         {
@@ -46,7 +45,7 @@ namespace Service.ServiceImp.SysManage
             }
         }
 
-        public DbSet<UserOnline> dbSet
+        public DbSet<SYS_CODE> dbSet
         {
             get
             {
@@ -85,32 +84,32 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public bool CreateStaticPage(string temppath, string path, UserOnline t)
+        public bool CreateStaticPage(string temppath, string path, SYS_CODE t)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(Expression<Func<UserOnline, bool>> predicate = null)
+        public int Delete(Expression<Func<SYS_CODE, bool>> predicate = null)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Expression<Func<UserOnline, bool>> predicate, bool IsCommit = true)
+        public bool Delete(Expression<Func<SYS_CODE, bool>> predicate, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(UserOnline entity, bool IsCommit = true)
+        public bool Delete(SYS_CODE entity, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(Expression<Func<UserOnline, bool>> predicate, bool IsCommit = true)
+        public Task<bool> DeleteAsync(Expression<Func<SYS_CODE, bool>> predicate, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(UserOnline entity, bool IsCommit = true)
+        public Task<bool> DeleteAsync(SYS_CODE entity, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
@@ -125,12 +124,12 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public int DeleteList(List<UserOnline> t)
+        public int DeleteList(List<SYS_CODE> t)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteList(List<UserOnline> T1, bool IsCommit = true)
+        public bool DeleteList(List<SYS_CODE> T1, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
@@ -145,7 +144,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteListAsync(List<UserOnline> T1, bool IsCommit = true)
+        public Task<bool> DeleteListAsync(List<SYS_CODE> T1, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
@@ -180,12 +179,12 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public UserOnline Get(Expression<Func<UserOnline, bool>> predicate)
+        public SYS_CODE Get(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<UserOnline> GetAsync(Expression<Func<UserOnline, bool>> predicate)
+        public Task<SYS_CODE> GetAsync(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
@@ -200,7 +199,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public bool IsExist(Expression<Func<UserOnline, bool>> predicate)
+        public bool IsExist(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
@@ -210,7 +209,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsExistAsync(Expression<Func<UserOnline, bool>> predicate)
+        public Task<bool> IsExistAsync(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
@@ -220,12 +219,12 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public IQueryable<UserOnline> LoadAll(Expression<Func<UserOnline, bool>> predicate)
+        public IQueryable<SYS_CODE> LoadAll(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable<UserOnline>> LoadAllAsync(Expression<Func<UserOnline, bool>> predicate)
+        public Task<IQueryable<SYS_CODE>> LoadAllAsync(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
@@ -235,12 +234,12 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public IEnumerable<UserOnline> LoadEnumerableAll(string sql, params DbParameter[] para)
+        public IEnumerable<SYS_CODE> LoadEnumerableAll(string sql, params DbParameter[] para)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UserOnline>> LoadEnumerableAllAsync(string sql, params DbParameter[] para)
+        public Task<IEnumerable<SYS_CODE>> LoadEnumerableAllAsync(string sql, params DbParameter[] para)
         {
             throw new NotImplementedException();
         }
@@ -250,22 +249,22 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public List<UserOnline> LoadListAll(Expression<Func<UserOnline, bool>> predicate)
+        public List<SYS_CODE> LoadListAll(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<UserOnline>> LoadListAllAsync(Expression<Func<UserOnline, bool>> predicate)
+        public Task<List<SYS_CODE>> LoadListAllAsync(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public DbQuery<UserOnline> LoadQueryAll(Expression<Func<UserOnline, bool>> predicate)
+        public DbQuery<SYS_CODE> LoadQueryAll(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DbQuery<UserOnline>> LoadQueryAllAsync(Expression<Func<UserOnline, bool>> predicate)
+        public Task<DbQuery<SYS_CODE>> LoadQueryAllAsync(Expression<Func<SYS_CODE, bool>> predicate)
         {
             throw new NotImplementedException();
         }
@@ -275,7 +274,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public IList<UserOnline> PageByListSql(string sql, IList<DbParameter> parameters, PageCollection page)
+        public IList<SYS_CODE> PageByListSql(string sql, IList<DbParameter> parameters, PageCollection page)
         {
             throw new NotImplementedException();
         }
@@ -290,7 +289,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public PageInfo<UserOnline> Query(IQueryable<UserOnline> query, int index, int PageSize)
+        public PageInfo<SYS_CODE> Query(IQueryable<SYS_CODE> query, int index, int PageSize)
         {
             throw new NotImplementedException();
         }
@@ -349,27 +348,27 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public bool Save(UserOnline entity)
+        public bool Save(SYS_CODE entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Save(UserOnline entity, bool IsCommit = true)
+        public bool Save(SYS_CODE entity, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> SaveAsync(UserOnline entity, bool IsCommit = true)
+        public Task<bool> SaveAsync(SYS_CODE entity, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public int SaveList(List<UserOnline> t)
+        public int SaveList(List<SYS_CODE> t)
         {
             throw new NotImplementedException();
         }
 
-        public bool SaveList(List<UserOnline> T1, bool IsCommit = true)
+        public bool SaveList(List<SYS_CODE> T1, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
@@ -384,7 +383,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public Task<bool> SaveListAsync(List<UserOnline> T1, bool IsCommit = true)
+        public Task<bool> SaveListAsync(List<SYS_CODE> T1, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
@@ -394,22 +393,22 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public bool SaveOrUpdate(UserOnline entity, bool isEdit)
+        public bool SaveOrUpdate(SYS_CODE entity, bool isEdit)
         {
             throw new NotImplementedException();
         }
 
-        public bool SaveOrUpdate(UserOnline entity, bool IsSave, bool IsCommit = true)
+        public bool SaveOrUpdate(SYS_CODE entity, bool IsSave, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> SaveOrUpdateAsync(UserOnline entity, bool IsSave, bool IsCommit = true)
+        public Task<bool> SaveOrUpdateAsync(SYS_CODE entity, bool IsSave, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public List<UserOnline> SelectBySql(string sql, params DbParameter[] para)
+        public List<SYS_CODE> SelectBySql(string sql, params DbParameter[] para)
         {
             throw new NotImplementedException();
         }
@@ -419,7 +418,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public Task<List<UserOnline>> SelectBySqlAsync(string sql, params DbParameter[] para)
+        public Task<List<SYS_CODE>> SelectBySqlAsync(string sql, params DbParameter[] para)
         {
             throw new NotImplementedException();
         }
@@ -429,27 +428,27 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public bool Update(UserOnline entity)
+        public bool Update(SYS_CODE entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(UserOnline entity, bool IsCommit = true)
+        public bool Update(SYS_CODE entity, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(UserOnline entity, bool IsCommit = true)
+        public Task<bool> UpdateAsync(SYS_CODE entity, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
 
-        public int UpdateList(List<UserOnline> t)
+        public int UpdateList(List<SYS_CODE> t)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateList(List<UserOnline> T1, bool IsCommit = true)
+        public bool UpdateList(List<SYS_CODE> T1, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }
@@ -464,7 +463,7 @@ namespace Service.ServiceImp.SysManage
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateListAsync(List<UserOnline> T1, bool IsCommit = true)
+        public Task<bool> UpdateListAsync(List<SYS_CODE> T1, bool IsCommit = true)
         {
             throw new NotImplementedException();
         }

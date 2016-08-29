@@ -43,5 +43,6 @@ namespace Domain
         public virtual DbSet<SYS_USER_ROLE> SYS_USER_ROLE { get; set; }
         public virtual DbSet<SYS_USERINFO> SYS_USERINFO { get; set; }
         public virtual DbSet<UserOnline> UserOnline { get; set; }
+        public virtual DbSet<SYS_CHATMESSAGE> SYS_CHATMESSAGE { get; set; }
     }
 }

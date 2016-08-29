@@ -10,9 +10,12 @@
     <property name="PostUserManage" ref="Service.PostUser"></property>
     <property name="PermissionManage" ref="Service.Permission"></property>
     <property name="DepartmentManage" ref="Service.Department"></property>
- 
+    <property name="UserOnlineManage" ref="Service.UserOnlineManage"/>
   </object>
   <object id="Service.UserInfo" type="Service.ServiceImp.SysManage.UserInfoManage,Service" singleton="false">
+  </object>
+
+  <object id="Service.UserOnlineManage" type="Service.ServiceImp.SysManage.UserOnlineManage,Service" singleton="false">
   </object>
 
   <object id="Service.UserRole" type="Service.ServiceImp.SysManage.UserRoleManage,Service" singleton="false">

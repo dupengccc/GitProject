@@ -10,7 +10,6 @@ namespace GMS.Web.Admin.Controllers
     {
         //
         // GET: /Home/
-
         public ActionResult Index()
         {
             return RedirectToAction("login", "Account", new { Area = "SysManage" });

@@ -228,191 +228,462 @@ namespace Common.Enums
     /// </summary>
     public class ClsDic
     {
-        /// <summary>
-        /// 根据DicKey值获取value
-        /// </summary>
-        public static string GetDicValueByKey(string key, Dictionary<string, string> p)
-        {
-            if (p == null || p.Count == 0) return "";
-            var dic = p.GetEnumerator();
-            while (dic.MoveNext())
-            {
-                var obj = dic.Current;
-                if (key == obj.Key)
-                    return obj.Value;
-            }
-            return "";
-        }
-        /// <summary>
-        /// 根据DICValue获取Key
-        /// </summary>
-        public static string GetDicKeyByValue(string value, Dictionary<string, string> p)
-        {
-            if (p == null || p.Count == 0) return "";
-            var dic = p.GetEnumerator();
-            while (dic.MoveNext())
-            {
-                var obj = dic.Current;
-                if (obj.Value == value)
-                    return obj.Key;
-            }
-            return "";
-        }
-        /// <summary>
-        /// 描述:实体与编码对应字典,在验证数据权限时,通过此处字典来枚举实体编号
-        /// <author>创建标识: add yuangang by 2016-05-10</author>
-        /// </summary>
-        public static Dictionary<string, string> DicEntity
+        public static System.Collections.Generic.Dictionary<string, string> DicEntity
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("日志", "");
-                _dic.Add("用户", "18da4207-3bfc-49ea-90f7-16867721805c");
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "日志",
+                        ""
+                    },
+
+                    {
+                        "用户",
+                        "18da4207-3bfc-49ea-90f7-16867721805c"
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 描述:存放特别的角色编号字典,在验证操作权限时用到
-        /// 创建标识:add by liuj 2013-8-9 9:56
-        /// </summary>
-        public static Dictionary<string, int> DicRole
+        public static System.Collections.Generic.Dictionary<string, int> DicRole
         {
             get
             {
-                Dictionary<string, int> _dic = new Dictionary<string, int>();
-                _dic.Add("超级管理员", 5);
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "超级管理员",
+                        1
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 字典类型
-        /// </summary>
-        public static Dictionary<string, string> DicCodeType
+        public static System.Collections.Generic.Dictionary<string, int> DicStatus
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "驳回",
+                        0
+                    },
+
+                    {
+                        "通过",
+                        1
+                    },
+
+                    {
+                        "等待审核",
+                        2
+                    }
+                };
+            }
+        }
+        public static System.Collections.Generic.Dictionary<string, int> DicProject
+        {
+            get
+            {
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "准备中",
+                        0
+                    },
+
+                    {
+                        "进行中",
+                        1
+                    },
+
+                    {
+                        "延期",
+                        2
+                    },
+
+                    {
+                        "已超时",
+                        3
+                    },
+
+                    {
+                        "已终止",
+                        4
+                    },
+
+                    {
+                        "已验收",
+                        5
+                    },
+
+                    {
+                        "已完成",
+                        6
+                    },
+
+                    {
+                        "已失败",
+                        7
+                    },
+
+                    {
+                        "已违约",
+                        8
+                    },
+
+                    {
+                        "对方违约",
+                        9
+                    }
+                };
+            }
+        }
+        public static System.Collections.Generic.Dictionary<string, int> DicMailSendStatus
+        {
+            get
+            {
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "未发送",
+                        0
+                    },
+
+                    {
+                        "已发送",
+                        1
+                    },
+
+                    {
+                        "发送失败",
+                        2
+                    }
+                };
+            }
+        }
+        public static System.Collections.Generic.Dictionary<string, int> DicMailReadStatus
+        {
+            get
+            {
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "未读",
+                        0
+                    },
+
+                    {
+                        "已读",
+                        1
+                    }
+                };
+            }
+        }
+        public static System.Collections.Generic.Dictionary<string, int> DicMailType
+        {
+            get
+            {
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "发件箱",
+                        0
+                    },
+
+                    {
+                        "收件箱",
+                        1
+                    },
+
+                    {
+                        "垃圾箱",
+                        2
+                    },
+
+                    {
+                        "草稿箱",
+                        3
+                    },
+
+                    {
+                        "已删除",
+                        4
+                    }
+                };
+            }
+        }
+        public static System.Collections.Generic.Dictionary<string, int> DicMessageType
+        {
+            get
+            {
+                return new System.Collections.Generic.Dictionary<string, int>
+                {
+
+                    {
+                        "广播",
+                        0
+                    },
+
+                    {
+                        "群组",
+                        1
+                    },
+
+                    {
+                        "私聊",
+                        2
+                    }
+                };
+            }
+        }
+        public static System.Collections.Generic.Dictionary<string, string> DicCodeType
+        {
+            get
+            {
+                System.Collections.Generic.Dictionary<string, string> dictionary = new System.Collections.Generic.Dictionary<string, string>();
                 try
                 {
-                    string dicStr = Utils.GetFileContent(System.Web.HttpContext.Current.Server.MapPath("/Models/DicType.txt"), false);
-                    var diclist = dicStr.TrimEnd(',').TrimStart(',').Split(',').ToList();
-                    if (diclist.Count > 0)
+                    string fileContent = Utils.GetFileContent(HttpContext.Current.Server.MapPath("/Models/DicType.txt"), false);
+                    System.Collections.Generic.List<string> list = fileContent.TrimEnd(new char[]
                     {
-                        foreach (var item in diclist)
+                        ','
+                    }).TrimStart(new char[]
+                    {
+                        ','
+                    }).Split(new char[]
+                    {
+                        ','
+                    }).ToList<string>();
+                    if (list.Count > 0)
+                    {
+                        foreach (string current in list)
                         {
-                            _dic.Add(item.Split('-')[0], item.Split('-')[1]);
+                            dictionary.Add(current.Split(new char[]
+                            {
+                                '-'
+                            })[0], current.Split(new char[]
+                            {
+                                '-'
+                            })[1]);
                         }
                     }
                 }
-                catch { }
-                return _dic;
+                catch
+                {
+                }
+                return dictionary;
             }
         }
-        /// <summary>
-        /// 附件上传路径
-        /// 创建标识:add yuangang by 2016-05-10
-        /// </summary>
-        public static Dictionary<string, string> DicAttachmentPath
+        public static System.Collections.Generic.Dictionary<string, string> DicAttachmentPath
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("上传路径", System.Configuration.ConfigurationManager.AppSettings["upfile"]);
-                _dic.Add("档案简历", System.Configuration.ConfigurationManager.AppSettings["upfile"]);
-                _dic.Add("手机文件", System.Configuration.ConfigurationManager.AppSettings["upphone"]);
-                _dic.Add("手机照片", System.Configuration.ConfigurationManager.AppSettings["photofile"]);
-                _dic.Add("技术文件", System.Configuration.ConfigurationManager.AppSettings["upTsfile"]);
-                _dic.Add("工程图", System.Configuration.ConfigurationManager.AppSettings["UploadFiles"]);
-                _dic.Add("档案头像", System.Configuration.ConfigurationManager.AppSettings["upfile"]);
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "上传路径",
+                        ConfigurationManager.AppSettings["upfile"]
+                    },
+
+                    {
+                        "档案简历",
+                        ConfigurationManager.AppSettings["upfile"]
+                    },
+
+                    {
+                        "手机文件",
+                        ConfigurationManager.AppSettings["upphone"]
+                    },
+
+                    {
+                        "手机照片",
+                        ConfigurationManager.AppSettings["photofile"]
+                    },
+
+                    {
+                        "技术文件",
+                        ConfigurationManager.AppSettings["upTsfile"]
+                    },
+
+                    {
+                        "工程图",
+                        ConfigurationManager.AppSettings["UploadFiles"]
+                    },
+
+                    {
+                        "档案头像",
+                        ConfigurationManager.AppSettings["upfile"]
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 业务办理图片宽高
-        /// 创建标识:add yuangang by 2016-05-10
-        /// </summary>
-        public static Dictionary<string, string> DicImageWH
+        public static System.Collections.Generic.Dictionary<string, string> DicImageWH
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("图片宽度", System.Configuration.ConfigurationManager.AppSettings["imgWidth"]);
-                _dic.Add("图片高度", System.Configuration.ConfigurationManager.AppSettings["imgHeight"]);
-                _dic.Add("手机用户头像高", System.Configuration.ConfigurationManager.AppSettings["UserPhotoHeight"]);
-                _dic.Add("手机用户头像宽", System.Configuration.ConfigurationManager.AppSettings["UserPhotoWidth"]);
-                _dic.Add("用户头像高", System.Configuration.ConfigurationManager.AppSettings["PolicePhotoHeight"]);
-                _dic.Add("用户头像宽", System.Configuration.ConfigurationManager.AppSettings["PolicePhotoWidth"]);
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "图片宽度",
+                        ConfigurationManager.AppSettings["imgWidth"]
+                    },
+
+                    {
+                        "图片高度",
+                        ConfigurationManager.AppSettings["imgHeight"]
+                    },
+
+                    {
+                        "手机用户头像高",
+                        ConfigurationManager.AppSettings["UserPhotoHeight"]
+                    },
+
+                    {
+                        "手机用户头像宽",
+                        ConfigurationManager.AppSettings["UserPhotoWidth"]
+                    },
+
+                    {
+                        "用户头像高",
+                        ConfigurationManager.AppSettings["PolicePhotoHeight"]
+                    },
+
+                    {
+                        "用户头像宽",
+                        ConfigurationManager.AppSettings["PolicePhotoWidth"]
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 警务室图片宽高
-        /// 创建标识:add yuangang by 2016-05-10
-        /// </summary>
-        public static Dictionary<string, string> DicPoliceHouseImageWH
+        public static System.Collections.Generic.Dictionary<string, string> DicPoliceHouseImageWH
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("图片宽度", System.Configuration.ConfigurationManager.AppSettings["imgPoliceWidth"]);
-                _dic.Add("图片高度", System.Configuration.ConfigurationManager.AppSettings["imgPoliceHeight"]);
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "图片宽度",
+                        ConfigurationManager.AppSettings["imgPoliceWidth"]
+                    },
+
+                    {
+                        "图片高度",
+                        ConfigurationManager.AppSettings["imgPoliceHeight"]
+                    }
+                };
             }
         }
-        /// <summary>
-        /// OracleReportData
-        /// 创建标识:add yuangang by 2016-05-10
-        /// </summary>
-        public static Dictionary<string, string> OracleReportData
+        public static System.Collections.Generic.Dictionary<string, string> OracleReportData
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("OrcalReport", System.Configuration.ConfigurationManager.AppSettings["connectionString"]);
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "OrcalReport",
+                        ConfigurationManager.AppSettings["connectionString"]
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 手机客户端命名
-        /// 创建标识:add yuangang by 2016-05-10
-        /// </summary>
-        public static Dictionary<string, string> DicPhone
+        public static System.Collections.Generic.Dictionary<string, string> DicPhone
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("安卓程序", System.Configuration.ConfigurationManager.AppSettings["AndroidName"]);
-                _dic.Add("苹果程序", System.Configuration.ConfigurationManager.AppSettings["IOSName"]);
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "安卓程序",
+                        ConfigurationManager.AppSettings["AndroidName"]
+                    },
+
+                    {
+                        "苹果程序",
+                        ConfigurationManager.AppSettings["IOSName"]
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 功能描述：记录Cookie的Key值 
-        /// 创建标识：徐戈
-        /// </summary>
-        public static Dictionary<string, string> DicCookie
+        public static System.Collections.Generic.Dictionary<string, string> DicCookie
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("Session中存储的帐号和CookieID", "AccountCookieID_Session");
-                _dic.Add("Cookie中存储的帐号和CookieID", "AccountCookieIDNew");
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "Session中存储的帐号和CookieID",
+                        "AccountCookieID_Session"
+                    },
+
+                    {
+                        "Cookie中存储的帐号和CookieID",
+                        "AccountCookieIDNew"
+                    }
+                };
             }
         }
-        /// <summary>
-        /// 功能描述：记录Cookie的Key值 
-        /// 创建标识：徐戈
-        /// </summary>
-        public static Dictionary<string, string> DicCookieTimeout
+        public static System.Collections.Generic.Dictionary<string, string> DicCookieTimeout
         {
             get
             {
-                Dictionary<string, string> _dic = new Dictionary<string, string>();
-                _dic.Add("帐号过期时间", "30");
-                return _dic;
+                return new System.Collections.Generic.Dictionary<string, string>
+                {
+
+                    {
+                        "帐号过期时间",
+                        "30"
+                    }
+                };
             }
+        }
+        public static string GetDicValueByKey(string key, System.Collections.Generic.Dictionary<string, string> p)
+        {
+            if (p == null || p.Count == 0)
+            {
+                return "";
+            }
+            System.Collections.Generic.Dictionary<string, string>.Enumerator enumerator = p.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                System.Collections.Generic.KeyValuePair<string, string> current = enumerator.Current;
+                if (key == current.Key)
+                {
+                    return current.Value;
+                }
+            }
+            return "";
+        }
+        public static string GetDicKeyByValue(string value, System.Collections.Generic.Dictionary<string, string> p)
+        {
+            if (p == null || p.Count == 0)
+            {
+                return "";
+            }
+            System.Collections.Generic.Dictionary<string, string>.Enumerator enumerator = p.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                System.Collections.Generic.KeyValuePair<string, string> current = enumerator.Current;
+                if (current.Value == value)
+                {
+                    return current.Key;
+                }
+            }
+            return "";
         }
 
     }

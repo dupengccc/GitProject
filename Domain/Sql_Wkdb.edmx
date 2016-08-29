@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Domain.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SYS_CHATMESSAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromUser" Type="int" />
+          <Property Name="MessageType" Type="int" />
+          <Property Name="MessageContent" Type="text" />
+          <Property Name="ToGroup" Type="varchar" MaxLength="200" />
+          <Property Name="MessageDate" Type="datetime" />
+          <Property Name="MessageIP" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SYS_CODE">
           <Key>
             <PropertyRef Name="ID" />
@@ -260,6 +272,7 @@
           <Property Name="UserIP" Type="varchar" MaxLength="50" />
           <Property Name="OffineDate" Type="datetime" />
           <Property Name="ConnectId" Type="varchar" MaxLength="50" />
+          <Property Name="IsOnline" Type="bit" />
         </EntityType>
         <Association Name="FK_SYS_MODULE_SYSTEMID">
           <End Role="SYS_SYSTEM" Type="Self.SYS_SYSTEM" Multiplicity="1" />
@@ -442,6 +455,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DomainStoreContainer">
+          <EntitySet Name="SYS_CHATMESSAGE" EntityType="Self.SYS_CHATMESSAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_CODE" EntityType="Self.SYS_CODE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_CODE_AREA" EntityType="Self.SYS_CODE_AREA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_DEPARTMENT" EntityType="Self.SYS_DEPARTMENT" Schema="dbo" store:Type="Tables" />
@@ -639,6 +653,7 @@
             <End Role="UserOnline" EntitySet="UserOnline" />
             <End Role="UserOnline1" EntitySet="UserOnline" />
           </AssociationSet>
+          <EntitySet Name="SYS_CHATMESSAGE" EntityType="Domain.SYS_CHATMESSAGE" />
         </EntityContainer>
         <EntityType Name="SYS_CODE">
           <Key>
@@ -1079,6 +1094,7 @@
           <Property Name="OffineDate" Type="DateTime" Precision="3" />
           <Property Name="ConnectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserOnline1" Relationship="Domain.FK_UserOnline_UserOnline" FromRole="UserOnline" ToRole="UserOnline1" />
+          <Property Name="IsOnline" Type="Boolean" />
         </EntityType>
         <Association Name="FK_UserOnline_UserOnline">
           <End Type="Domain.UserOnline" Role="UserOnline" Multiplicity="1" />
@@ -1092,6 +1108,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SYS_CHATMESSAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromUser" Type="Int32" />
+          <Property Name="MessageType" Type="Int32" />
+          <Property Name="MessageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ToGroup" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MessageDate" Type="DateTime" Precision="3" />
+          <Property Name="MessageIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1363,11 +1391,25 @@
           <EntitySetMapping Name="UserOnline">
             <EntityTypeMapping TypeName="Domain.UserOnline">
               <MappingFragment StoreEntitySet="UserOnline">
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
                 <ScalarProperty Name="ConnectId" ColumnName="ConnectId" />
                 <ScalarProperty Name="OffineDate" ColumnName="OffineDate" />
                 <ScalarProperty Name="UserIP" ColumnName="UserIP" />
                 <ScalarProperty Name="OnlineDate" ColumnName="OnlineDate" />
                 <ScalarProperty Name="FK_Userid" ColumnName="FK_Userid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_CHATMESSAGE">
+            <EntityTypeMapping TypeName="Domain.SYS_CHATMESSAGE">
+              <MappingFragment StoreEntitySet="SYS_CHATMESSAGE">
+                <ScalarProperty Name="MessageIP" ColumnName="MessageIP" />
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="ToGroup" ColumnName="ToGroup" />
+                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="FromUser" ColumnName="FromUser" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

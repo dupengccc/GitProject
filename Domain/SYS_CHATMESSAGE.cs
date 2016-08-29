@@ -12,16 +12,14 @@ namespace Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class UserOnline
+    public partial class SYS_CHATMESSAGE
     {
         public int ID { get; set; }
-        public Nullable<int> FK_Userid { get; set; }
-        public Nullable<System.DateTime> OnlineDate { get; set; }
-        public string UserIP { get; set; }
-        public Nullable<System.DateTime> OffineDate { get; set; }
-        public string ConnectId { get; set; }
-        public Nullable<bool> IsOnline { get; set; }
-    
-        public virtual SYS_USER Sys_User { get; set; }
+        public Nullable<int> FromUser { get; set; }
+        public Nullable<int> MessageType { get; set; }
+        public string MessageContent { get; set; }
+        public string ToGroup { get; set; }
+        public Nullable<System.DateTime> MessageDate { get; set; }
+        public string MessageIP { get; set; }
     }
 }

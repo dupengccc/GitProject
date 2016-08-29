@@ -77,6 +77,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sql_Wkdb.edmx</DependentUpon>
     </Compile>
+    <Compile Include="SYS_CHATMESSAGE.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
     <Compile Include="SYS_CODE.cs">
       <DependentUpon>Sql_Wkdb.tt</DependentUpon>
     </Compile>

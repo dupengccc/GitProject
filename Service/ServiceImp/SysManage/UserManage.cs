@@ -19,6 +19,9 @@ namespace Service.ServiceImp.SysManage
 
         IUserRoleManage UserRoleManage { get; set; }
 
+        IUserOnlineManage UserOnlineManage { get; set; }
+        
+
         IUserPermissionManage UserPermissionManage { get; set; }
 
         IPostUserManage PostUserManage { get; set; }
@@ -148,7 +151,7 @@ namespace Service.ServiceImp.SysManage
         public bool IsAdmin(int userId)
         {
             //通过用户ID获取角色
-            Domain.SYS_USER entity = this.Get(p => p.ID == userId);
+            SYS_USER entity = this.Get(p => p.ID == userId);
             if (entity == null) return false;
             var roles = entity.SYS_USER_ROLE.Select(p => new Domain.SYS_ROLE
             {
