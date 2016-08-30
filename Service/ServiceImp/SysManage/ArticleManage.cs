@@ -14,7 +14,7 @@ using System.Runtime.Remoting.Contexts;
 
 namespace Service.ServiceImp.SysManage
 {
-    public class ArticleManage : RepositoryBase<Domain.Articles>, IArticleManage
+    public class ArticleManage : RepositoryBase<Articles>, IArticleManage
     {
     }
 }

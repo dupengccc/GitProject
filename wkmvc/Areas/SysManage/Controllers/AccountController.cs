@@ -17,9 +17,11 @@ namespace wkmvc.Areas.SysManage.Controllers
         #region 声明容器
         /// <summary>
         /// 用户管理
-        /// add yuangang by 2016-05-16
+        /// add dupeng by 2016-05-16
         /// </summary>
         IUserManage UserManage { get; set; }
+
+        IUserOnlineManage UserOnlineManage { get; set; }
         /// <summary>
         /// 日志记录
         /// </summary>
@@ -27,7 +29,7 @@ namespace wkmvc.Areas.SysManage.Controllers
         #endregion
 
         #region 基本视图
-        public ActionResult login()
+        public ActionResult Index()
         {
             SessionHelper.Remove("CurrentUser");
             CookieHelper.ClearCookie("cookie_rememberme");

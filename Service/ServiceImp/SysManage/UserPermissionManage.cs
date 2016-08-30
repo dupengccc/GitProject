@@ -31,10 +31,10 @@ namespace Service.ServiceImp.SysManage
                     FK_PERMISSIONID = int.Parse(t)
                 }))
                 {
-                    this.dbSet.Add(per);
+                    this.Save(per,false);
                 }
                 //5、Save
-                return this.Context.SaveChanges() > 0;
+                return this._Context.SaveChanges() > 0;
             }
             catch (Exception e) { throw e; }
         }

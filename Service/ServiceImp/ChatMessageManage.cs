@@ -15,7 +15,7 @@ using System.Runtime.Remoting.Contexts;
 
 namespace Service.ServiceImp
 {
-    public class ChatMessageManage : IChatMessageManage
+    public class ChatMessageManage : RepositoryBase<Domain.SYS_CHATMESSAGE>,IChatMessageManage
     {
         public bool Committed
         {
@@ -220,10 +220,7 @@ namespace Service.ServiceImp
             throw new NotImplementedException();
         }
 
-        public IQueryable<SYS_CHATMESSAGE> LoadAll(Expression<Func<SYS_CHATMESSAGE, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public Task<IQueryable<SYS_CHATMESSAGE>> LoadAllAsync(Expression<Func<SYS_CHATMESSAGE, bool>> predicate)
         {

@@ -55,7 +55,7 @@ namespace Service.ServiceImp.SysManage
                             DEPARTMENT_ID = item,
                             USER_ID = userId
                         }).ToList();
-                        return this.SaveList(list) > 0;
+                    return this.SaveList(list,true);
                     }
                     return true;
                 }

@@ -101,7 +101,6 @@
     <Compile Include="IService\SysManage\IUserRoleManage.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Repository.cs=" />
     <Compile Include="IService\SysManage\IUserDepartmentManage.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="ServiceImp\ChatMessageManage.cs" />

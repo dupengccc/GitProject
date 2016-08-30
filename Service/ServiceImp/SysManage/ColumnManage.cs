@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.ServiceImp.SysManage
 {
-    public class ColumnManage:RepositoryBase<Domain.Column>, IColumnManage
+    public class ColumnManage:RepositoryBase<Domain.Column>,IColumnManage
     {
     }
 }

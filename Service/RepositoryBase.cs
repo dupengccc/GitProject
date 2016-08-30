@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Common;
+using Domain;
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using Domain;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Collections;
 using System.Threading.Tasks;
-using Common;
 
 namespace Service
 {
@@ -44,7 +42,15 @@ namespace Service
             {
                 return new MyConfig();
             }
-        }   
+        }
+
+        DbContext IRepository<T>._Context
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         #endregion
 
         #region 单模型 CRUD 操作
@@ -809,7 +815,7 @@ namespace Service
         {
             List<object> list = QueryObject<TEntity, TOrderBy>
                  (where, orderby, selector, IsAsc);
-            return await Task.Run(() => Common.JsonConverter.JsonClass(list));
+            return await Task.Run(() => Common.JsonHelper.JsonConverter.JsonClass(list));
         }
 
         #endregion
@@ -1084,7 +1090,7 @@ namespace Service
             }
             if (count > 0)
                 enumerable = enumerable.Skip((index - 1) * PageSize).Take(PageSize);
-            return new Common.PageInfo(index, PageSize, count, Common.JsonConverter.JsonClass(enumerable.ToList()));
+            return new PageInfo(index, PageSize, count, Common.JsonHelper.JsonConverter.JsonClass(enumerable.ToList()));
         }
         #endregion
 
@@ -1119,7 +1125,7 @@ namespace Service
         {
             return _Context.Database.SqlQueryForDynamic(sql, para);
         }
-        
+
         #endregion
 
         #region 更新操作
@@ -1159,7 +1165,8 @@ namespace Service
             }
             catch (Exception e) { throw e; }
         }
+
         #endregion
-       
+
     }
 }

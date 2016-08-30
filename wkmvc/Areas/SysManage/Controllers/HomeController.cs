@@ -84,7 +84,7 @@ namespace wkmvc.Areas.SysManage.Controllers
         {
             Common.SessionHelper.Remove("CurrentUser");// .Logout(this.CookieContext.UserToken);
             Common.CookieHelper.ClearCookie("Cooke_rememberme");
-            return RedirectToAction("login", "Account", new { Area = "SysManage" });
+            return RedirectToAction("Index", "Account", new { Area = "SysManage" });
            
         }
 

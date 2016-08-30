@@ -11,7 +11,7 @@ using Common.JsonHelper;
 
 namespace Service.ServiceImp.SysManage
 {
-    public class UserManage : RepositoryBase<Domain.SYS_USER>, IUserManage
+    public class UserManage : RepositoryBase<SYS_USER>, IUserManage
     {
 
         #region 引用容器

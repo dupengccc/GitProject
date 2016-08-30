@@ -6,7 +6,9 @@
  <object type="wkmvc.Areas.SysManage.Controllers.AccountController,wkmvc" singleton="false">
         <property name="UserManage" ref="Service.User"/>
         <property name="UserOnlineManage" ref="Service.UserOnlineManage"/>
+
   </object>
+  
   
   <object type="wkmvc.Areas.SysManage.Controllers.HomeController,wkmvc" singleton="false">
         <property name="ModuleManage" ref="Service.Module"/>

@@ -31,9 +31,10 @@ namespace Service.ServiceImp.SysManage
                     FK_ROLEID = int.Parse(t)
                 }))
                 {
-                    this.dbSet.Add(entity);
+
+                    this.Save(entity, false);
                 }
-                return this.Context.SaveChanges() > 0;
+                return this._Context.SaveChanges()>0;
             }
             catch (Exception e) { throw e; }
         }
