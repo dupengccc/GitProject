@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-@using Common
+﻿@using Common
 @model  Domain.SYS_USER
 <!DOCTYPE html>
 <html>
@@ -21,7 +18,7 @@
             <img src="@Url.JsCssFile("/Content/images/login/login_top_tip.png")" />
         </div>
         <div class="login_fields">
-            @using (Ajax.BeginForm("login", null, new AjaxOptions()
+            @using (Ajax.BeginForm("PostLogin", null, new AjaxOptions()
             {
                 HttpMethod = "Post",
                 OnBegin = "dig.Loading",

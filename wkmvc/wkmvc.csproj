@@ -253,6 +253,7 @@
     <Content Include="Areas\SysManage\Views\Module\Index.cshtml" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModuleDistinct.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -479,6 +480,23 @@
     <Content Include="Content\images\login\puffred.svg" />
     <Content Include="Content\images\selected-icon.png" />
     <Content Include="Content\images\watermark.png" />
+    <Content Include="Content\js\bui\bui-min.js" />
+    <Content Include="Content\js\bui\bui.js" />
+    <Content Include="Content\js\bui\chart-min.js" />
+    <Content Include="Content\js\bui\common\build.xml" />
+    <Content Include="Content\js\bui\common\main-min.js" />
+    <Content Include="Content\js\bui\common\main.js" />
+    <Content Include="Content\js\bui\common\page-min.js" />
+    <Content Include="Content\js\bui\common\page.js" />
+    <Content Include="Content\js\bui\common\search-min.js" />
+    <Content Include="Content\js\bui\common\search.js" />
+    <Content Include="Content\js\bui\config-min.js" />
+    <Content Include="Content\js\bui\config.js" />
+    <Content Include="Content\js\bui\graphic-min.js" />
+    <Content Include="Content\js\bui\jquery-1.8.1.min.js" />
+    <Content Include="Content\js\bui\module\build.xml" />
+    <Content Include="Content\js\bui\prettify.js" />
+    <Content Include="Content\js\bui\slider-min.js" />
     <Content Include="Content\ueditor\net\config.json" />
     <Content Include="Content\ueditor\net\controller.ashx" />
     <Content Include="Content\ueditor\third-party\jquery-1.10.2.min.map" />
@@ -486,8 +504,11 @@
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Areas\SysManage\Views\Account\Index.cshtml" />
-    <None Include="Hubs\ChatHub.cs=" />
+    <Content Include="Areas\SysManage\Views\Home\Default.cshtml" />
+    <Content Include="Areas\SysManage\Views\Home\Index.cshtml" />
+    <None Include="Hubs\ChatHub.cs1" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CommonHelper.cs" />
     <Compile Include="Models\CommonHtmlHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -815,6 +836,7 @@
     <Content Include="Content\ueditor\ueditor.parse.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Views\Home\Index.html" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
@@ -862,7 +884,7 @@
     <Content Include="Content\img\user.png" />
     <Content Include="Content\img\wenku_logo.png" />
     <Content Include="Config\WebSite.config" />
-    <Content Include="Areas\SysManage\Views\Home\Index.cshtml" />
+    <None Include="Areas\SysManage\Views\Home\Index.cshtmlbak" />
     <None Include="Areas\SysManage\Views\Account\Login.cshtmlbak" />
     <Content Include="Areas\SysManage\Views\Module\Edit.cshtml" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -1039,7 +1061,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtmlbak" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Layout.Edit.cshtml" />
   </ItemGroup>
@@ -1051,6 +1074,7 @@
     <Folder Include="Areas\ComManage\Views\Shared\" />
     <Folder Include="Areas\SysManage\Models\" />
     <Folder Include="Areas\SysManage\Views\Shared\" />
+    <Folder Include="Content\js\bui\extensions\" />
     <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>

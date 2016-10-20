@@ -60,6 +60,24 @@
     <Compile Include="Articles.cs" />
     <Compile Include="Column.cs" />
     <Compile Include="Company.cs" />
+    <Compile Include="COM_CONTENT.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM_DAILYS.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM_UPLOAD.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM_WORKATTENDANCE.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAIL_ATTACHMENT.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAIL_INBOX.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
+    </Compile>
     <Compile Include="MyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql_Wkdb.Context.cs">
@@ -76,6 +94,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Sql_Wkdb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Sql_Wkdb.tt</DependentUpon>
     </Compile>
     <Compile Include="SYS_CHATMESSAGE.cs">
       <DependentUpon>Sql_Wkdb.tt</DependentUpon>

@@ -1,0 +1,58 @@
+﻿@using Common;
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>H+ 后台主题UI框架 - 主页</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="@Url.JsCssFile("~/Content/css/bootstrap.min14ed.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/css/font-awesome.min93e3.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/css/animate.min.css")" rel="stylesheet">
+    <link href="@Url.JsCssFile("~/Content/css/style.min862f.css")" rel="stylesheet">
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close">
+                <i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                @Html.Partial("_Menu")
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            @Html.Partial("_Header")
+            @RenderBody();
+            @Html.Partial("_Footer")
+        </div>
+        <!--右侧部分结束-->
+        <!--右侧边栏开始-->
+        @Html.Partial("_Chat")
+    </div>
+    <script src="@Url.JsCssFile("~/Content/js/jquery.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/bootstrap.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/plugins/iCheck/icheck.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/plugins/metisMenu/jquery.metisMenu.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/plugins/slimscroll/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/plugins/layer/layer.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/hplus.min.js?v=4.1.0")"></script>
+    <script type="text/javascript" src="@Url.JsCssFile("~/Content/js/contabs.min.js")"></script>
+    <script src="@Url.JsCssFile("~/Content/js/plugins/pace/pace.min.js")"></script>
+</body>
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
+</html>

@@ -40,6 +40,14 @@
         <EntityTypeShape EntityType="Domain.UserOnline" Width="1.5" PointX="10.375" PointY="0.75" />
         <AssociationConnector Association="Domain.FK_UserOnline_UserOnline" />
         <EntityTypeShape EntityType="Domain.SYS_CHATMESSAGE" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="Domain.FK_UserOnline_SYS_USER" />
+        <EntityTypeShape EntityType="Domain.COM_CONTENT" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Domain.COM_DAILYS" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Domain.COM_UPLOAD" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Domain.COM_WORKATTENDANCE" Width="1.5" PointX="5.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Domain.MAIL_ATTACHMENT" Width="1.5" PointX="7.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Domain.MAIL_INBOX" Width="1.5" PointX="9.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Domain.sysdiagrams" Width="1.5" PointX="14.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

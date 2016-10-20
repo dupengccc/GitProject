@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Spring.Context.Support;
 using Service.ServiceImp.SysManage;
+using log4net.Ext;
+using Common.Enums;
 
 namespace wkmvc.Controllers
 {
@@ -26,17 +28,36 @@ namespace wkmvc.Controllers
             /// 视图传递的分页条数
             /// </summary>
             public int pagesize { get; set; }
-            /// <summary>
-            /// 用户容器，公用
-            /// </summary>
-            public IUserManage UserManage = ContextRegistry.GetContext().GetObject("Service.User") as IUserManage;
-            public IModuleManage ModuleManage = ContextRegistry.GetContext().GetObject("Service.Module") as IModuleManage;  
+
+        protected static IExtLog _log = ExtLogManager.GetLogger("dblog");
+        /// <summary>
+        /// 用户容器，公用
+        /// </summary>
+        public IUserManage UserManage = ContextRegistry.GetContext().GetObject("Service.User") as IUserManage;
+
+        public IModuleManage ModuleManage = ContextRegistry.GetContext().GetObject("Service.Module") as IModuleManage;
+
+
         #endregion
-        //public void WriteLog()
-        //{
-        //    log4net.Ext.IExtLog log = log4net.Ext.ExtLogManager.GetLogger("dblog");
-        //    log.Error()
-        //}
+        public void WriteLog(enumOperator action, string message, enumLog4net logLevel)
+        {
+            switch (logLevel)
+            {
+                case enumLog4net.INFO:
+                    _log.Info(Utils.GetIP(), this.CurrentUser.Name, base.Request.Url.ToString(), action.ToString(), message);
+                    return;
+
+                case enumLog4net.WARN:
+                    _log.Warn(Utils.GetIP(), this.CurrentUser.Name, base.Request.Url.ToString(), action.ToString(), message);
+                    return;
+            }
+            _log.Error(Utils.GetIP(), this.CurrentUser.Name, base.Request.Url.ToString(), action.ToString(), message);
+        }
+
+        public void WriteLog(enumOperator action, string message, Exception e)
+        {
+            _log.Fatal(Utils.GetIP(), this.CurrentUser.Name, base.Request.Url.ToString(), action.ToString(), message + e.Message, e);
+        }
 
 
         #region 用户对象

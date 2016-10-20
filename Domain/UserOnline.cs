@@ -22,6 +22,6 @@ namespace Domain
         public string ConnectId { get; set; }
         public Nullable<bool> IsOnline { get; set; }
     
-        public virtual SYS_USER Sys_User { get; set; }
+        public virtual SYS_USER SYS_USER { get; set; }
     }
 }

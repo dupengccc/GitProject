@@ -44,5 +44,12 @@ namespace Domain
         public virtual DbSet<SYS_USERINFO> SYS_USERINFO { get; set; }
         public virtual DbSet<UserOnline> UserOnline { get; set; }
         public virtual DbSet<SYS_CHATMESSAGE> SYS_CHATMESSAGE { get; set; }
+        public virtual DbSet<COM_CONTENT> COM_CONTENT { get; set; }
+        public virtual DbSet<COM_DAILYS> COM_DAILYS { get; set; }
+        public virtual DbSet<COM_UPLOAD> COM_UPLOAD { get; set; }
+        public virtual DbSet<COM_WORKATTENDANCE> COM_WORKATTENDANCE { get; set; }
+        public virtual DbSet<MAIL_ATTACHMENT> MAIL_ATTACHMENT { get; set; }
+        public virtual DbSet<MAIL_INBOX> MAIL_INBOX { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

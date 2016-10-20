@@ -25,7 +25,7 @@ namespace wkmvc
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Account", action = "login", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Account", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             ).DataTokens.Add("Area", "SysManage"); ///默认起始页面
 
         }

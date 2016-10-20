@@ -5,6 +5,99 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Domain.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COM_CONTENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CONTENT" Type="text" />
+          <Property Name="CONTENTBLOB" Type="image" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="FK_RELATIONID" Type="varchar" MaxLength="50" />
+          <Property Name="FK_TABLE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="COM_DAILYS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DailySubIP" Type="varchar" MaxLength="50" />
+          <Property Name="FK_RELATIONID" Type="varchar" MaxLength="50" />
+          <Property Name="FK_USERID" Type="int" />
+          <Property Name="LastEditDate" Type="datetime" />
+          <Property Name="AddDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="COM_UPLOAD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_USERID" Type="int" />
+          <Property Name="UPFILEIP" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILEPATH" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILESIZE" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UPFILESUFFIX" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILETHUMBNAIL" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILETHUMBNAILFORPAD" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILETHUMBNAILFORPHONE" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILEUNIT" Type="varchar" MaxLength="50" />
+          <Property Name="UPFILEURL" Type="varchar" MaxLength="50" />
+          <Property Name="UPNEWNAME" Type="varchar" MaxLength="50" />
+          <Property Name="UPOLDNAME" Type="varchar" MaxLength="50" />
+          <Property Name="UPOPEATOR" Type="varchar" MaxLength="50" />
+          <Property Name="UPTIME" Type="datetime" />
+        </EntityType>
+        <EntityType Name="COM_WORKATTENDANCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="EarlyOutAMMinutes" Type="int" />
+          <Property Name="EarlyOutPMMinutes" Type="int" />
+          <Property Name="FK_UserId" Type="int" />
+          <Property Name="Is_SiginAM" Type="bit" />
+          <Property Name="Is_SiginPM" Type="bit" />
+          <Property Name="Is_SigOutAM" Type="bit" />
+          <Property Name="Is_SigOutPM" Type="bit" />
+          <Property Name="IsEarlyOutAM" Type="bit" />
+          <Property Name="IsEarlyOutPM" Type="bit" />
+          <Property Name="IsLatePM" Type="bit" />
+          <Property Name="IsLateAM" Type="bit" />
+          <Property Name="LateAMMinutes" Type="int" />
+          <Property Name="LatePMMinutes" Type="int" />
+          <Property Name="SiginAMDate" Type="datetime" />
+          <Property Name="SiginPM" Type="datetime" />
+          <Property Name="SigIP" Type="varchar" MaxLength="50" />
+          <Property Name="SigOutAMDate" Type="datetime" />
+          <Property Name="SigOutPM" Type="datetime" />
+          <Property Name="WorkHours" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="MAIL_ATTACHMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="AttExt" Type="varchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttName" Type="varchar" MaxLength="50" />
+          <Property Name="AttNewName" Type="varchar" MaxLength="50" />
+          <Property Name="AttPath" Type="varchar" MaxLength="50" />
+          <Property Name="AttSize" Type="nchar" MaxLength="10" />
+          <Property Name="CreateIP" Type="nchar" MaxLength="10" />
+          <Property Name="FK_MailID" Type="nchar" MaxLength="10" />
+          <Property Name="UploadDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MAIL_INBOX">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_MailID" Type="int" />
+          <Property Name="MailType" Type="int" />
+          <Property Name="ReadStatus" Type="int" />
+          <Property Name="ReceivingTime" Type="datetime" />
+          <Property Name="Recipient" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SYS_CHATMESSAGE">
           <Key>
             <PropertyRef Name="ID" />
@@ -262,6 +355,16 @@
           <Property Name="UPDATEDATE" Type="datetime" />
           <Property Name="UPDATEUSER" Type="nvarchar" MaxLength="36" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="UserOnline">
           <Key>
             <PropertyRef Name="ID" />
@@ -454,7 +557,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserOnline_SYS_USER">
+          <End Role="SYS_USER" Type="Self.SYS_USER" Multiplicity="0..1" />
+          <End Role="UserOnline" Type="Self.UserOnline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserOnline">
+              <PropertyRef Name="FK_Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DomainStoreContainer">
+          <EntitySet Name="COM_CONTENT" EntityType="Self.COM_CONTENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_DAILYS" EntityType="Self.COM_DAILYS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_UPLOAD" EntityType="Self.COM_UPLOAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_WORKATTENDANCE" EntityType="Self.COM_WORKATTENDANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAIL_ATTACHMENT" EntityType="Self.MAIL_ATTACHMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAIL_INBOX" EntityType="Self.MAIL_INBOX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_CHATMESSAGE" EntityType="Self.SYS_CHATMESSAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_CODE" EntityType="Self.SYS_CODE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_CODE_AREA" EntityType="Self.SYS_CODE_AREA" Schema="dbo" store:Type="Tables" />
@@ -473,6 +594,7 @@
           <EntitySet Name="SYS_USER_PERMISSION" EntityType="Self.SYS_USER_PERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_USER_ROLE" EntityType="Self.SYS_USER_ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_USERINFO" EntityType="Self.SYS_USERINFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_SYS_MODULE_SYSTEMID" Association="Self.FK_SYS_MODULE_SYSTEMID">
             <End Role="SYS_SYSTEM" EntitySet="SYS_SYSTEM" />
@@ -534,6 +656,10 @@
             <End Role="SYS_USER" EntitySet="SYS_USER" />
             <End Role="SYS_USERINFO" EntitySet="SYS_USERINFO" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserOnline_SYS_USER" Association="Self.FK_UserOnline_SYS_USER">
+            <End Role="SYS_USER" EntitySet="SYS_USER" />
+            <End Role="UserOnline" EntitySet="UserOnline" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -569,6 +695,7 @@
           <NavigationProperty Name="SYS_USER_PERMISSION" Relationship="Domain.FK_SYS_USER_PERMISSION_USERID" FromRole="SYS_USER" ToRole="SYS_USER_PERMISSION" />
           <NavigationProperty Name="SYS_USER_ROLE" Relationship="Domain.FK_SYS_USER_ROLE_USERID" FromRole="SYS_USER" ToRole="SYS_USER_ROLE" />
           <NavigationProperty Name="SYS_USERINFO" Relationship="Domain.FK_SYS_USERINFO_SYSUSERID" FromRole="SYS_USER" ToRole="SYS_USERINFO" />
+          <NavigationProperty Name="UserOnline" Relationship="Domain.FK_UserOnline_SYS_USER" FromRole="SYS_USER" ToRole="UserOnline" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SYS_USER" EntityType="Self.SYS_USER" />
@@ -654,6 +781,17 @@
             <End Role="UserOnline1" EntitySet="UserOnline" />
           </AssociationSet>
           <EntitySet Name="SYS_CHATMESSAGE" EntityType="Domain.SYS_CHATMESSAGE" />
+          <AssociationSet Name="FK_UserOnline_SYS_USER" Association="Domain.FK_UserOnline_SYS_USER">
+            <End Role="SYS_USER" EntitySet="SYS_USER" />
+            <End Role="UserOnline" EntitySet="UserOnline" />
+          </AssociationSet>
+          <EntitySet Name="COM_CONTENT" EntityType="Domain.COM_CONTENT" />
+          <EntitySet Name="COM_DAILYS" EntityType="Domain.COM_DAILYS" />
+          <EntitySet Name="COM_UPLOAD" EntityType="Domain.COM_UPLOAD" />
+          <EntitySet Name="COM_WORKATTENDANCE" EntityType="Domain.COM_WORKATTENDANCE" />
+          <EntitySet Name="MAIL_ATTACHMENT" EntityType="Domain.MAIL_ATTACHMENT" />
+          <EntitySet Name="MAIL_INBOX" EntityType="Domain.MAIL_INBOX" />
+          <EntitySet Name="sysdiagrams" EntityType="Domain.sysdiagrams" />
         </EntityContainer>
         <EntityType Name="SYS_CODE">
           <Key>
@@ -1093,8 +1231,8 @@
           <Property Name="UserIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OffineDate" Type="DateTime" Precision="3" />
           <Property Name="ConnectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserOnline1" Relationship="Domain.FK_UserOnline_UserOnline" FromRole="UserOnline" ToRole="UserOnline1" />
           <Property Name="IsOnline" Type="Boolean" />
+          <NavigationProperty Name="SYS_USER" Relationship="Domain.FK_UserOnline_SYS_USER" FromRole="UserOnline" ToRole="SYS_USER" />
         </EntityType>
         <Association Name="FK_UserOnline_UserOnline">
           <End Type="Domain.UserOnline" Role="UserOnline" Multiplicity="1" />
@@ -1119,6 +1257,121 @@
           <Property Name="ToGroup" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="MessageDate" Type="DateTime" Precision="3" />
           <Property Name="MessageIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_UserOnline_SYS_USER">
+          <End Type="Domain.SYS_USER" Role="SYS_USER" Multiplicity="0..1" />
+          <End Type="Domain.UserOnline" Role="UserOnline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserOnline">
+              <PropertyRef Name="FK_Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="COM_CONTENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CONTENTBLOB" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="FK_RELATIONID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_TABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="COM_DAILYS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DailySubIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_RELATIONID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_USERID" Type="Int32" />
+          <Property Name="LastEditDate" Type="DateTime" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="COM_UPLOAD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_USERID" Type="Int32" />
+          <Property Name="UPFILEIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILEPATH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILESIZE" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UPFILESUFFIX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILETHUMBNAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILETHUMBNAILFORPAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILETHUMBNAILFORPHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILEUNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPFILEURL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPNEWNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPOLDNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPOPEATOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPTIME" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="COM_WORKATTENDANCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="EarlyOutAMMinutes" Type="Int32" />
+          <Property Name="EarlyOutPMMinutes" Type="Int32" />
+          <Property Name="FK_UserId" Type="Int32" />
+          <Property Name="Is_SiginAM" Type="Boolean" />
+          <Property Name="Is_SiginPM" Type="Boolean" />
+          <Property Name="Is_SigOutAM" Type="Boolean" />
+          <Property Name="Is_SigOutPM" Type="Boolean" />
+          <Property Name="IsEarlyOutAM" Type="Boolean" />
+          <Property Name="IsEarlyOutPM" Type="Boolean" />
+          <Property Name="IsLatePM" Type="Boolean" />
+          <Property Name="IsLateAM" Type="Boolean" />
+          <Property Name="LateAMMinutes" Type="Int32" />
+          <Property Name="LatePMMinutes" Type="Int32" />
+          <Property Name="SiginAMDate" Type="DateTime" Precision="3" />
+          <Property Name="SiginPM" Type="DateTime" Precision="3" />
+          <Property Name="SigIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SigOutAMDate" Type="DateTime" Precision="3" />
+          <Property Name="SigOutPM" Type="DateTime" Precision="3" />
+          <Property Name="WorkHours" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="MAIL_ATTACHMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="AttExt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttNewName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttSize" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CreateIP" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FK_MailID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MAIL_INBOX">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_MailID" Type="Int32" />
+          <Property Name="MailType" Type="Int32" />
+          <Property Name="ReadStatus" Type="Int32" />
+          <Property Name="ReceivingTime" Type="DateTime" Precision="3" />
+          <Property Name="Recipient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1411,6 +1664,116 @@
                 <ScalarProperty Name="MessageType" ColumnName="MessageType" />
                 <ScalarProperty Name="FromUser" ColumnName="FromUser" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_CONTENT">
+            <EntityTypeMapping TypeName="Domain.COM_CONTENT">
+              <MappingFragment StoreEntitySet="COM_CONTENT">
+                <ScalarProperty Name="FK_TABLE" ColumnName="FK_TABLE" />
+                <ScalarProperty Name="FK_RELATIONID" ColumnName="FK_RELATIONID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="CONTENTBLOB" ColumnName="CONTENTBLOB" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_DAILYS">
+            <EntityTypeMapping TypeName="Domain.COM_DAILYS">
+              <MappingFragment StoreEntitySet="COM_DAILYS">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+                <ScalarProperty Name="FK_USERID" ColumnName="FK_USERID" />
+                <ScalarProperty Name="FK_RELATIONID" ColumnName="FK_RELATIONID" />
+                <ScalarProperty Name="DailySubIP" ColumnName="DailySubIP" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_UPLOAD">
+            <EntityTypeMapping TypeName="Domain.COM_UPLOAD">
+              <MappingFragment StoreEntitySet="COM_UPLOAD">
+                <ScalarProperty Name="UPTIME" ColumnName="UPTIME" />
+                <ScalarProperty Name="UPOPEATOR" ColumnName="UPOPEATOR" />
+                <ScalarProperty Name="UPOLDNAME" ColumnName="UPOLDNAME" />
+                <ScalarProperty Name="UPNEWNAME" ColumnName="UPNEWNAME" />
+                <ScalarProperty Name="UPFILEURL" ColumnName="UPFILEURL" />
+                <ScalarProperty Name="UPFILEUNIT" ColumnName="UPFILEUNIT" />
+                <ScalarProperty Name="UPFILETHUMBNAILFORPHONE" ColumnName="UPFILETHUMBNAILFORPHONE" />
+                <ScalarProperty Name="UPFILETHUMBNAILFORPAD" ColumnName="UPFILETHUMBNAILFORPAD" />
+                <ScalarProperty Name="UPFILETHUMBNAIL" ColumnName="UPFILETHUMBNAIL" />
+                <ScalarProperty Name="UPFILESUFFIX" ColumnName="UPFILESUFFIX" />
+                <ScalarProperty Name="UPFILESIZE" ColumnName="UPFILESIZE" />
+                <ScalarProperty Name="UPFILEPATH" ColumnName="UPFILEPATH" />
+                <ScalarProperty Name="UPFILEIP" ColumnName="UPFILEIP" />
+                <ScalarProperty Name="FK_USERID" ColumnName="FK_USERID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_WORKATTENDANCE">
+            <EntityTypeMapping TypeName="Domain.COM_WORKATTENDANCE">
+              <MappingFragment StoreEntitySet="COM_WORKATTENDANCE">
+                <ScalarProperty Name="WorkHours" ColumnName="WorkHours" />
+                <ScalarProperty Name="SigOutPM" ColumnName="SigOutPM" />
+                <ScalarProperty Name="SigOutAMDate" ColumnName="SigOutAMDate" />
+                <ScalarProperty Name="SigIP" ColumnName="SigIP" />
+                <ScalarProperty Name="SiginPM" ColumnName="SiginPM" />
+                <ScalarProperty Name="SiginAMDate" ColumnName="SiginAMDate" />
+                <ScalarProperty Name="LatePMMinutes" ColumnName="LatePMMinutes" />
+                <ScalarProperty Name="LateAMMinutes" ColumnName="LateAMMinutes" />
+                <ScalarProperty Name="IsLateAM" ColumnName="IsLateAM" />
+                <ScalarProperty Name="IsLatePM" ColumnName="IsLatePM" />
+                <ScalarProperty Name="IsEarlyOutPM" ColumnName="IsEarlyOutPM" />
+                <ScalarProperty Name="IsEarlyOutAM" ColumnName="IsEarlyOutAM" />
+                <ScalarProperty Name="Is_SigOutPM" ColumnName="Is_SigOutPM" />
+                <ScalarProperty Name="Is_SigOutAM" ColumnName="Is_SigOutAM" />
+                <ScalarProperty Name="Is_SiginPM" ColumnName="Is_SiginPM" />
+                <ScalarProperty Name="Is_SiginAM" ColumnName="Is_SiginAM" />
+                <ScalarProperty Name="FK_UserId" ColumnName="FK_UserId" />
+                <ScalarProperty Name="EarlyOutPMMinutes" ColumnName="EarlyOutPMMinutes" />
+                <ScalarProperty Name="EarlyOutAMMinutes" ColumnName="EarlyOutAMMinutes" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAIL_ATTACHMENT">
+            <EntityTypeMapping TypeName="Domain.MAIL_ATTACHMENT">
+              <MappingFragment StoreEntitySet="MAIL_ATTACHMENT">
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="FK_MailID" ColumnName="FK_MailID" />
+                <ScalarProperty Name="CreateIP" ColumnName="CreateIP" />
+                <ScalarProperty Name="AttSize" ColumnName="AttSize" />
+                <ScalarProperty Name="AttPath" ColumnName="AttPath" />
+                <ScalarProperty Name="AttNewName" ColumnName="AttNewName" />
+                <ScalarProperty Name="AttName" ColumnName="AttName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttExt" ColumnName="AttExt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAIL_INBOX">
+            <EntityTypeMapping TypeName="Domain.MAIL_INBOX">
+              <MappingFragment StoreEntitySet="MAIL_INBOX">
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="ReceivingTime" ColumnName="ReceivingTime" />
+                <ScalarProperty Name="ReadStatus" ColumnName="ReadStatus" />
+                <ScalarProperty Name="MailType" ColumnName="MailType" />
+                <ScalarProperty Name="FK_MailID" ColumnName="FK_MailID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Domain.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

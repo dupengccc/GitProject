@@ -22,6 +22,7 @@ namespace Domain
             this.SYS_USER_PERMISSION = new HashSet<SYS_USER_PERMISSION>();
             this.SYS_USER_ROLE = new HashSet<SYS_USER_ROLE>();
             this.SYS_USERINFO = new HashSet<SYS_USERINFO>();
+            this.UserOnline = new HashSet<UserOnline>();
         }
     
         public int ID { get; set; }
@@ -52,5 +53,7 @@ namespace Domain
         public virtual ICollection<SYS_USER_ROLE> SYS_USER_ROLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_USERINFO> SYS_USERINFO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserOnline> UserOnline { get; set; }
     }
 }
