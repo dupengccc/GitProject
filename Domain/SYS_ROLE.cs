@@ -22,8 +22,9 @@ namespace Domain
         }
     
         public int ID { get; set; }
+        public string FK_BELONGSYSTEM { get; set; }
         public string ROLENAME { get; set; }
-        public int ISCUSTOM { get; set; }
+        public bool ISCUSTOM { get; set; }
         public string ROLEDESC { get; set; }
         public string CREATEPERID { get; set; }
         public System.DateTime CREATEDATE { get; set; }

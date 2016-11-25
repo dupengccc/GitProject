@@ -15,10 +15,10 @@ namespace Domain
     public partial class COM_DAILYS
     {
         public int ID { get; set; }
-        public string DailySubIP { get; set; }
+        public int FK_USERID { get; set; }
         public string FK_RELATIONID { get; set; }
-        public Nullable<int> FK_USERID { get; set; }
-        public Nullable<System.DateTime> LastEditDate { get; set; }
-        public Nullable<System.DateTime> AddDate { get; set; }
+        public System.DateTime AddDate { get; set; }
+        public System.DateTime LastEditDate { get; set; }
+        public string DailySubIP { get; set; }
     }
 }

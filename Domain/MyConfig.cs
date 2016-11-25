@@ -12,7 +12,7 @@ namespace Domain
     /// 字符串对应应用程序中配置文件
     /// 模型对应Domain中的数据库模型Context.cs构造函数
     /// </summary>
-    public class MyConfig : Entities
+    public class MyConfig: Entities
     {
         /// <summary>
         /// 封装EF实体模型，供Dao使用，

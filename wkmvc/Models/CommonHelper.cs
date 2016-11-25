@@ -3,6 +3,7 @@ using Common.Enums;
 using Domain;
 using Service.IService;
 using Service.IService.SysManage;
+using Service.ServiceImp.SysManage;
 using Spring.Context.Support;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 
-namespace wkmvc.Models
+namespace Models
 {
 
     public class CommonHelper
     {
-       // public ICodeAreaManage CodeAreaManage = (ContextRegistry.GetContext().GetObject("Service.CodeArea") as ICodeAreaManage);
+        public ICodeAreaManage CodeAreaManage = (ContextRegistry.GetContext().GetObject("Service.CodeArea") as ICodeAreaManage);
         public ICodeManage CodeManage = (ContextRegistry.GetContext().GetObject("Service.Code") as ICodeManage);
-       // public IContentManage ContentManage = (ContextRegistry.GetContext().GetObject("Service.Com.Content") as IContentManage);
-       // public IProjectFilesManage ProjectFilesManage = (ContextRegistry.GetContext().GetObject("Service.Pro.ProjectFilesManage") as IProjectFilesManage);
-       // public IProjectStageManage ProjectStageManage = (ContextRegistry.GetContext().GetObject("Service.Pro.ProjectStageManage") as IProjectStageManage);
+        public IContentManage ContentManage = (ContextRegistry.GetContext().GetObject("Service.Com.Content") as IContentManage);
+        public IProjectFilesManage ProjectFilesManage = (ContextRegistry.GetContext().GetObject("Service.Pro.ProjectFiles") as IProjectFilesManage);
+        public IProjectStageManage ProjectStageManage = (ContextRegistry.GetContext().GetObject("Service.Pro.ProjectStage") as IProjectStageManage);
         public IUserManage UserManage = (ContextRegistry.GetContext().GetObject("Service.User") as IUserManage);
 
         private bool ChildModuleList(SYS_MODULE module, List<SYS_MODULE> moduleList, StringBuilder str, bool IsAppend)
@@ -46,37 +47,37 @@ namespace wkmvc.Models
             return true;
         }
 
-        //public string GetCodeAreaName(string codearealist)
-        //{
-        //    if (string.IsNullOrEmpty(codearealist))
-        //    {
-        //        return string.Empty;
-        //    }
-        //    List<string> list = (from p in codearealist.Trim(new char[] { ',' }).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries) select p).ToList<string>();
-        //    if ((list == null) || (list.Count <= 0))
-        //    {
-        //        return string.Empty;
-        //    }
-        //    string str = string.Empty;
-        //    using (List<string>.Enumerator enumerator = list.GetEnumerator())
-        //    {
-        //        while (enumerator.MoveNext())
-        //        {
-        //            string item = enumerator.Current;
-        //            str = str + this.CodeAreaManage.Get(p => p.ID == item).NAME + "&nbsp;";
-        //        }
-        //    }
-        //    return str;
-        //}
+        public string GetCodeAreaName(string codearealist)
+        {
+            if (string.IsNullOrEmpty(codearealist))
+            {
+                return string.Empty;
+            }
+            List<string> list = (from p in codearealist.Trim(new char[] { ',' }).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries) select p).ToList<string>();
+            if ((list == null) || (list.Count <= 0))
+            {
+                return string.Empty;
+            }
+            string str = string.Empty;
+            using (List<string>.Enumerator enumerator = list.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    string item = enumerator.Current;
+                    str = str + this.CodeAreaManage.Get(p => p.ID == item).NAME + "&nbsp;";
+                }
+            }
+            return str;
+        }
 
-        //public string GetContentText(string FK_RELATIONID, string TableName)
-        //{
-        //    if (this.ContentManage.Get(p => (p.FK_RELATIONID == FK_RELATIONID) && (p.FK_TABLE == TableName)) != null)
-        //    {
-        //        return Utils.DropHTML(this.ContentManage.Get(p => (p.FK_RELATIONID == FK_RELATIONID) && (p.FK_TABLE == TableName)).CONTENT);
-        //    }
-        //    return "";
-        //}
+        public string GetContentText(string FK_RELATIONID, string TableName)
+        {
+            if (this.ContentManage.Get(p => (p.FK_RELATIONID == FK_RELATIONID) && (p.FK_TABLE == TableName)) != null)
+            {
+                return Utils.DropHTML(this.ContentManage.Get(p => (p.FK_RELATIONID == FK_RELATIONID) && (p.FK_TABLE == TableName)).CONTENT);
+            }
+            return "";
+        }
 
         public MvcHtmlString GetModuleMenu(SYS_MODULE module, List<SYS_MODULE> moduleList)
         {
@@ -97,51 +98,52 @@ namespace wkmvc.Models
             return new MvcHtmlString(str.ToString());
         }
 
-        //public int GetProgress(int projectId)
-        //{
-        //    List<PRO_PROJECT_STAGES> source = this.ProjectStageManage.LoadListAll(p => p.FK_ProjectId == projectId);
-        //    int num = 0;
-        //    if ((source == null) || (source.Count <= 0))
-        //    {
-        //        return num;
-        //    }
-        //    int count = source.Count;
-        //    int num3 = source.Where<PRO_PROJECT_STAGES>(delegate (PRO_PROJECT_STAGES p) {
-        //        if (p.StageStatus != ClsDic.get_DicProject()["已验收"])
-        //        {
-        //            return (p.StageStatus == ClsDic.get_DicProject()["已超时"]);
-        //        }
-        //        return true;
-        //    }).ToList<PRO_PROJECT_STAGES>().Count;
-        //    return ((count > 0) ? ((int)Math.Floor((double)((((double)num3) / (count * 1.0)) * 100.0))) : 0);
-        //}
+        public int GetProgress(int projectId)
+        {
+            List<PRO_PROJECT_STAGES> source = this.ProjectStageManage.LoadListAll(p => p.FK_ProjectId == projectId);
+            int num = 0;
+            if ((source == null) || (source.Count <= 0))
+            {
+                return num;
+            }
+            int count = source.Count;
+            int num3 = source.Where<PRO_PROJECT_STAGES>(delegate (PRO_PROJECT_STAGES p)
+            {
+                if (p.StageStatus != ClsDic.DicProject["已验收"])
+                {
+                    return (p.StageStatus == ClsDic.DicProject["已超时"]);
+                }
+                return true;
+            }).ToList<PRO_PROJECT_STAGES>().Count;
+            return ((count > 0) ? ((int)Math.Floor((double)((((double)num3) / (count * 1.0)) * 100.0))) : 0);
+        }
 
-        //public List<PRO_PROJECT_FILES> GetStageFiles(int stageId, int userId)
-        //{
-        //    return (from p in this.ProjectFilesManage.LoadAll(p => ((p.DocStyle == "projectstage") && (p.Fk_ForeignId == stageId)) && (p.FK_UserId == userId))
-        //            orderby p.UploadDate descending
-        //            select p).ToList<PRO_PROJECT_FILES>();
-        //}
+        public List<PRO_PROJECT_FILES> GetStageFiles(int stageId, int userId)
+        {
+            return (from p in this.ProjectFilesManage.LoadAll(p => ((p.DocStyle == "projectstage") && (p.Fk_ForeignId == stageId)) && (p.FK_UserId == userId))
+                    orderby p.UploadDate descending
+                    select p).ToList<PRO_PROJECT_FILES>();
+        }
 
-        //public string GetStageTeams(PRO_PROJECT_STAGES Stages)
-        //{
-        //    string str = string.Empty;
-        //    if (((Stages != null) && (Stages.PRO_PROJECT_TEAMS != null)) && (Stages.PRO_PROJECT_TEAMS.Count > 0))
-        //    {
-        //        using (IEnumerator<PRO_PROJECT_TEAMS> enumerator = Stages.PRO_PROJECT_TEAMS.GetEnumerator())
-        //        {
-        //            while (enumerator.MoveNext())
-        //            {
-        //                PRO_PROJECT_TEAMS team = enumerator.Current;
-        //                if (team.JionStatus == ClsDic.get_DicStatus()["通过"])
-        //                {
-        //                    str = str + "&nbsp;" + (string.IsNullOrEmpty(this.UserManage.Get(p => p.ID == team.FK_UserId).FACE_IMG) ? ("<img alt=\"image\" class=\"img-circle\" src=\"/Pro/Project/User_Default_Avatat?name=" + this.UserManage.Get(p => p.ID == team.FK_UserId).NAME.Substring(0, 1).ToUpper() + "\" data-toggle=\"tooltip\" data-placement=\"top\"  data-original-title=\"" + this.UserManage.Get(p => p.ID == team.FK_UserId).NAME + "\" />") : ("<img alt=\"image\" class=\"img-circle\" src=\"" + this.UserManage.Get(p => p.ID == team.FK_UserId).FACE_IMG + "\" data-toggle=\"tooltip\" data-placement=\"top\"  data-original-title=\"" + this.UserManage.Get(p => p.ID == team.FK_UserId).NAME + "\" />"));
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return str;
-        //}
+        public string GetStageTeams(PRO_PROJECT_STAGES Stages)
+        {
+            string str = string.Empty;
+            if (((Stages != null) && (Stages.PRO_PROJECT_TEAMS != null)) && (Stages.PRO_PROJECT_TEAMS.Count > 0))
+            {
+                using (IEnumerator<PRO_PROJECT_TEAMS> enumerator = Stages.PRO_PROJECT_TEAMS.GetEnumerator())
+                {
+                    while (enumerator.MoveNext())
+                    {
+                        PRO_PROJECT_TEAMS team = enumerator.Current;
+                        if (team.JionStatus == ClsDic.DicProject["通过"])
+                        {
+                            str = str + "&nbsp;" + (string.IsNullOrEmpty(this.UserManage.Get(p => p.ID == team.FK_UserId).FACE_IMG) ? ("<img alt=\"image\" class=\"img-circle\" src=\"/Pro/Project/User_Default_Avatat?name=" + this.UserManage.Get(p => p.ID == team.FK_UserId).NAME.Substring(0, 1).ToUpper() + "\" data-toggle=\"tooltip\" data-placement=\"top\"  data-original-title=\"" + this.UserManage.Get(p => p.ID == team.FK_UserId).NAME + "\" />") : ("<img alt=\"image\" class=\"img-circle\" src=\"" + this.UserManage.Get(p => p.ID == team.FK_UserId).FACE_IMG + "\" data-toggle=\"tooltip\" data-placement=\"top\"  data-original-title=\"" + this.UserManage.Get(p => p.ID == team.FK_UserId).NAME + "\" />"));
+                        }
+                    }
+                }
+            }
+            return str;
+        }
 
         public string GetSurplusTime(DateTime dt)
         {
@@ -234,6 +236,8 @@ namespace wkmvc.Models
 
         public string GetUserZW(string levels)
         {
+
+         //   var CodeModel = this.CodeManage.Get(m => (m.CODEVALUE == "2") && (m.CODETYPE == "ZW"));
             return this.CodeManage.Get(m => (m.CODEVALUE == levels) && (m.CODETYPE == "ZW")).NAMETEXT;
         }
 

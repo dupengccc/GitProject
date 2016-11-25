@@ -19,8 +19,12 @@ namespace Service.ServiceImp.SysManage
 
         IUserRoleManage UserRoleManage { get; set; }
 
-        IUserOnlineManage UserOnlineManage { get; set; }
-        
+        IUserOnlieManage UserOnlieManage { get; set; }
+
+
+        IProjectTeamManage ProjectTeamManage { get; set; }
+
+        IMailInBoxManage MailInBoxManage { get; set; }
 
         IUserPermissionManage UserPermissionManage { get; set; }
 
@@ -30,7 +34,10 @@ namespace Service.ServiceImp.SysManage
 
         IPermissionManage PermissionManage { get; set; }
 
-        IUserDepartmentManage UserDepartmentManage { get; set; }
+      //  IUserDepartmentManage UserDepartmentManage { get; set; }
+
+
+        IWorkAttendanceManage WorkAttendanceManage { get; set; }
 
         #endregion
         /// <summary>
@@ -38,10 +45,10 @@ namespace Service.ServiceImp.SysManage
         /// </summary>
         public Account GetAccountByCookie()
         {
-            var cookie =  Common.CookieHelper.GetCookie("cookie_rememberme");
+            var cookie = Common.CookieHelper.GetCookie("cookie_rememberme");
             if (cookie != null)
             {
-                
+
                 //验证json的有效性
                 if (!string.IsNullOrEmpty(cookie.Value))
                 {
@@ -76,17 +83,17 @@ namespace Service.ServiceImp.SysManage
             //用户角色
             var role = users.SYS_USER_ROLE.Select(p => p.SYS_ROLE).ToList();
             //用户部门
-            var dpt = users.SYS_USER_DEPARTMENT.Select(p => p.SYS_DEPARTMENT).ToList();
+           //  var dpt = users.SYS_USER_DEPARTMENT.Select(p => p.SYS_DEPARTMENT).ToList();
             //用户岗位
-            var post = users.SYS_POST_USER.ToList();
+          //  var post = users.SYS_POST_USER.ToList();
             //用户主部门
-           
+
             var dptInfo = this.DepartmentManage.Get(p => p.ID == users.DPTID);
             //用户模块
             var module = permission.Select(p => p.SYS_MODULE).ToList().Distinct(new ModuleDistinct()).ToList();
 
             ///系统ID
-            var System_id = module.Select(a=>a.FK_BELONGSYSTEM).Distinct<string>().ToList();
+            var System_id = module.Select(a => a.FK_BELONGSYSTEM).Distinct<string>().ToList();
 
 
             Account account = new Account()
@@ -95,15 +102,16 @@ namespace Service.ServiceImp.SysManage
                 Name = users.NAME,
                 LogName = users.ACCOUNT,
                 PassWord = users.PASSWORD,
-                System_id= System_id,
+                System_id = System_id,
                 IsAdmin = IsAdmin(users.ID),
                 DptInfo = dptInfo,
-                Dpt = dpt,
+              //  Dpt = dpt,
                 Face_Img = users.FACE_IMG,
                 Permissions = permission,
                 Roles = role,
-                PostUser = post,
-                Modules = module
+               // PostUser = post,
+                Modules = module,
+                Levels = users.LEVELS,
             };
             return account;
         }
@@ -204,10 +212,10 @@ namespace Service.ServiceImp.SysManage
                     this.PostUserManage.Delete(p => p.FK_USERID == userId);
                 }
                 //用户部门
-                if (this.UserDepartmentManage.IsExist(p => p.USER_ID == userId))
-                {
-                    this.UserDepartmentManage.Delete(p => p.USER_ID == userId);
-                }
+                //if (this.UserDepartmentManage.IsExist(p => p.USER_ID == userId))
+                //{
+                //    this.UserDepartmentManage.Delete(p => p.USER_ID == userId);
+                //}
                 //用户自身
                 if (this.IsExist(p => p.ID == userId))
                 {

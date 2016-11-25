@@ -1,6 +1,7 @@
 ﻿using Common;
 using Common.JsonHelper;
 using Service.IService.SysManage;
+using Service.ServiceImp.SysManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -155,7 +156,7 @@ namespace wkmvc.Areas.SysManage.Controllers
                              p.SHOWORDER,
                              p.ICON,
                              ModuleType = ((Common.Enums.enumModuleType)p.MODULETYPE).ToString(),
-                             ISSHOW = p.ISSHOW == 1 ? "显示" : "隐藏",
+                             ISSHOW = p.ISSHOW ==true ? "显示" : "隐藏",
                              p.NAME,
                              SYSNAME = p.SYS_SYSTEM.NAME,
                              p.FK_BELONGSYSTEM

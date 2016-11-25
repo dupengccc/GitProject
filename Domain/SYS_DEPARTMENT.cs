@@ -17,8 +17,7 @@ namespace Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_DEPARTMENT()
         {
-            this.SYS_POST_DEPARTMENT = new HashSet<SYS_POST_DEPARTMENT>();
-            this.SYS_USER_DEPARTMENT = new HashSet<SYS_USER_DEPARTMENT>();
+            this.SYS_POST = new HashSet<SYS_POST>();
         }
     
         public string ID { get; set; }
@@ -34,8 +33,6 @@ namespace Domain
         public string PARENTCODE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_POST_DEPARTMENT> SYS_POST_DEPARTMENT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_USER_DEPARTMENT> SYS_USER_DEPARTMENT { get; set; }
+        public virtual ICollection<SYS_POST> SYS_POST { get; set; }
     }
 }

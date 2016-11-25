@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.IService.SysManage
 {
-    public  interface ICompanyManage : IRepository<Domain.Company>
+    public  interface ICompanyManage: IRepository<Domain.Company>
     {
     }
 }

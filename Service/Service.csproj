@@ -85,38 +85,69 @@
     <Compile Include="DatabaseExtensions.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IService\SysManage\IArticleManage.cs" />
+    <Compile Include="IService\SysManage\IBussinessCustomerManage.cs" />
     <Compile Include="IService\SysManage\IChatMessageManage.cs" />
+    <Compile Include="IService\SysManage\ICodeAreaManage.cs" />
     <Compile Include="IService\SysManage\IColumnManage.cs" />
     <Compile Include="IService\SysManage\ICompanyManage.cs" />
+    <Compile Include="IService\SysManage\IContentManage.cs" />
+    <Compile Include="IService\SysManage\IDailyManage.cs" />
     <Compile Include="IService\SysManage\IDepartmentManage.cs" />
+    <Compile Include="IService\SysManage\IMailAttachment.cs" />
+    <Compile Include="IService\SysManage\IMailInBoxManage.cs" />
+    <Compile Include="IService\SysManage\IMailOutBoxManage.cs" />
     <Compile Include="IService\SysManage\IModuleManage.cs" />
     <Compile Include="IService\SysManage\IPermissionManage.cs" />
     <Compile Include="IService\SysManage\IPostUserManage.cs" />
     <Compile Include="IService\SysManage\ICodeManage.cs" />
+    <Compile Include="IService\SysManage\IProjectFilesManage.cs" />
+    <Compile Include="IService\SysManage\IProjectManage.cs" />
+    <Compile Include="IService\SysManage\IProjectMessageManage.cs" />
+    <Compile Include="IService\SysManage\IProjectStageManage.cs" />
+    <Compile Include="IService\SysManage\IProjectTeamManage.cs" />
+    <Compile Include="IService\SysManage\IRoleManage .cs" />
+    <Compile Include="IService\SysManage\IRolePermissionManage.cs" />
     <Compile Include="IService\SysManage\ISystemManage.cs" />
+    <Compile Include="IService\SysManage\IUploadManage.cs" />
     <Compile Include="IService\SysManage\IUserInfoManage.cs" />
     <Compile Include="IService\SysManage\IUserManage.cs" />
-    <Compile Include="IService\SysManage\IUserOnlineManage.cs" />
+    <Compile Include="IService\SysManage\IUserOnlieManage.cs" />
     <Compile Include="IService\SysManage\IUserPermissionManage .cs" />
     <Compile Include="IService\SysManage\IUserRoleManage.cs" />
+    <Compile Include="IService\SysManage\IWorkAttendanceManage.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IService\SysManage\IUserDepartmentManage.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="ServiceImp\ChatMessageManage.cs" />
     <Compile Include="ServiceImp\SysManage\ArticleManage.cs" />
+    <Compile Include="ServiceImp\SysManage\BussinessCustomerManage.cs" />
+    <Compile Include="ServiceImp\SysManage\CodeAreaManage.cs" />
+    <Compile Include="ServiceImp\SysManage\CodeManage.cs" />
     <Compile Include="ServiceImp\SysManage\ColumnManage.cs" />
     <Compile Include="ServiceImp\SysManage\CompanyManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ContentManage.cs" />
+    <Compile Include="ServiceImp\SysManage\DailyManage.cs" />
     <Compile Include="ServiceImp\SysManage\DepartmentManage.cs" />
+    <Compile Include="ServiceImp\SysManage\MailAttachment.cs" />
+    <Compile Include="ServiceImp\SysManage\ProjectFilesManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ProjectManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ProjectMessageManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ProjectStageManage.cs" />
+    <Compile Include="ServiceImp\SysManage\RoleManage.cs" />
+    <Compile Include="ServiceImp\SysManage\RolePermissionManage.cs" />
+    <Compile Include="ServiceImp\SysManage\UploadManage.cs" />
+    <Compile Include="ServiceImp\SysManage\WorkAttendanceManage.cs" />
+    <Compile Include="ServiceImp\SysManage\MailInBoxManage.cs" />
+    <Compile Include="ServiceImp\SysManage\MailOutBoxManage.cs" />
     <Compile Include="ServiceImp\SysManage\ModuleManage.cs" />
     <Compile Include="ServiceImp\SysManage\PermissionDistinct.cs" />
     <Compile Include="ServiceImp\SysManage\PermissionManage .cs" />
     <Compile Include="ServiceImp\SysManage\PostUserManage.cs" />
+    <Compile Include="ServiceImp\SysManage\ProjectTeamManage.cs" />
     <Compile Include="ServiceImp\SysManage\SystemManage.cs" />
-    <Compile Include="ServiceImp\SysManage\UserDepartmentManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserInfoManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserManage.cs" />
-    <Compile Include="ServiceImp\SysManage\UserOnlineManage.cs" />
+    <Compile Include="ServiceImp\SysManage\UserOnlieManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserPermissionManage.cs" />
     <Compile Include="ServiceImp\SysManage\UserRoleManage.cs" />
     <Compile Include="UnitOfWork.cs" />
@@ -128,7 +159,7 @@
       <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{B2EC50D4-D2E0-4843-9DBE-6FE0CFB62ADA}</Project>
+      <Project>{b2ec50d4-d2e0-4843-9dbe-6fe0cfb62ada}</Project>
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
@@ -143,6 +174,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Config\ComService.xml" />
     <EmbeddedResource Include="Config\Service.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\MailService.xml" />
+    <EmbeddedResource Include="Config\ProService.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

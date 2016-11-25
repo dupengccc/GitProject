@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>
+    Spring注入控制器，容器指向Service层封装的接口
+  </description>
+  <!--项目中心控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectHomeController,wkmvc" singleton="false">
+    <property name="ProjectManage" ref="Service.Pro.Project" />
+    <property name="BussinessCustomerManage" ref="Service.BussinessCustomer" />
+    <property name="CodeAreaManage" ref="Service.CodeArea" />
+    <property name="ContentManage" ref="Service.Com.Content" />
+    <property name="CodeManage" ref="Service.Code" />
+    <property name="ProjectFilesManage" ref="Service.Pro.ProjectFiles" />
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam" />
+    <property name="ProjectStageManage" ref="Service.Pro.ProjectStage" />
+    <property name="ProjectMessage" ref="Service.Pro.ProjectMessage" />
+  </object>
+  <!--项目管理控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectController,wkmvc" singleton="false">
+    <property name="ProjectManage" ref="Service.Pro.ProjectManage" />
+    <property name="BussinessCustomerManage" ref="Service.BussinessCustomer" />
+    <property name="CodeAreaManage" ref="Service.CodeArea" />
+    <property name="ContentManage" ref="Service.Com.Content" />
+    <property name="CodeManage" ref="Service.Code" />
+    <property name="ProjectFilesManage" ref="Service.Pro.ProjectFiles" />
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam" />
+    <property name="ProjectStageManage" ref="Service.Pro.ProjectStage" />
+    <property name="ProjectMessage" ref="Service.Pro.ProjectMessage" />
+  </object>
+  <!--项目文档管理控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectDocumentController,wkmvc" singleton="false">
+    <property name="ProjectFilesManage" ref="Service.Pro.ProjectFiles" />
+    <property name="ProjectMessage" ref="Service.Pro.ProjectMessage" />
+  </object>
+  <!--项目阶段管理控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectStageController,wkmvc" singleton="false">
+    <property name="ProjectStageManage" ref="Service.Pro.ProjectStage" />
+    <property name="ProjectFilesManage" ref="Service.Pro.ProjectFiles" />
+    <property name="ProjectMessage" ref="Service.Pro.ProjectMessage" />
+    <property name="ProjectManage" ref="Service.Pro.ProjectManage" />
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam" />
+  </object>
+  <!--项目团队管理控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectTeamsController,wkmvc" singleton="false">
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam" />
+    <property name="ProjectStageManage" ref="Service.Pro.ProjectStage" />
+    <property name="ProjectMessage" ref="Service.Pro.ProjectMessage" />
+  </object>
+  <!--任务中心控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectMissionController,wkmvc" singleton="false">
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam" />
+    <property name="ProjectStageManage" ref="Service.Pro.ProjectStage" />
+    <property name="ProjectMessage" ref="Service.Pro.ProjectMessage" />
+    <property name="ProjectFilesManage" ref="Service.Pro.ProjectFiles" />
+  </object>
+  <!--任务排行榜控制器-->
+  <object type="wkmvc.Areas.ProManage.Controllers.ProjectRankingListController,wkmvc " singleton="false">
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam" />
+    <property name="ProjectStageManage" ref="Service.Pro.ProjectStage" />
+    <property name="ProjectFilesManage" ref="Service.Pro.ProjectFiles" />
+  </object>
+  <!--工作日报控制器-->
+  <object type="wkmvc.Areas.ComManage.Controllers.DailyController,wkmvc" singleton="false">
+    <property name="DailyManage" ref="Service.Com.Daily" />
+    <property name="ContentManage" ref="Service.Com.Content" />
+  </object>
+</objects>
+
+
+
+

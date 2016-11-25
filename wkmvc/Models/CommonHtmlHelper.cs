@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace wkmvc.Models
+namespace Models
 {
     public class CommonHtmlHelper
     {

@@ -15,25 +15,25 @@ namespace Domain
     public partial class COM_WORKATTENDANCE
     {
         public int ID { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> EarlyOutAMMinutes { get; set; }
-        public Nullable<int> EarlyOutPMMinutes { get; set; }
-        public Nullable<int> FK_UserId { get; set; }
-        public Nullable<bool> Is_SiginAM { get; set; }
-        public Nullable<bool> Is_SiginPM { get; set; }
-        public Nullable<bool> Is_SigOutAM { get; set; }
-        public Nullable<bool> Is_SigOutPM { get; set; }
-        public Nullable<bool> IsEarlyOutAM { get; set; }
-        public Nullable<bool> IsEarlyOutPM { get; set; }
-        public Nullable<bool> IsLatePM { get; set; }
-        public Nullable<bool> IsLateAM { get; set; }
-        public Nullable<int> LateAMMinutes { get; set; }
-        public Nullable<int> LatePMMinutes { get; set; }
-        public Nullable<System.DateTime> SiginAMDate { get; set; }
-        public Nullable<System.DateTime> SiginPM { get; set; }
+        public int FK_UserId { get; set; }
+        public bool Is_SiginAM { get; set; }
+        public bool Is_SigOutAM { get; set; }
+        public System.DateTime SiginAMDate { get; set; }
+        public System.DateTime SigOutAMDate { get; set; }
+        public bool Is_SiginPM { get; set; }
+        public bool Is_SigOutPM { get; set; }
+        public System.DateTime SiginPM { get; set; }
+        public System.DateTime SigOutPM { get; set; }
+        public bool IsLateAM { get; set; }
+        public int LateAMMinutes { get; set; }
+        public bool IsEarlyOutAM { get; set; }
+        public int EarlyOutAMMinutes { get; set; }
+        public bool IsLatePM { get; set; }
+        public int LatePMMinutes { get; set; }
+        public bool IsEarlyOutPM { get; set; }
+        public int EarlyOutPMMinutes { get; set; }
+        public double WorkHours { get; set; }
         public string SigIP { get; set; }
-        public Nullable<System.DateTime> SigOutAMDate { get; set; }
-        public Nullable<System.DateTime> SigOutPM { get; set; }
-        public Nullable<decimal> WorkHours { get; set; }
+        public System.DateTime CreateDate { get; set; }
     }
 }

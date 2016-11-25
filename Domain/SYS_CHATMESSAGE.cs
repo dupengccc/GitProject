@@ -15,11 +15,11 @@ namespace Domain
     public partial class SYS_CHATMESSAGE
     {
         public int ID { get; set; }
-        public Nullable<int> FromUser { get; set; }
-        public Nullable<int> MessageType { get; set; }
+        public int FromUser { get; set; }
+        public int MessageType { get; set; }
         public string MessageContent { get; set; }
         public string ToGroup { get; set; }
-        public Nullable<System.DateTime> MessageDate { get; set; }
+        public System.DateTime MessageDate { get; set; }
         public string MessageIP { get; set; }
     }
 }

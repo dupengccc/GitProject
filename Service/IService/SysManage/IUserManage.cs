@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.IService.SysManage
 {
-    public interface IUserManage:IRepository<Domain.SYS_USER>
+    public interface IUserManage :IRepository<Domain.SYS_USER>
     {
         /// <summary>
         /// 管理用户登录验证,并返回用户信息与权限集合

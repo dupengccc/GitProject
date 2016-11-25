@@ -15,10 +15,12 @@ namespace Domain
     public partial class MAIL_INBOX
     {
         public int ID { get; set; }
-        public Nullable<int> FK_MailID { get; set; }
-        public Nullable<int> MailType { get; set; }
-        public Nullable<int> ReadStatus { get; set; }
-        public Nullable<System.DateTime> ReceivingTime { get; set; }
+        public int FK_MailID { get; set; }
         public string Recipient { get; set; }
+        public int MailType { get; set; }
+        public int ReadStatus { get; set; }
+        public System.DateTime ReceivingTime { get; set; }
+    
+        public virtual MAIL_OUTBOX MAIL_OUTBOX { get; set; }
     }
 }

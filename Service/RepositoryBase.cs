@@ -1,13 +1,14 @@
-﻿using Common;
-using Domain;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
+using Domain;
 using System.Linq.Expressions;
+using System.Collections;
 using System.Threading.Tasks;
 
 namespace Service
@@ -15,7 +16,7 @@ namespace Service
     /// <summary>
     /// 数据操作基本实现类，公用实现方法
     /// add yuangang by 2015-05-10
-    /// </summary>222
+    /// </summary>
     /// <typeparam name="T">具体操作的实体模型</typeparam>
     public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
@@ -29,7 +30,7 @@ namespace Service
         {
             get
             {
-               context.Configuration.ValidateOnSaveEnabled = false;
+                context.Configuration.ValidateOnSaveEnabled = false;
                 return context;
             }
         }
@@ -42,15 +43,7 @@ namespace Service
             {
                 return new MyConfig();
             }
-        }
-
-        DbContext IRepository<T>._Context
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        }   
         #endregion
 
         #region 单模型 CRUD 操作
@@ -139,7 +132,7 @@ namespace Service
 
         /// <summary>
         /// 通过Lamda表达式获取实体
-        /// </summary>222
+        /// </summary>
         /// <param name="predicate">Lamda表达式（p=>p.Id==Id）</param>
         /// <returns></returns>
         public virtual T Get(Expression<Func<T, bool>> predicate)
@@ -798,7 +791,7 @@ namespace Service
         {
             List<object> list = QueryObject<TEntity, TOrderBy>
                  (where, orderby, selector, IsAsc);
-            return  Common.JsonHelper.JsonConverter.JsonClass(list);
+            return Common.JsonHelper.JsonConverter.JsonClass(list);
         }
         /// <summary>
         /// 可指定返回结果、排序、查询条件的通用查询方法，返回动态类对象集合（异步方式）
@@ -1090,7 +1083,7 @@ namespace Service
             }
             if (count > 0)
                 enumerable = enumerable.Skip((index - 1) * PageSize).Take(PageSize);
-            return new PageInfo(index, PageSize, count, Common.JsonHelper.JsonConverter.JsonClass(enumerable.ToList()));
+            return new Common.PageInfo(index, PageSize, count, Common.JsonHelper.JsonConverter.JsonClass(enumerable.ToList()));
         }
         #endregion
 
@@ -1125,7 +1118,7 @@ namespace Service
         {
             return _Context.Database.SqlQueryForDynamic(sql, para);
         }
-
+        
         #endregion
 
         #region 更新操作
@@ -1165,8 +1158,7 @@ namespace Service
             }
             catch (Exception e) { throw e; }
         }
-
         #endregion
-
+       
     }
 }

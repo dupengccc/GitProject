@@ -7,9 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Spring.Context.Support;
-using Service.ServiceImp.SysManage;
 using log4net.Ext;
 using Common.Enums;
+using System.Configuration;
 
 namespace wkmvc.Controllers
 {
@@ -28,6 +28,9 @@ namespace wkmvc.Controllers
             /// 视图传递的分页条数
             /// </summary>
             public int pagesize { get; set; }
+
+        public string EmailDomain =>
+          ConfigurationManager.AppSettings["EmailDomain"];
 
         protected static IExtLog _log = ExtLogManager.GetLogger("dblog");
         /// <summary>

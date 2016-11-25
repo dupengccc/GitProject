@@ -91,6 +91,7 @@
     <Compile Include="Config\Models\SystemConfig.cs" />
     <Compile Include="Config\Models\UploadConfig.cs" />
     <Compile Include="CookieHelper.cs" />
+    <Compile Include="Enums\ClsDic.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="JScript.cs" />
     <Compile Include="JsonHelper\AjaxResult.cs" />

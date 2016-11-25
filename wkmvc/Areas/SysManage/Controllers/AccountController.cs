@@ -9,10 +9,11 @@ using Common.JsonHelper;
 using Common;
 using wkmvc.Controllers;
 using Models;
+using Service.ServiceImp.SysManage;
 
 namespace wkmvc.Areas.SysManage.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
         #region 声明容器
         /// <summary>
@@ -21,7 +22,7 @@ namespace wkmvc.Areas.SysManage.Controllers
         /// </summary>
         IUserManage UserManage { get; set; }
 
-        IUserOnlineManage UserOnlineManage { get; set; }
+        IUserOnlieManage UserOnlieManage { get; set; }
         /// <summary>
         /// 日志记录
         /// </summary>
@@ -58,7 +59,7 @@ namespace wkmvc.Areas.SysManage.Controllers
                         if (users != null)
                         {
                             //是否锁定
-                            if (users.ISCANLOGIN == 1)
+                            if (users.ISCANLOGIN ==true)
                             {
                                 json.Msg = "用户已锁定，禁止登录，请联系管理员进行解锁";
                                 log.Warn(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
@@ -78,8 +79,8 @@ namespace wkmvc.Areas.SysManage.Controllers
                                 string cookie = "{\"id\":\"" + Account.Id + "\",\"username\":\"" + Account.LogName + "\",\"password\":\"" + Account.PassWord + "\",\"ToKen\":\"" + Session.SessionID + "\"}";
                                 CookieHelper.SetCookie("Cooke_rememberme", new Common.CryptHelper.AESCrypt().Encrypt(cookie), null);
                                 var sysuser = UserManage.Get(p => p.ID == users.ID);
-                                sysuser.LastLoginIP = Utils.GetIP();
-                                UserManage.Update(sysuser);
+                               // sysuser.LastLoginIP = Utils.GetIP();
+                                //UserManage.Update(sysuser);
                                 json.ReUrl = "sys/Home/Index";
                                 log.Info(Utils.GetIP(), item.ACCOUNT, Request.Url.ToString(), "Login", "系统登录，登录结果：" + json.Msg);
                             }

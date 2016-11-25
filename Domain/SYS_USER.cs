@@ -17,19 +17,17 @@ namespace Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_USER()
         {
-            this.SYS_POST_USER = new HashSet<SYS_POST_USER>();
-            this.SYS_USER_DEPARTMENT = new HashSet<SYS_USER_DEPARTMENT>();
+            this.SYS_USER_ONLINE = new HashSet<SYS_USER_ONLINE>();
             this.SYS_USER_PERMISSION = new HashSet<SYS_USER_PERMISSION>();
             this.SYS_USER_ROLE = new HashSet<SYS_USER_ROLE>();
             this.SYS_USERINFO = new HashSet<SYS_USERINFO>();
-            this.UserOnline = new HashSet<UserOnline>();
         }
     
         public int ID { get; set; }
         public string NAME { get; set; }
         public string ACCOUNT { get; set; }
         public string PASSWORD { get; set; }
-        public Nullable<int> ISCANLOGIN { get; set; }
+        public bool ISCANLOGIN { get; set; }
         public Nullable<int> SHOWORDER1 { get; set; }
         public Nullable<int> SHOWORDER2 { get; set; }
         public string PINYIN1 { get; set; }
@@ -41,19 +39,14 @@ namespace Domain
         public Nullable<System.DateTime> CREATEDATE { get; set; }
         public string UPDATEUSER { get; set; }
         public Nullable<System.DateTime> UPDATEDATE { get; set; }
-        public string LastLoginIP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_POST_USER> SYS_POST_USER { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_USER_DEPARTMENT> SYS_USER_DEPARTMENT { get; set; }
+        public virtual ICollection<SYS_USER_ONLINE> SYS_USER_ONLINE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_USER_PERMISSION> SYS_USER_PERMISSION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_USER_ROLE> SYS_USER_ROLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_USERINFO> SYS_USERINFO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserOnline> UserOnline { get; set; }
     }
 }

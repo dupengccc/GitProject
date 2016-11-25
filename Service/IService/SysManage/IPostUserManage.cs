@@ -9,7 +9,7 @@ namespace Service.IService.SysManage
     /// 岗位用户关系业务接口
     /// add yuangang by 2016-05-19
     /// </summary>
-    public interface IPostUserManage : IRepository<Domain.SYS_POST_USER>
+    public interface IPostUserManage  : IRepository<Domain.SYS_POST_USER>
     {
         /// <summary>
         /// 根据岗位ID获取人员集合，可传递多个岗位ID

@@ -1,11 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var MissionList = ViewData["MissionList"] as List<Domain.PRO_PROJECT_TEAMS>;
-    //var mweek = Convert.ToInt32(ViewData["week"]);
-    //var mmoth = Convert.ToInt32(ViewData["month"]);
-    //if (mweek == 7) { mweek = 0; }
-    //var daySum = DateTime.DaysInMonth(DateTime.Now.Year, mmoth);
-    //var AttendanceList = ViewData["AttendanceList"] as List<Domain.COM_WORKATTENDANCE>;
+    var mweek = Convert.ToInt32(ViewData["week"]);
+    var mmoth = Convert.ToInt32(ViewData["month"]);
+    if (mweek == 7) { mweek = 0; }
+    var daySum = DateTime.DaysInMonth(DateTime.Now.Year, mmoth);
+    var AttendanceList = ViewData["AttendanceList"] as List<Domain.COM_WORKATTENDANCE>;
 }
 @model Service.Account
 <link href="/Content/css/daily/dailydate.css" rel="stylesheet" />
@@ -36,7 +36,7 @@
                         <h1>@Model.Name</h1>
                         <p class="font-bold">@(Model.DptInfo==null?"——":Model.DptInfo.NAME)</p>
                         <div class="text-center">
-                            <a class="btn btn-xs btn-white text-danger">@(new Models.().GetUserZW(Model.Levels))</a>
+                            <a class="btn btn-xs btn-white text-danger">@(new Models.CommonHelper().GetUserZW(Model.Levels))</a>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                 </div>
             </div>
         <div class="col-sm-6">
-            <iframe class="J_iframe" name="iframe0" style="width:100%;height:824px;margin-top:-20px;" src="/pro/daily" frameborder="0"  seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" style="width:100%;height:824px;margin-top:-20px;" src="/com/daily" frameborder="0"  seamless></iframe>
         </div>
     </div>
 </div>

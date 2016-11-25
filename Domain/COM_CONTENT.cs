@@ -14,11 +14,11 @@ namespace Domain
     
     public partial class COM_CONTENT
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
+        public string FK_RELATIONID { get; set; }
         public string CONTENT { get; set; }
         public byte[] CONTENTBLOB { get; set; }
-        public Nullable<System.DateTime> CREATEDATE { get; set; }
-        public string FK_RELATIONID { get; set; }
         public string FK_TABLE { get; set; }
+        public System.DateTime CREATEDATE { get; set; }
     }
 }

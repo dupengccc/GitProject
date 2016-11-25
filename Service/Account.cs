@@ -38,6 +38,12 @@ namespace Service
         /// 用户头像
         /// </summary>
         public string Face_Img { get; set; }
+
+
+        /// <summary>
+        /// 用户头像
+        /// </summary>
+        public string Levels { get; set; }
         /// <summary>
         /// 用户主部门
         /// </summary>

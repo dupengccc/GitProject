@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.IService.SysManage
 {
-   public interface IColumnManage : IRepository<Domain.Column>
+   public interface IColumnManage: IRepository<Domain.Column>
     {
       
 

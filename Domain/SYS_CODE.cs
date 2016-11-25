@@ -19,7 +19,7 @@ namespace Domain
         public string NAMETEXT { get; set; }
         public string CODEVALUE { get; set; }
         public Nullable<int> SHOWORDER { get; set; }
-        public Nullable<int> ISCODE { get; set; }
+        public bool ISCODE { get; set; }
         public string REMARK { get; set; }
         public Nullable<System.DateTime> CREATEDATE { get; set; }
         public string CREATEUSER { get; set; }

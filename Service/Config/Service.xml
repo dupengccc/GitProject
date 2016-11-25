@@ -10,12 +10,17 @@
     <property name="PostUserManage" ref="Service.PostUser"></property>
     <property name="PermissionManage" ref="Service.Permission"></property>
     <property name="DepartmentManage" ref="Service.Department"></property>
-    <property name="UserOnlineManage" ref="Service.UserOnlineManage"/>
+    <property name="UserOnlieManage" ref="Service.UserOnlie"/>
+    <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam"/>
+    <property name="MailInBoxManage" ref="Service.Mail.MailInBox"/>
+    <property name="WorkAttendanceManage" ref="Service.Com.WorkAttendance"/>
   </object>
   <object id="Service.UserInfo" type="Service.ServiceImp.SysManage.UserInfoManage,Service" singleton="false">
   </object>
 
-  <object id="Service.UserOnlineManage" type="Service.ServiceImp.SysManage.UserOnlineManage,Service" singleton="false">
+  <object id="Service.UserOnlie" type="Service.ServiceImp.SysManage.UserOnlieManage,Service" singleton="false">
+  </object>
+  <object id="Service.Department" type="Service.ServiceImp.SysManage.DepartmentManage,Service" singleton="false">
   </object>
 
   <object id="Service.UserRole" type="Service.ServiceImp.SysManage.UserRoleManage,Service" singleton="false">
@@ -30,8 +35,11 @@
   <object id="Service.Permission" type="Service.ServiceImp.SysManage.PermissionManage,Service" singleton="false">
   </object>
 
-  <object id="Service.Department" type="Service.ServiceImp.SysManage.DepartmentManage,Service" singleton="false">
-  </object>
+  <object id="Service.CodeArea" type="Service.ServiceImp.SysManage.CodeAreaManage,Service" singleton="false" />
+  <object id="Service.Code" type="Service.ServiceImp.SysManage.CodeManage,Service" singleton="false" />
+
+  <object id="Service.BussinessCustomer" type="Service.ServiceImp.SysManage.BussinessCustomerManage,Service" singleton="false" />
+
 
   <object id="Service.ArticleManage" type="Service.ServiceImp.SysManage.ArticleManage,Service" singleton="false">
   </object>
@@ -48,6 +56,9 @@
   <object id="Service.System" type="Service.ServiceImp.SysManage.SystemManage,Service" singleton="false">
   </object>
 
+ 
+
+
 </objects>
-  <!--系统管理end-->
+
 

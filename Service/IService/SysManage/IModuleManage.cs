@@ -9,7 +9,7 @@ namespace Service.IService.SysManage
         /// Service模型处理接口
         /// add yuangang by 2015-05-22
         /// </summary>
-        public interface IModuleManage : IRepository<Domain.SYS_MODULE>
+        public interface IModuleManage  : IRepository<Domain.SYS_MODULE>
         {
             /// <summary>
             /// 获取用户权限模块集合

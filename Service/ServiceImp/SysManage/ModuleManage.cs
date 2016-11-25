@@ -37,7 +37,7 @@ namespace Service.ServiceImp.SysManage
                 //检索显示与系统
                 //permodule = permodule.Where(p => p.ISSHOW == 1 && p.FK_BELONGSYSTEM.ToString() == siteId).ToList();
                 //商城系统融入本系统不再区分系统
-                permodule = permodule.Where(p => p.ISSHOW == 1).ToList();
+                permodule = permodule.Where(p => p.ISSHOW).ToList();
                 //构造上级导航模块
                 //var prevModule = this.LoadListAll(p => p.FK_BELONGSYSTEM.ToString() == siteId);
                 //商城系统融入本系统不再区分系统
@@ -70,7 +70,7 @@ namespace Service.ServiceImp.SysManage
                 permodule = permodule.Distinct(new ModuleDistinct()).ToList();
             }
             //检索显示与系统
-            permodule = permodule.Where(p => p.ISSHOW==1 && systemid.Any(e => e == p.FK_BELONGSYSTEM)).ToList();
+            permodule = permodule.Where(p => p.ISSHOW==true && systemid.Any(e => e == p.FK_BELONGSYSTEM)).ToList();
             //构造上级导航模块
             var prevModule = this.LoadListAll(p => systemid.Any(e => e == p.FK_BELONGSYSTEM));
             //反向递归算法构造模块带上级上上级模块
@@ -150,7 +150,7 @@ namespace Service.ServiceImp.SysManage
                     {
                         item.LEVELS = levels + 1;
                         this.Update(item);
-                        MoreModifyModule(item.ID, item.LEVELS??0);
+                        MoreModifyModule(item.ID, item.LEVELS);
                     }
                 }
                 return true;

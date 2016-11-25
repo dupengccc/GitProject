@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain;
 using Service.IService.SysManage;
 
 namespace Service.ServiceImp.SysManage
@@ -30,10 +31,10 @@ namespace Service.ServiceImp.SysManage
         /// <summary>
         /// 根据用户ID获取所持有的岗位集合
         /// </summary>
-        public List<Domain.SYS_POST> GetPostListByUserId(string userId)
-        {
-            return this.LoadAll(p => userId.Contains(p.FK_USERID.ToString())).Select(p => p.SYS_POST_DEPARTMENT.SYS_POST).ToList();
-        }
+        //public List<Domain.SYS_POST> GetPostListByUserId(string userId)
+        //{
+        //    return this.LoadAll(p => userId.Contains(p.FK_USERID.ToString())).Select(p => p.SYS_POST_DEPARTMENT.SYS_POST).ToList();
+        //}
 
         /// <summary>
         /// 添加岗位人员关系
@@ -48,10 +49,10 @@ namespace Service.ServiceImp.SysManage
                 if (this.IsExist(p => p.FK_USERID == userId))
                 {
                     //存在之后再对比是否一致 
-                    var oldCount = this.LoadAll(p => p.FK_USERID == userId).Select(p => p.FK_POST_DEPARTMENTID).ToList().Cast<int>().ToList();
-                    var newpostId = postId.Trim(',').Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(p => int.Parse(p)).ToList();
-                    if (oldCount.Count == newpostId.Count && oldCount.All(newpostId.Contains)) return true;
-                    //删除原有关系
+                    //var oldCount = this.LoadAll(p => p.FK_USERID == userId).Select(p => p.FK_POST_DEPARTMENTID).ToList().Cast<int>().ToList();
+                    //var newpostId = postId.Trim(',').Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(p => int.Parse(p)).ToList();
+                    //if (oldCount == newpostId.Count && oldCount.All(newpostId.Contains)) return true;
+                    ////删除原有关系
                     this.Delete(p => p.FK_USERID == userId);
                 }
                 if (!string.IsNullOrEmpty(postId))
@@ -59,8 +60,8 @@ namespace Service.ServiceImp.SysManage
                     //添加现有关系
                     var list = postId.Split(',').Select(item => new Domain.SYS_POST_USER()
                     {
-                        FK_USERID = userId,
-                        FK_POST_DEPARTMENTID = int.Parse(item)
+                        FK_USERID = userId
+                      ///  FK_POST_DEPARTMENTID = int.Parse(item)
                     }).ToList();
                     return this.SaveList(list);
                 }
@@ -72,19 +73,29 @@ namespace Service.ServiceImp.SysManage
         /// <summary>
         /// 根据岗位集合获取岗位名称，部门-岗位模式        
         /// </summary>
-        public dynamic GetPostNameBySysPostUser(ICollection<Domain.SYS_POST_USER> collection)
+        //public dynamic GetPostNameBySysPostUser(ICollection<Domain.SYS_POST_USER> collection)
+        //{
+        //    //岗位部门关系ID集合
+        //    string post_departmentid = collection.Select(p => p.FK_POST_DEPARTMENTID).Aggregate(string.Empty, (current, t) => current + "'" + t + "',").TrimEnd(',');
+        //    try
+        //    {
+        //        string sql = @"select d.name+'-'+p.postname as postname,s.id from sys_department d inner join
+        //                sys_post_department s on d.id=s.fk_department_id
+        //                inner join sys_post p on p.id=s.fk_post_id 
+        //                where s.id in (" + post_departmentid + ")";
+        //        return this.ExecuteSqlQuery(sql);
+        //    }
+        //    catch (Exception e) { throw e.InnerException; }
+        //}
+
+        public List<SYS_POST> GetPostListByUserId(string userId)
         {
-            //岗位部门关系ID集合
-            string post_departmentid = collection.Select(p => p.FK_POST_DEPARTMENTID).Aggregate(string.Empty, (current, t) => current + "'" + t + "',").TrimEnd(',');
-            try
-            {
-                string sql = @"select d.name+'-'+p.postname as postname,s.id from sys_department d inner join
-                        sys_post_department s on d.id=s.fk_department_id
-                        inner join sys_post p on p.id=s.fk_post_id 
-                        where s.id in (" + post_departmentid + ")";
-                return this.ExecuteSqlQuery(sql);
-            }
-            catch (Exception e) { throw e.InnerException; }
+            throw new NotImplementedException();
+        }
+
+        public dynamic GetPostNameBySysPostUser(ICollection<SYS_POST_USER> collection)
+        {
+            throw new NotImplementedException();
         }
     }
 }

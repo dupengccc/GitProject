@@ -5,21 +5,90 @@
   <!--登录控制器-->
  <object type="wkmvc.Areas.SysManage.Controllers.AccountController,wkmvc" singleton="false">
         <property name="UserManage" ref="Service.User"/>
-        <property name="UserOnlineManage" ref="Service.UserOnlineManage"/>
+         <property name="UserOnlieManage" ref="Service.UserOnlie"/>
+ </object>
 
-  </object>
-  
-  
   <object type="wkmvc.Areas.SysManage.Controllers.HomeController,wkmvc" singleton="false">
         <property name="ModuleManage" ref="Service.Module"/>
         <property name="PermissionManage" ref="Service.Permission"/>
         <property name="SystemManage" ref="Service.System"/>
+       <property name="UserOnlieManage" ref="Service.UserOnlie"/>
+       <property name="DepartmentManage" ref="Service.Department"/>
+       <property name="WorkAttendanceManage" ref="Service.Com.WorkAttendance"/>
+        <property name="ProjectTeamManage" ref="Service.Pro.ProjectTeam"/>
+        <property name="MailInBoxManage" ref="Service.Mail.MailInBox"/>
+  </object>
+  <!--编码管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.CodeController,wkmvc" singleton="false">
+    <property name="CodeManage" ref="Service.Code" />
+  </object>
+  <!--模块管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.ModuleController,wkmvc" singleton="false">
+    <property name="ModuleManage" ref="Service.Module" />
+    <property name="PermissionManage" ref="Service.Permission" />
+    <property name="SystemManage" ref="Service.System" />
+  </object>
+  <!--权限管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.PermissionController,wkmvc" singleton="false">
+    <property name="ModuleManage" ref="Service.Module" />
+    <property name="SystemManage" ref="Service.System" />
+    <property name="PermissionManage" ref="Service.Permission" />
+    <property name="CodeManage" ref="Service.Code" />
+    <property name="RoleManage" ref="Service.Role" />
+    <property name="UserPermissionManage" ref="Service.UserPermission" />
+    <property name="RolePermissionManage" ref="Service.RolePermission" />
+  </object>
+  <!--系统管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.SystemController,wkmvc" singleton="false">
+    <property name="ModuleManage" ref="Service.Module" />
+    <property name="SystemManage" ref="Service.System" />
+  </object>
+  <!--系统日志管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.SysLogController,wkmvc" singleton="false">
+    <property name="SyslogManage" ref="Service.Syslog" />
+  </object>
+  <!--角色管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.RoleController,wkmvc" singleton="false">
+    <property name="RoleManage" ref="Service.Role" />
+    <property name="RolePermissionManage" ref="Service.RolePermission" />
+    <property name="UserRoleManage" ref="Service.UserRole" />
+    <property name="SystemManage" ref="Service.System" />
+  </object>
+  <!--部门管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.DepartmentController,wkmvc" singleton="false">
+    <property name="DepartmentManage" ref="Service.Department" />
+    <property name="PostManage" ref="Service.Post" />
+  </object>
+  <!--岗位管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.PostController,wkmvc" singleton="false">
+    <property name="PostManage" ref="Service.Post" />
+    <property name="PostUserManage" ref="Service.PostUser" />
+    <property name="CodeManage" ref="Service.Code" />
+    <property name="DepartmentManage" ref="Service.Department" />
+  </object>
+  <!--用户管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.UserController,wkmvc" singleton="false">
+    <property name="PostUserManage" ref="Service.PostUser" />
+    <property name="DepartmentManage" ref="Service.Department" />
+    <property name="PostManage" ref="Service.Post" />
+    <property name="CodeManage" ref="Service.Code" />
+    <property name="UserInfoManage" ref="Service.UserInfo" />
+    <property name="RoleManage" ref="Service.Role" />
+    <property name="DailyManage" ref="Service.Com.Daily" />
+    <property name="ContentManage" ref="Service.Com.Content" />
+    <property name="WorkAttendanceManage" ref="Service.Com.WorkAttendance" />
+  </object>
+  <!--省市级联管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.CodeAreaController,wkmvc" singleton="false">
+    <property name="CodeAreaManage" ref="Service.CodeArea" />
+  </object>
+  <!--公司客户管理-->
+  <object type="wkmvc.Areas.SysManage.Controllers.BussinessCustomerController,wkmvc" singleton="false">
+    <property name="BussinessCustomerManage" ref="Service.BussinessCustomer" />
+    <property name="CodeAreaManage" ref="Service.CodeArea" />
+    <property name="ContentManage" ref="Service.Com.Content" />
+    <property name="CodeManage" ref="Service.Code" />
   </object>
 
-  <object type="wkmvc.Areas.SysManage.Controllers.ModuleController,wkmvc" singleton="false">
-    <property name="ModuleManage" ref="Service.Module"/>
-    <property name="PermissionManage" ref="Service.Permission"/>
-    <property name="SystemManage" ref="Service.System"/>
-  </object>
   <!--系统管理 end-->
 </objects>

@@ -23,9 +23,7 @@ namespace Domain
         public string ID { get; set; }
         public string NAME { get; set; }
         public string SITEURL { get; set; }
-        public Nullable<byte> IS_LOGIN { get; set; }
-        public string DOCKUSER { get; set; }
-        public string DOCKPASS { get; set; }
+        public bool IS_LOGIN { get; set; }
         public Nullable<System.DateTime> CREATEDATE { get; set; }
         public string REMARK { get; set; }
     

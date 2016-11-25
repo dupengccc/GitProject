@@ -14,14 +14,16 @@ namespace Domain
     
     public partial class MAIL_ATTACHMENT
     {
-        public string AttExt { get; set; }
         public int ID { get; set; }
+        public int FK_MailID { get; set; }
         public string AttName { get; set; }
         public string AttNewName { get; set; }
         public string AttPath { get; set; }
+        public string AttExt { get; set; }
         public string AttSize { get; set; }
         public string CreateIP { get; set; }
-        public string FK_MailID { get; set; }
-        public Nullable<System.DateTime> UploadDate { get; set; }
+        public System.DateTime UploadDate { get; set; }
+    
+        public virtual MAIL_OUTBOX MAIL_OUTBOX { get; set; }
     }
 }

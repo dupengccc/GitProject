@@ -14,20 +14,20 @@ namespace Domain
     
     public partial class COM_UPLOAD
     {
-        public int ID { get; set; }
-        public Nullable<int> FK_USERID { get; set; }
-        public string UPFILEIP { get; set; }
-        public string UPFILEPATH { get; set; }
+        public string ID { get; set; }
+        public string FK_USERID { get; set; }
+        public string UPOPEATOR { get; set; }
+        public Nullable<System.DateTime> UPTIME { get; set; }
+        public string UPOLDNAME { get; set; }
+        public string UPNEWNAME { get; set; }
         public Nullable<decimal> UPFILESIZE { get; set; }
+        public string UPFILEUNIT { get; set; }
+        public string UPFILEPATH { get; set; }
         public string UPFILESUFFIX { get; set; }
         public string UPFILETHUMBNAIL { get; set; }
         public string UPFILETHUMBNAILFORPAD { get; set; }
         public string UPFILETHUMBNAILFORPHONE { get; set; }
-        public string UPFILEUNIT { get; set; }
+        public string UPFILEIP { get; set; }
         public string UPFILEURL { get; set; }
-        public string UPNEWNAME { get; set; }
-        public string UPOLDNAME { get; set; }
-        public string UPOPEATOR { get; set; }
-        public Nullable<System.DateTime> UPTIME { get; set; }
     }
 }

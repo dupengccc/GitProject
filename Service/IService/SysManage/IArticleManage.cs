@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.IService.SysManage
 {
-    public  interface IArticleManage : IRepository<Domain.Articles>
+    public  interface IArticleManage: IRepository<Domain.Articles>
     {
     }
 }
