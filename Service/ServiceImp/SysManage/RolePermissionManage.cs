@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.IService.SysManage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.ServiceImp.SysManage
 {
-    public class RolePermissionManage:IR
+    public class RolePermissionManage:RepositoryBase<Domain.SYS_ROLE_PERMISSION>,IRolePermissionManage
     {
     }
 }

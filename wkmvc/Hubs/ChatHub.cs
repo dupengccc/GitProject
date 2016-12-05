@@ -1,15 +1,14 @@
-﻿using Common;
+﻿   
+
+using Common;
 using Common.Enums;
 using Common.JsonHelper;
 using Domain;
 using Microsoft.AspNet.SignalR;
-using Microsoft.CSharp.RuntimeBinder;
-using Service;
-using Common;
-using Common.Enums;
-using Domain;
-using Microsoft.AspNet.SignalR;
 using Service.IService;
+using Service.IService.SysManage;
+using Service.ServiceImp.SysManage;
+using Spring.Context.Support;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,19 +16,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using Service.IService.SysManage;
-using Spring.Context.Support;
-
-namespace wkmvc.Hubs
-{
-
+using wkmvc.Hubs;
+namespace WebPage.Hubs
+{ 
     public class ChatHub : Hub
     {
         public IChatMessageManage ChatMessageManage = (ContextRegistry.GetContext().GetObject("Service.ChatMessageManage") as IChatMessageManage);
         public ICodeManage CodeManage = (ContextRegistry.GetContext().GetObject("Service.Code") as ICodeManage);
         public IDepartmentManage DepartmentManage = (ContextRegistry.GetContext().GetObject("Service.Department") as IDepartmentManage);
         public IUserManage UserManage = (ContextRegistry.GetContext().GetObject("Service.User") as IUserManage);
-        public IUserOnlineManage UserOnlineManage = (ContextRegistry.GetContext().GetObject("Service.UserOnlineManage") as IUserOnlineManage);
+        public IUserOnlieManage UserOnlineManage = (ContextRegistry.GetContext().GetObject("Service.UserOnlie") as IUserOnlieManage);
 
         private string GetMessageType(int type)
         {
@@ -73,12 +69,12 @@ namespace wkmvc.Hubs
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            Domain.UserOnline UserOnline = this.UserOnlineManage.LoadListAll(p => p.ConnectId == this.Context.ConnectionId).FirstOrDefault<UserOnline>();
+            SYS_USER_ONLINE UserOnline = this.UserOnlineManage.LoadListAll(p => p.ConnectId == this.Context.ConnectionId).FirstOrDefault<SYS_USER_ONLINE>();
             UserOnline.ConnectId = base.Context.ConnectionId;
-            UserOnline.OffineDate = new DateTime?(DateTime.Now);
+            UserOnline.OfflineDate = new DateTime?(DateTime.Now);
             UserOnline.IsOnline = false;
             this.UserOnlineManage.Update(UserOnline);
-            SYS_USER sys_user = this.UserManage.Get(p => p.ID == UserOnline.FK_Userid);
+            SYS_USER sys_user = this.UserManage.Get(p => p.ID == UserOnline.FK_UserId);
             ((dynamic)base.Clients.All).UserLogOutNotice(sys_user.NAME + "：离线了!");
             ((dynamic)base.Clients.All).ContactsNotice(JsonConverter.Serialize(UserOnline, false));
             return base.OnDisconnected(true);
@@ -86,15 +82,15 @@ namespace wkmvc.Hubs
 
         public void Register(string account, string password)
         {
-            var selector=null;
-            var func2=null;
+            //var selector ;
+            //var func2 ;
             try
             {
                 SYS_USER User = this.UserManage.Get(p => p.ACCOUNT == account);
                 if ((User != null) && (User.PASSWORD == password))
                 {
                     ParameterExpression expression3;
-                    UserOnline entity = this.UserOnlineManage.LoadListAll(p => p.FK_Userid == User.ID).FirstOrDefault<Domain.UserOnline>();
+                    SYS_USER_ONLINE entity = this.UserOnlineManage.LoadListAll(p => p.SYS_USER.ID == User.ID).FirstOrDefault<SYS_USER_ONLINE>();
                     entity.ConnectId = base.Context.ConnectionId;
                     entity.OnlineDate = DateTime.Now;
                     entity.IsOnline = true;
@@ -102,26 +98,25 @@ namespace wkmvc.Hubs
                     this.UserOnlineManage.Update(entity);
                     int num = int.Parse(ConfigurationManager.AppSettings["HistoryDays"]);
                     DateTime dtHistory = DateTime.Now.AddDays((double)-num);
-                    IQueryable<SYS_CHATMESSAGE> queryable = this.ChatMessageManage.LoadAll(Expression.Lambda<Func<SYS_CHATMESSAGE, bool>>(Expression.GreaterThan(Expression.Property(expression3 = Expression.Parameter(typeof(SYS_CHATMESSAGE), "p"), (MethodInfo)methodof(SYS_CHATMESSAGE.MessageDate)), Expression.Constant(dtHistory), false, (MethodInfo)methodof(DateTime.op_GreaterThan)), new ParameterExpression[] { expression3 }));
+                    IQueryable<SYS_CHATMESSAGE> queryable = this.ChatMessageManage.LoadAll(p => p.MessageDate > dtHistory);
+                
                     if (User.ID == ClsDic.DicRole["超级管理员"])
                     {
                         ((dynamic)base.Clients.All).UserLoginNotice("超级管理员：" + User.NAME + " 上线了!");
-                        if (selector == null)
-                        {
-                            selector = p => new {
-                                UserName = this.UserManage.Get(m => m.ID == p.FromUser).NAME,
-                                UserFace = string.IsNullOrEmpty(this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG) ? ("/Pro/Project/User_Default_Avatat?name=" + this.UserManage.Get(m => m.ID == p.FromUser).NAME.Substring(0, 1)) : this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG,
-                                MessageType = this.GetMessageType(p.MessageType),
-                                FromUser = p.FromUser,
-                                MessageContent = p.MessageContent,
-                                MessageDate = p.MessageDate.GetDateTimeFormats('D')[1].ToString() + " - " + p.MessageDate.ToString("HH:mm:ss"),
-                                ConnectId = this.UserOnlineManage.LoadListAll(m => m.SYS_USER.ID == p.FromUser).FirstOrDefault<SYS_USER_ONLINE>().ConnectId
-                            };
-                        }
                         var list = (from p in queryable
                                     orderby p.MessageDate
-                                    select p).ToList<SYS_CHATMESSAGE>().Select(selector).ToList();
-                        ((dynamic)base.Clients.Client(base.Context.ConnectionId)).addHistoryMessageToPage(JsonConverter.Serialize(list, false));
+                                    select p).ToList<SYS_CHATMESSAGE>().Select(
+                                         p=>new {
+                                              UserName= this.UserManage.Get(m => m.ID == p.FromUser).NAME,
+                                              UserFace = string.IsNullOrEmpty(this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG) ? ("/Pro/Project/User_Default_Avatat?name=" + this.UserManage.Get(m => m.ID == p.FromUser).NAME.Substring(0, 1)) : this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG,
+                                              MessageType = this.GetMessageType(p.MessageType),
+                                              FromUser = p.FromUser,
+                                              MessageContent = p.MessageContent,
+                                              MessageDate = p.MessageDate.GetDateTimeFormats('D')[1].ToString() + " - " + p.MessageDate.ToString("HH:mm:ss"),
+                                              ConnectId = this.UserOnlineManage.LoadListAll(m => m.SYS_USER.ID == p.FromUser).FirstOrDefault<SYS_USER_ONLINE>().ConnectId
+                                         }
+                                  ).ToList();
+                                ((dynamic)base.Clients.Client(base.Context.ConnectionId)).addHistoryMessageToPage(JsonConverter.Serialize(list, false));
                     }
                     else
                     {
@@ -133,22 +128,21 @@ namespace wkmvc.Hubs
                             int typeOfpublic = ClsDic.DicMessageType["广播"];
                             int typeOfgroup = ClsDic.DicMessageType["群组"];
                             int typeOfprivate = ClsDic.DicMessageType["私聊"];
-                            if (func2 == null)
-                            {
-                                func2 = p => new {
-                                    UserName = this.UserManage.Get(m => m.ID == p.FromUser).NAME,
-                                    UserFace = string.IsNullOrEmpty(this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG) ? ("/Pro/Project/User_Default_Avatat?name=" + this.UserManage.Get(m => m.ID == p.FromUser).NAME.Substring(0, 1)) : this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG,
-                                    MessageType = this.GetMessageType(p.MessageType),
-                                    FromUser = p.FromUser,
-                                    MessageContent = p.MessageContent,
-                                    MessageDate = p.MessageDate.GetDateTimeFormats('D')[1].ToString() + " - " + p.MessageDate.ToString("HH:mm:ss"),
-                                    ConnectId = this.UserOnlineManage.LoadListAll(m => m.SYS_USER.ID == p.FromUser).FirstOrDefault<SYS_USER_ONLINE>().ConnectId
-                                };
-                            }
                             var list2 = (from p in queryable
                                          where (((p.MessageType == typeOfpublic) || (p.FromUser == User.ID)) || ((p.MessageType == typeOfgroup) && (p.ToGroup == Depart.ID))) || ((p.MessageType == typeOfprivate) && (p.ToGroup == User.ID.ToString()))
                                          orderby p.MessageDate
-                                         select p).ToList<SYS_CHATMESSAGE>().Select(func2).ToList();
+                                         select p).ToList<SYS_CHATMESSAGE>().Select(
+                                            p => new
+                                            {
+                                                UserName = this.UserManage.Get(m => m.ID == p.FromUser).NAME,
+                                                UserFace = string.IsNullOrEmpty(this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG) ? ("/Pro/Project/User_Default_Avatat?name=" + this.UserManage.Get(m => m.ID == p.FromUser).NAME.Substring(0, 1)) : this.UserManage.Get(m => m.ID == p.FromUser).FACE_IMG,
+                                                MessageType = this.GetMessageType(p.MessageType),
+                                                FromUser = p.FromUser,
+                                                MessageContent = p.MessageContent,
+                                                MessageDate = p.MessageDate.GetDateTimeFormats('D')[1].ToString() + " - " + p.MessageDate.ToString("HH:mm:ss"),
+                                                ConnectId = this.UserOnlineManage.LoadListAll(m => m.SYS_USER.ID == p.FromUser).FirstOrDefault<SYS_USER_ONLINE>().ConnectId
+                                            }
+                                         ).ToList();
                             ((dynamic)base.Clients.Client(base.Context.ConnectionId)).addHistoryMessageToPage(JsonConverter.Serialize(list2, false));
                         }
                     }
@@ -166,12 +160,12 @@ namespace wkmvc.Hubs
         {
             try
             {
-                UserOnline sys_user_online = this.UserOnlineManage.LoadListAll(p => p.ConnectId == this.Context.ConnectionId).FirstOrDefault<UserOnline>();
+                SYS_USER_ONLINE sys_user_online = this.UserOnlineManage.LoadListAll(p => p.ConnectId == this.Context.ConnectionId).FirstOrDefault<SYS_USER_ONLINE>();
                 if (string.IsNullOrEmpty(groupId))
                 {
                     SYS_CHATMESSAGE entity = new SYS_CHATMESSAGE
                     {
-                        FromUser = sys_user_online.FK_Userid,
+                        FromUser = sys_user_online.FK_UserId,
                         MessageType = ClsDic.DicMessageType["广播"],
                         MessageContent = message,
                         MessageDate = DateTime.Now,
@@ -194,7 +188,7 @@ namespace wkmvc.Hubs
                 {
                     SYS_CHATMESSAGE sys_chatmessage2 = new SYS_CHATMESSAGE
                     {
-                        FromUser = sys_user_online.FK_Userid,
+                        FromUser = sys_user_online.FK_UserId,
                         MessageType = ClsDic.DicMessageType["群组"],
                         MessageContent = message,
                         MessageDate = DateTime.Now,
@@ -241,8 +235,8 @@ namespace wkmvc.Hubs
                 }
                 else
                 {
-                    UserOnline sys_user_online = this.UserOnlineManage.LoadListAll(p => p.ConnectId == this.Context.ConnectionId).FirstOrDefault<UserOnline>();
-                    UserOnline sys_user_online2 = this.UserOnlineManage.LoadListAll(p => p.ConnectId == clientId).FirstOrDefault<UserOnline>();
+                    SYS_USER_ONLINE sys_user_online = this.UserOnlineManage.LoadListAll(p => p.ConnectId == this.Context.ConnectionId).FirstOrDefault<SYS_USER_ONLINE>();
+                    SYS_USER_ONLINE sys_user_online2 = this.UserOnlineManage.LoadListAll(p => p.ConnectId == clientId).FirstOrDefault<SYS_USER_ONLINE>();
                     if (sys_user_online2 == null)
                     {
                         ((dynamic)base.Clients.Client(base.Context.ConnectionId)).addSysMessageToPage("系统消息：用户不存在！");
@@ -251,7 +245,7 @@ namespace wkmvc.Hubs
                     {
                         SYS_CHATMESSAGE entity = new SYS_CHATMESSAGE
                         {
-                            FromUser = sys_user_online.FK_Userid,
+                            FromUser = sys_user_online.FK_UserId,
                             MessageType = ClsDic.DicMessageType["私聊"],
                             MessageContent = message,
                             MessageDate = DateTime.Now,
@@ -269,7 +263,7 @@ namespace wkmvc.Hubs
                             MessageType = "private",
                             UserId = sys_user_online.SYS_USER.ID
                         };
-                        if (sys_user_online2.IsOnline??true)
+                        if (sys_user_online2.IsOnline)
                         {
                             ((dynamic)base.Clients.Client(clientId)).addNewMessageToPage(JsonConverter.Serialize(message2, false));
                         }

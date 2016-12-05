@@ -275,6 +275,7 @@
     <Compile Include="Areas\SysManage\Controllers\UserController.cs" />
     <Compile Include="Areas\SysManage\SysManageAreaRegistration.cs" />
     <Content Include="Areas\SysManage\Views\Module\Index.cshtml" />
+    <None Include="Areas\SysManage\Views\Module\Index.cshtmlbak" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuleDistinct.cs" />
@@ -537,7 +538,9 @@
     <Content Include="Areas\ComManage\Views\Daily\Index.cshtml" />
     <Content Include="Areas\ComManage\Views\Daily\Detail.cshtml" />
     <Content Include="Areas\ComManage\Views\Daily\ViewDetail.cshtml" />
-    <None Include="Hubs\ChatHub.cs1" />
+    <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Hubs\ManageHub.cs" />
+    <Compile Include="Hubs\Message.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommonHelper.cs" />
     <Compile Include="Models\CommonHtmlHelper.cs" />
